@@ -34,10 +34,8 @@ export default class MovieList extends Component {
         //   return '?' + $string.substring(1, string.length);
         // };
 
-
         // const link = `${API_URL}/discover/movie?api_key=${API_KEY_3}&language=ru-RU&sort_by=${sort_by}&page=${page}&primary_release_year=${primary_release_year}`;
-        // const link  = `${API_URL}/discover/movie${getQueryStringParams(queryString)}';
-
+        // const link = `${API_URL}/discover/movie${getQueryStringParams(queryString)}';
         // const link = `${API_URL}/discover/movie?api_key=${API_KEY_3}&language=ru-RU&sort_by=${sort_by}&page=${page}&primary_release_year=${primary_release_year}&with_genres=28%2C37%2C36`;
 
         const link  = `${API_URL}/discover/movie?${queryString.stringify(
@@ -59,20 +57,6 @@ export default class MovieList extends Component {
 
 
   componentDidMount() {
-    //   //const sort_by = this.props.filters.sort_by
-    //   const {filters: {sort_by}} = this.props;
-    // // const link = `${API_URL}/discover/movie?api_key=${API_KEY_3}&language=ru-RU&sort_by=popularity.desc`;
-    // const link = `${API_URL}/discover/movie?api_key=${API_KEY_3}&language=ru-RU&sort_by=${sort_by}`;
-    // fetch(link)
-    //   .then(response => {
-    //     return response.json();
-    //   })
-    //   .then(data => {
-    //       // console.log(data);
-    //     this.setState({
-    //       movies: data.results
-    //     });
-    //   });
       this.getMovies(this.props.filters, this.props.page)
   }
 
@@ -115,7 +99,6 @@ export default class MovieList extends Component {
 
   render() {
     const { movies } = this.state;
-      // console.log(this.props.filters);
       // console.log(movies);
 
     return (

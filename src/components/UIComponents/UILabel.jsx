@@ -1,4 +1,4 @@
-import React, {Componenets} from "react";
+import React from "react";
 
 class UILabel extends React.PureComponent {
     // shouldComponentUpdate(nextProps, nextStage) {
@@ -15,7 +15,10 @@ class UILabel extends React.PureComponent {
     render() {
         const {id, children} = this.props;
         // console.log('UILabel render')
-        return <label htmlFor={id}>{children()}</label>
+
+        return <label htmlFor={id}>
+            {children()}
+        </label>
     }
 }
 export default UILabel;

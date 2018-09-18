@@ -1,12 +1,12 @@
-import React, { Component } from "react";
+import React from "react";
 import { API_URL, API_KEY_3 } from "../../api/api";
 
-export default class Genres extends Component {
+export default class Genres extends React.Component {
     constructor() {
         super();
 
         this.state = {
-            list: []
+            genreList: []
         };
     }
 
@@ -18,7 +18,7 @@ export default class Genres extends Component {
             })
             .then(data => {
                 this.setState({
-                    list: data.genres
+                    genreList: data.genres
                 })
             })
     }
@@ -29,18 +29,18 @@ export default class Genres extends Component {
 
 
     render() {
-        const { list } = this.state;
+        const { genreList } = this.state;
 
         return (
             <div className="container">
-                {list.map(item => {
+                {genreList.map(item => {
                     return (
                         <div className='form-check' key={item.id}>
                             <input
                                 className="form-check-input"
                                 type="checkbox"
                                 value={item.id}
-                                id="defaultCheck1"
+                                // id="defaultCheck1"
                                 checked={this.props.genres.includes(String(item.id))}
                                 onChange={this.props.onChangeGenres}
                             />

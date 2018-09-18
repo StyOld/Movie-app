@@ -1,4 +1,4 @@
-import React, {Componenets} from "react";
+import React from "react";
 import PropTypes from 'prop-types';
 import UILabel from "./UILabel";
 import _ from 'lodash'
@@ -36,6 +36,7 @@ export default class UISelect extends React.Component {
                 <UILabel id={id}>
                     {label}
                 </UILabel>
+
                 <select
                     className="form-control"
                     id={id}

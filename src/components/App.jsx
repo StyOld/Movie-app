@@ -6,7 +6,6 @@ import _ from "lodash"
 export default class App extends React.Component {
   constructor() {
     super()
-
       this.state = {
           filters: {
             sort_by: 'vote_average.asc',
@@ -15,7 +14,7 @@ export default class App extends React.Component {
           },
           page: 1,
           total_pages: ''
-      }
+      };
 
       // this.initalState = {
       //   ...this.state,
@@ -26,7 +25,7 @@ export default class App extends React.Component {
       //
       //    };
       //
-      this.initalState = _.cloneDeep(this.state)
+      this.initialState = _.cloneDeep(this.state)
   };
 
   onChangeFilters = (event) => {
@@ -34,6 +33,7 @@ export default class App extends React.Component {
       ...this.state.filters,
       [event.target.name]: event.target.value
     };
+
     this.setState(prevState => ({
         filters: newFilters
 
@@ -43,7 +43,6 @@ export default class App extends React.Component {
         //     [event.target.name]: event.target.value
         // }
     }));
-    // console.log(event.target.name, event.target.value)
   };
 
   onChangePage = page => {
@@ -51,13 +50,13 @@ export default class App extends React.Component {
         // page: page
         page
     })
-  }
+  };
 
   getTotalPages = total_pages => {
       this.setState({
           total_pages
       });
-  }
+  };
 
   onChangeGenres = (event) => {
       // console.log(event.target.value)
@@ -85,7 +84,7 @@ export default class App extends React.Component {
               }
           }))
       }
-}
+};
 
   render() {
     const {filters, page, total_pages} = this.state;
@@ -102,18 +101,17 @@ export default class App extends React.Component {
                         type='button'
                         className='btn'
                         // onClick={() => {
-                        //     window.location.reload();
-
+                        //     window.location.reload(); плохая идея перезагружать страницу, будет всё заново рендериться.
                         onClick={(event) => {
-                        this.setState(this.initalState);
+                        this.setState(this.initialState);
                         }}
                     >
                         Очистить фильтры
                     </button>
                 </div>
                 <Filters
-                    page={page}
                     filters={filters}
+                    page={page}
                     total_pages={total_pages}
                     onChangeFilters={this.onChangeFilters}
                     onChangePage={this.onChangePage}
