@@ -5,7 +5,6 @@ import PrimaryReleaseYear from "./PrimaryReleaseYear";
 
 export default class Filters extends React.PureComponent {
   render() {
-      // console.log('Filters');
     const {
         filters: {sort_by, primary_release_year, genres},
         onChangeFilters,

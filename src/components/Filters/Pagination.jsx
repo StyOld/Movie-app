@@ -2,7 +2,7 @@ import React from 'react';
 
 export default class Pagination extends React.PureComponent {
     render() {
-        // console.log('paggination');
+        console.log('paggination');
         const {page, total_pages, onChangePage}=this.props;
 
         return(
