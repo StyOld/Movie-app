@@ -1,7 +1,9 @@
 import React from "react";
 import Filters from "./Filters/Filters";
 import MoviesList from "./Movies/MoviesList";
+import Pagination from "./Filters/Pagination";
 import _ from "lodash"
+
 
 export default class App extends React.Component {
   constructor() {
@@ -62,7 +64,7 @@ export default class App extends React.Component {
       // console.log(event.target.value)
       const id = event.target.value;
 
-      {(event.target.checked) ? (
+      (event.target.checked) ? (
               // this.setState({
               //     filters: {
               //         genres: [...this.state.filters.genres, id]
@@ -83,7 +85,6 @@ export default class App extends React.Component {
                   })
               }
           }))
-      }
 };
 
   render() {
@@ -117,6 +118,11 @@ export default class App extends React.Component {
                     onChangePage={this.onChangePage}
                     onChangeGenres={this.onChangeGenres}
                 />
+                 <Pagination
+                    page={page}
+                    total_pages={total_pages}
+                    onChangePage={this.onChangePage}
+                 />
               </div>
             </div>
           </div>

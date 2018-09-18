@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import UISelect from "../UIComponents/UISelect";
-import _ from "lodash";
+// import _ from "lodash";
 
 // Один из способов задать ссылку на массив, что бы каждый раз не было лишнего рендера, но эти данные не передаються с компонентом.
 // const options = [
@@ -12,7 +12,7 @@ import _ from "lodash";
 //     ...
 // ];
 
-export default class SortBy extends React.Component {
+export default class SortBy extends React.PureComponent {
     static propTypes = {
         sort_by: PropTypes.string.isRequired,
         onChangeFilters: PropTypes.func.isRequired

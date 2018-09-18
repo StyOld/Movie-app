@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import UILabel from "./UILabel";
-import _ from 'lodash'
+// import _ from 'lodash'
 
 
 export default class UISelect extends React.Component {
@@ -27,7 +27,7 @@ export default class UISelect extends React.Component {
 
     render() {
         const {id, name, value, onChange, label} = this.props;
-        console.log('UISelect render')
+        // console.log('UISelect render')
 
         return (
             <div className="form-group">

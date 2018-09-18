@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import UISelect from "../UIComponents/UISelect";
 
-export default class PrimaryReleaseYear extends React.Component {
+export default class PrimaryReleaseYear extends React.PureComponent {
     static propTypes = {
         primary_release_year: PropTypes.string.isRequired,
         onChangeFilters: PropTypes.func.isRequired
