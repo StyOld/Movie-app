@@ -2,17 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c9a05c73-df32-412e-9bf0-82df6aea82fd" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/Filters/Pagination.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Filters/PrimaryReleaseYear.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/App.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Filters/Filters.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Filters/Filters.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Filters/Genres.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Filters/Genres.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Filters/SortBy.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Filters/SortBy.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Movies/MovieItem.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Movies/MovieItem.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Movies/MoviesList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Movies/MoviesList.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/UIComponents/UILabel.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/UIComponents/UILabel.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/UIComponents/UISelect.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/UIComponents/UISelect.jsx" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -126,7 +116,7 @@
       <path value="$PROJECT_DIR$/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="15" />
     <option name="width" value="1349" />
     <option name="height" value="734" />
@@ -232,12 +222,12 @@
       <workItem from="1537034776901" duration="23421000" />
       <workItem from="1537089297229" duration="1050000" />
       <workItem from="1537092291917" duration="12339000" />
-      <workItem from="1537229616295" duration="11539000" />
+      <workItem from="1537229616295" duration="12413000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="101264000" />
+    <option name="totallyTimeSpent" value="102138000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1368" height="738" extended-state="6" />
