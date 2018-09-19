@@ -32,6 +32,7 @@ export default class PrimaryReleaseYear extends React.PureComponent {
     render() {
         const {primary_release_year, onChangeFilters, optionsYear} = this.props;
         const LabelText = () => <div>Год релиза:</div>;
+        console.log('primary_release_year');
 
         return (
             <div>

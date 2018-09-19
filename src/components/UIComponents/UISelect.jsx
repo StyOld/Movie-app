@@ -4,7 +4,7 @@ import UILabel from "./UILabel";
 // import _ from 'lodash'
 
 
-export default class UISelect extends React.Component {
+export default class UISelect extends React.PureComponent {
     static propTypes = {
         name: PropTypes.string.isRequired,
         onChange: PropTypes.func.isRequired
@@ -15,8 +15,8 @@ export default class UISelect extends React.Component {
     // }
 
     // shouldComponentUpdate(nextProps, nextStage) {
-    //     console.log('this.props', this.props);
-    //     console.log('nextProps', nextProps);
+    //     // console.log('this.props', this.props);
+    //     // console.log('nextProps', nextProps);
     //
     //     if (nextProps.value !== this.props.value) {
     //         return true;
@@ -26,8 +26,8 @@ export default class UISelect extends React.Component {
     // }
 
     render() {
-        const {id, name, value, onChange, label} = this.props;
-        // console.log('UISelect render')
+        const {id, name, value, onChange, label, children} = this.props;
+        console.log('UISelect render');
 
         return (
             <div className="form-group">
@@ -44,7 +44,7 @@ export default class UISelect extends React.Component {
                     value={value}
                     onChange={onChange}
                 >
-                    {this.props.children}
+                    {children}
 
                     {/*{options.map(option => {*/}
                             {/*return <option key={option.value} value={option.value}>*/}
