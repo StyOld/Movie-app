@@ -3,6 +3,7 @@ import Filters from "./Filters/Filters";
 import MoviesList from "./Movies/MoviesList";
 import Pagination from "./Filters/Pagination";
 import _ from "lodash"
+import Header from "./Header/Header";
 
 
 export default class App extends React.Component {
@@ -91,6 +92,8 @@ export default class App extends React.Component {
     const {filters, page, total_pages} = this.state;
       // console.log(total_pages);
       return (
+    <div>
+     <Header />
       <div className="container">
         <div className="row mt-4">
           <div className="col-4">
@@ -136,6 +139,7 @@ export default class App extends React.Component {
           </div>
         </div>
       </div>
+    </div>
     );
   }
 }
