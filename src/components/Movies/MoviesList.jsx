@@ -53,7 +53,7 @@ export default class MovieList extends Component {
 
                 this.props.getTotalPages(data.total_pages);
             })
-    }
+    };
 
 
   componentDidMount() {
