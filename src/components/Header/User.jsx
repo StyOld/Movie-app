@@ -8,9 +8,11 @@ export default class User extends React.Component {
                 <img
                     width='40'
                     className='rounded-circle'
-                    src={`https://secure.gravatar.com/avatar/${
+                    // src={`https://secure.gravatar.com/avatar/${
+                    src={`https://gravatar.com/avatar/${
                         user.avatar.gravatar.hash
                         }.jpg?s=64"`}
+                    alt=''
                 />
             </div>
         )

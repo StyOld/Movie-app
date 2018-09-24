@@ -2,13 +2,12 @@ import React from "react";
 import Filters from "./Filters/Filters";
 import MoviesList from "./Movies/MoviesList";
 import Pagination from "./Filters/Pagination";
-import _ from "lodash"
+import _ from "lodash";
 import Header from "./Header/Header";
 import {API_KEY_3, API_URL, fetchApi} from '../api/api';
 import Cookies from 'universal-cookie';
 
 const cookies = new Cookies();
-
 
 export default class App extends React.Component {
   constructor() {
@@ -58,15 +57,8 @@ export default class App extends React.Component {
       ...this.state.filters,
       [event.target.name]: event.target.value
     };
-
     this.setState(prevState => ({
         filters: newFilters
-
-        // filters: {
-        //     // ...this.state.filters,
-        //     ...prevState.filters,
-        //     [event.target.name]: event.target.value
-        // }
     }));
   };
 
@@ -112,7 +104,7 @@ export default class App extends React.Component {
 
   componentDidMount() {
       const session_id = cookies.get('session_id');
-      console.log(session_id);
+      // console.log(session_id);
 
       if (session_id) {
           fetchApi(

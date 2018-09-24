@@ -27,7 +27,6 @@ export default class Genres extends React.PureComponent {
         this.getGenres()
     }
 
-
     render() {
         const { genreList } = this.state;
 

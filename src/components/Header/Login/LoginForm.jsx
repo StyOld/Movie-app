@@ -5,7 +5,12 @@ export default class LoginForm extends React.Component {
     state = {
         username: "",
         password: "",
-        errors: {},
+        repeatPassword: '',
+        errors: {
+            username: false,
+            password: false,
+            repeatPassword: false
+        },
         submitting: false
     };
 
@@ -23,7 +28,7 @@ export default class LoginForm extends React.Component {
     };
 
     handleBlur = () => {
-        console.log("on blur");
+        // console.log("on blur");
         const errors = this.validateFields();
         if (Object.keys(errors).length > 0) {
             this.setState(prevState => ({
@@ -40,6 +45,14 @@ export default class LoginForm extends React.Component {
 
         if (this.state.username === "") {
             errors.username = "Not empty";
+        }
+
+        if (this.state.password === '') {
+            errors.password = 'Not empty';
+        }
+
+        if (this.state.password !== this.state.repeatPassword) {
+            errors.repeatPassword = 'Must be equal password';
         }
 
         return errors;
@@ -123,7 +136,8 @@ export default class LoginForm extends React.Component {
     };
 
     render() {
-        const { username, password, errors, submitting } = this.state;
+        console.log(this.state.submitting);
+        const { username, password, repeatPassword, errors, submitting } = this.state;
         return (
             <div className="form-login-container">
                 <form className="form-login">
@@ -156,9 +170,26 @@ export default class LoginForm extends React.Component {
                             name="password"
                             value={password}
                             onChange={this.onChange}
+                            onBlur={this.handleBlur}
                         />
                         {errors.password && (
                             <div className="invalid-feedback">{errors.password}</div>
+                        )}
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="password">Повторите Пароль</label>
+                        <input
+                            type="password"
+                            className="form-control"
+                            id="repeatPassword"
+                            placeholder="Повторите Пароль"
+                            name="repeatPassword"
+                            value={repeatPassword}
+                            onChange={this.onChange}
+                            onBlur={this.handleBlur}
+                        />
+                        {errors.repeatPassword && (
+                            <div className="invalid-feedback">{errors.repeatPassword}</div>
                         )}
                     </div>
                     <button

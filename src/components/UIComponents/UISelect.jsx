@@ -27,7 +27,7 @@ export default class UISelect extends React.PureComponent {
 
     render() {
         const {id, name, value, onChange, label, children} = this.props;
-        console.log('UISelect render');
+        // console.log('UISelect render');
 
         return (
             <div className="form-group">
