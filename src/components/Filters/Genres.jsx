@@ -1,55 +1,36 @@
 import React from "react";
-import { API_URL, API_KEY_3 } from "../../api/api";
+import PropTypes from 'prop-types';
 
-export default class Genres extends React.PureComponent {
-    constructor() {
-        super();
+const Genres = ({genreList, genres, onChangeGenres} = this.props) => (
+    <div className="container">
+        {genreList.map(item => {
+            return (
+                <div className='form-check' key={item.id}>
+                    <input
+                        className="form-check-input"
+                        type="checkbox"
+                        value={item.id}
+                        checked={genres.includes(String(item.id))}
+                        onChange={onChangeGenres}
+                    />
+                    <label className="form-check-label" htmlFor="defaultCheck1">
+                        {item.name}
+                    </label>
+                </div>
+            );
+        })}
+    </div>
+);
 
-        this.state = {
-            genreList: []
-        };
-    }
+Genres.defaultProps = {
+    genreList: [],
+    genres: []
+};
 
-    getGenres = () => {
-        const link = `${API_URL}/genre/movie/list?api_key=${API_KEY_3}&language=ru-RU`;
-        fetch(link)
-            .then(response => {
-                return response.json();
-            })
-            .then(data => {
-                this.setState({
-                    genreList: data.genres
-                })
-            })
-    };
+Genres.PropTypes = {
+    genreList: PropTypes.array.isRequired
+};
 
-    componentDidMount() {
-        this.getGenres()
-    }
+export default Genres;
 
-    render() {
-        const { genreList } = this.state;
 
-        return (
-            <div className="container">
-                {genreList.map(item => {
-                    return (
-                        <div className='form-check' key={item.id}>
-                            <input
-                                className="form-check-input"
-                                type="checkbox"
-                                value={item.id}
-                                // id="defaultCheck1"
-                                checked={this.props.genres.includes(String(item.id))}
-                                onChange={this.props.onChangeGenres}
-                            />
-                            <label className="form-check-label" htmlFor="defaultCheck1">
-                                {item.name}
-                            </label>
-                        </div>
-                    );
-                })}
-            </div>
-        );
-    }
-}

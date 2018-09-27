@@ -1,7 +1,7 @@
 import React from "react";
 import SortBy from './SortBy';
-import Genres from "./Genres";
 import PrimaryReleaseYear from "./PrimaryReleaseYear";
+import GenresContainer from "./GenresContainer";
 
 export default class Filters extends React.PureComponent {
   render() {
@@ -23,7 +23,7 @@ export default class Filters extends React.PureComponent {
               onChangeFilters={onChangeFilters}
           />
 
-          <Genres
+          <GenresContainer
               genres={genres}
               onChangeGenres={onChangeGenres}
           />
