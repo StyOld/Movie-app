@@ -18,7 +18,7 @@ MoviesList.defaultProps = {
     movies: []
 };
 
-MoviesList.PropTypes = {
+MoviesList.propTypes = {
     movies: PropTypes.array.isRequired
 };
 

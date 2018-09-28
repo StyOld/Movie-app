@@ -63,7 +63,7 @@ export default class SortBy extends React.PureComponent {
                             {option.label}
                         </option>
                     })}
-                    <p>children</p>
+                    children
                 </UISelect>
             </div>
         )

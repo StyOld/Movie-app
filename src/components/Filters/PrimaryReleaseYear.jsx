@@ -49,7 +49,7 @@ export default class PrimaryReleaseYear extends React.PureComponent {
                             {option.label}
                         </option>
                     })}
-                    <p>children</p>
+                    children
                 </UISelect>
             </div>
         )

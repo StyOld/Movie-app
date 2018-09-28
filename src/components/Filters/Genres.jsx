@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
 
-const Genres = ({genreList, genres, onChangeGenres} = this.props) => (
+const Genres = ({genreList, genres, onChangeGenres}) => (
     <div className="container">
         {genreList.map(item => {
             return (
@@ -27,7 +27,7 @@ Genres.defaultProps = {
     genres: []
 };
 
-Genres.PropTypes = {
+Genres.propTypes = {
     genreList: PropTypes.array.isRequired,
     genres: PropTypes.array.isRequired
 };
