@@ -125,14 +125,15 @@ export default class App extends React.Component {
       <AppContext.Provider
           value={{
               user: user,
-              updateUser: this.updateUser
+              updateUser: this.updateUser,
+              updateSessionId: this.updateSessionId
           }}
       >
           <div>
               <Header
                   user={user}
                   // updateUser={this.updateUser}
-                  updateSessionId={this.updateSessionId}
+                  // updateSessionId={this.updateSessionId}
               />
               <div className="container">
                   <div className="row mt-4">
