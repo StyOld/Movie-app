@@ -1,6 +1,6 @@
 import React from "react";
 import Filters from "./Filters/Filters";
-import MoviesContainer from "./Movies/MoviesContainer";
+import MoviesList from "./Movies/MoviesList";
 import Pagination from "./Filters/Pagination";
 import _ from "lodash";
 import Header from "./Header/Header";
@@ -171,7 +171,7 @@ export default class App extends React.Component {
                           </div>
                       </div>
                               <div className="col-8">
-                                  <MoviesContainer
+                                  <MoviesList
                                       page={page}
                                       filters={filters}
                                       onChangePage={this.onChangePage}
