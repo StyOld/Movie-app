@@ -28,7 +28,8 @@ Genres.defaultProps = {
 };
 
 Genres.PropTypes = {
-    genreList: PropTypes.array.isRequired
+    genreList: PropTypes.array.isRequired,
+    genres: PropTypes.array.isRequired
 };
 
 export default Genres;
