@@ -53,6 +53,14 @@ export default class App extends React.Component {
         })
   };
 
+  removeSessionId = () => {
+      cookies.remove('session_id');
+      this.setState({
+          session_id: null,
+          user: null
+      })
+  };
+
   onChangeFilters = (event) => {
     const newFilters = {
       ...this.state.filters,
@@ -119,21 +127,25 @@ export default class App extends React.Component {
   }
 
   render() {
-      const {filters, page, total_pages, user} = this.state;
+      const {filters, page, total_pages, user, session_id} = this.state;
       // console.log(total_pages);
   return (
       <AppContext.Provider
           value={{
               user: user,
+              session_id: session_id,
               updateUser: this.updateUser,
-              updateSessionId: this.updateSessionId
+              updateSessionId: this.updateSessionId,
+              removeSessionId: this.removeSessionId
           }}
       >
           <div>
               <Header
                   user={user}
+                  // session_id={session_id}
                   // updateUser={this.updateUser}
                   // updateSessionId={this.updateSessionId}
+                  // removeSessionId={this.removeSessionId}
               />
               <div className="container">
                   <div className="row mt-4">

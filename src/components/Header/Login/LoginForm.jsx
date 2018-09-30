@@ -210,7 +210,6 @@ class LoginForm extends React.Component {
     }
 }
 
-
 export default props => {
     // console.log(props);
     return (

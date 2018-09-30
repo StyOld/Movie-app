@@ -1,6 +1,7 @@
 import React from 'react';
 import Login from './Login/Login';
 import User from './User'
+import DropdownForm from "./DropdownForm";
 
 class Header extends React.Component {
     render() {
@@ -14,7 +15,7 @@ class Header extends React.Component {
                         </li>
                     </ul>
                     {user ?
-                        <User /> : <Login />
+                        <DropdownForm /> : <Login />
                     }
                 </div>
             </nav>
