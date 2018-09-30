@@ -2,7 +2,9 @@ import React from 'react';
 import { API_URL, API_KEY_3, fetchApi } from "../../api/api";
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import User from './User';
-import {AppContext} from "../App";
+import AppConsumerHOC from "../HOC/AppConsumerHOC";
+// import {AppContext} from "../App";
+
 
 class DropdownForm extends React.Component {
     constructor(props) {
@@ -38,6 +40,7 @@ class DropdownForm extends React.Component {
     };
 
     render() {
+        console.log()
         return (
             <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
                 <DropdownToggle caret className='bg-primary'>
@@ -54,18 +57,20 @@ class DropdownForm extends React.Component {
 
         );
     }
-}
-
-export default props => {
-    return (
-        <AppContext.Consumer>
-            {context =>
-                <DropdownForm
-                    session_id={context.session_id}
-                    removeSessionId={context.removeSessionId}
-                    {...props}
-                />
-            }
-        </AppContext.Consumer>
-    );
 };
+
+export default AppConsumerHOC(DropdownForm);
+
+// export default props => {
+//     return (
+//         <AppContext.Consumer>
+//             {context =>
+//                 <DropdownForm
+//                     session_id={context.session_id}
+//                     removeSessionId={context.removeSessionId}
+//                     {...props}
+//                 />
+//             }
+//         </AppContext.Consumer>
+//     );
+// };

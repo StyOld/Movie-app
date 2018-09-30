@@ -1,6 +1,7 @@
 import React from "react";
 import { API_URL, API_KEY_3, fetchApi } from "../../../api/api";
-import {AppContext} from "../../App";
+import AppConsumerHOC from "../../HOC/AppConsumerHOC";
+// import {AppContext} from "../../App";
 
 class LoginForm extends React.Component {
     state = {
@@ -75,8 +76,10 @@ class LoginForm extends React.Component {
                             "Content-type": "application/json"
                         },
                         body: JSON.stringify({
-                            username: this.state.username,
-                            password: this.state.password,
+                            // username: this.state.username,
+                            // password: this.state.password,
+                            username: 'StyOld',
+                            password: 'Agressor2805!',
                             request_token: data.request_token
                         })
                     }
@@ -210,17 +213,19 @@ class LoginForm extends React.Component {
     }
 }
 
-export default props => {
-    // console.log(props);
-    return (
-        <AppContext.Consumer>
-            {context =>
-                <LoginForm
-                    updateUser={context.updateUser}
-                    updateSessionId={context.updateSessionId}
-                    {...props}
-                />
-            }
-        </AppContext.Consumer>
-    );
-};
+export default AppConsumerHOC(LoginForm);
+
+// export default props => {
+//     // console.log(props);
+//     return (
+//         <AppContext.Consumer>
+//             {context =>
+//                 <LoginForm
+//                     updateUser={context.updateUser}
+//                     updateSessionId={context.updateSessionId}
+//                     {...props}
+//                 />
+//             }
+//         </AppContext.Consumer>
+//     );
+// };
