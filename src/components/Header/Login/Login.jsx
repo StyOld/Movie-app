@@ -25,7 +25,7 @@ export default class Login extends React.Component {
                     type='button'
                     onClick={this.toggleModal}
                 >
-                    Login
+                    Войти
                 </button>
                 <Modal isOpen={this.state.showModal} toggle={this.toggleModal}>
                     <ModalBody>

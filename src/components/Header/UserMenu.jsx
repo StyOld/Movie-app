@@ -1,12 +1,11 @@
 import React from 'react';
 import { API_URL, API_KEY_3, fetchApi } from "../../api/api";
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
-import User from './User';
 import AppConsumerHOC from "../HOC/AppConsumerHOC";
 // import {AppContext} from "../App";
 
 
-class DropdownForm extends React.Component {
+class UserMenu extends React.Component {
     constructor(props) {
         super(props);
 
@@ -40,32 +39,40 @@ class DropdownForm extends React.Component {
     };
 
     render() {
-        console.log()
+        const {user} = this.props;
         return (
             <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-                <DropdownToggle caret className='bg-primary'>
-                    <User />
+                <DropdownToggle nav caret>
+                    <div>
+                        <img
+                            width='40'
+                            className='rounded-circle'
+                            src={`https://gravatar.com/avatar/${
+                                user.avatar.gravatar.hash
+                                }.jpg?s=64"`}
+                            alt=''
+                        />
+                    </div>
                 </DropdownToggle>
-                <DropdownMenu>
+                <DropdownMenu right>
                     <DropdownItem
                     onClick={this.deleteSessionId}
                     >
-                        Logout
+                        Выход
                     </DropdownItem>
                 </DropdownMenu>
             </Dropdown>
-
         );
     }
-};
+}
 
-export default AppConsumerHOC(DropdownForm);
+export default AppConsumerHOC(UserMenu);
 
 // export default props => {
 //     return (
 //         <AppContext.Consumer>
 //             {context =>
-//                 <DropdownForm
+//                 <UserMenu
 //                     session_id={context.session_id}
 //                     removeSessionId={context.removeSessionId}
 //                     {...props}

@@ -1,8 +1,6 @@
 import React from 'react';
 import Login from './Login/Login';
-import DropdownForm from "./DropdownForm";
-// import User from './User'
-
+import UserMenu from "./UserMenu";
 
 class Header extends React.Component {
     render() {
@@ -12,11 +10,11 @@ class Header extends React.Component {
                 <div className='container'>
                     <ul className='navbar-nav'>
                         <li className='nav-item active'>
-                            <a className='nav-link'>Home</a>
+                            <a className='nav-link'></a>
                         </li>
                     </ul>
                     {user ?
-                        <DropdownForm /> : <Login />
+                        <UserMenu /> : <Login />
                     }
                 </div>
             </nav>
