@@ -1,5 +1,6 @@
 import React from "react";
 import { API_URL, API_KEY_3, fetchApi } from "../../../api/api";
+import classNames from 'classnames';
 import AppConsumerHOC from "../../HOC/AppConsumerHOC";
 // import {AppContext} from "../../App";
 
@@ -108,9 +109,10 @@ class LoginForm extends React.Component {
                     }`)
             })
             .then(user => {
-                this.props.updateUser(user);
                 this.setState({
                     submitting: false
+                }, () => {
+                    this.props.updateUser(user);
                 });
             })
             .catch(error => {
@@ -139,6 +141,10 @@ class LoginForm extends React.Component {
         }
     };
 
+    getClassForInput = key => (
+        classNames('form-control', {'invalid': this.state.errors[key]})
+    );
+
     render() {
         // console.log(this.state.submitting);
         const { username, password, repeatPassword, errors, submitting } = this.state;
@@ -152,7 +158,7 @@ class LoginForm extends React.Component {
                         <label htmlFor="username">Пользователь</label>
                         <input
                             type="text"
-                            className="form-control"
+                            className={this.getClassForInput('username')}
                             id="username"
                             placeholder="Пользователь"
                             name="username"
@@ -168,7 +174,7 @@ class LoginForm extends React.Component {
                         <label htmlFor="password">Пароль</label>
                         <input
                             type="password"
-                            className="form-control"
+                            className={this.getClassForInput('password')}
                             id="password"
                             placeholder="Пароль"
                             name="password"
@@ -184,7 +190,7 @@ class LoginForm extends React.Component {
                         <label htmlFor="password">Повторите Пароль</label>
                         <input
                             type="password"
-                            className="form-control"
+                            className={this.getClassForInput('repeatPassword')}
                             id="repeatPassword"
                             placeholder="Повторите Пароль"
                             name="repeatPassword"

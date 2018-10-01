@@ -1,7 +1,7 @@
 import React from 'react';
-// import {API_URL, API_KEY_3} from '../../../api/api';
 import {Modal, ModalBody} from 'reactstrap';
-import LoginForm from './LoginForm'
+import LoginForm from './LoginForm';
+// import {API_URL, API_KEY_3} from '../../../api/api';
 
 export default class Login extends React.Component {
     constructor() {

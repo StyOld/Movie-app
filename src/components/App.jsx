@@ -122,6 +122,7 @@ export default class App extends React.Component {
                   }`
           ).then(user => {
               this.updateUser(user);
+              this.updateSessionId(session_id);
           })
       }
   }
