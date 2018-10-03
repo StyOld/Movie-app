@@ -6,6 +6,13 @@ import _ from "lodash";
 import Header from "./Header/Header";
 import {API_KEY_3, API_URL, fetchApi} from '../api/api';
 import Cookies from 'universal-cookie';
+import { library } from '@fortawesome/fontawesome-svg-core';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import { faBookmark } from '@fortawesome/free-solid-svg-icons';
+library.add(faHeart);
+library.add(faBookmark);
+
 
 const cookies = new Cookies();
 

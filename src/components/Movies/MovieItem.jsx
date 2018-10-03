@@ -1,6 +1,16 @@
 import React, { Component } from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default class MovieItem extends Component {
+    constructor() {
+        super();
+
+        this.state = {
+            favourite: false,
+            watchlist: false
+        };
+    }
+
   render() {
     const { item } = this.props;
     return (
@@ -13,7 +23,11 @@ export default class MovieItem extends Component {
         />
         <div className="card-body">
           <h6 className="card-title">{item.title}</h6>
-          <div className="card-text">Рейтинг: {item.vote_average}</div>
+            <div className='d-flex justify-content-between align-items-center'>
+                <div className="card-text">Рейтинг: {item.vote_average}</div>
+                <FontAwesomeIcon icon="heart" />
+                <FontAwesomeIcon icon="bookmark" />
+            </div>
         </div>
       </div>
     );

@@ -5,9 +5,7 @@ export default (Component) => class AppConsumerHOC extends React.Component {
     render() {
         return (
             <AppContext.Consumer>
-                {context =>
-                    <Component {...context} {...this.props}/>
-                }
+                {context => <Component {...this.props} {...context}/>}
             </AppContext.Consumer>
         );
     }
