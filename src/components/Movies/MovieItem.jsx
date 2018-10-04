@@ -10,13 +10,18 @@ class MovieItem extends React.Component {
         this.state = {
             favorite_list: false,
             watch_list: false,
-            icon_disabled: false
+            favorit_disabled: false,
+            watch_disabled: false
         };
     }
 
     onChangeFavouriteList = () => {
-        this.setState({
-            icon_disabled: true
+        if (this.props.session_id===null) {
+            alert('!');
+        } else
+
+        {this.setState({
+            favorit_disabled: true
         });
 
         fetchApi(`${API_URL}/account/{account_id}/favorite?api_key=${API_KEY_3}&session_id=${this.props.session_id}`,
@@ -34,38 +39,41 @@ class MovieItem extends React.Component {
             })
             .then(() => {
                 this.setState(prevState => ({
-                    icon_disabled: false,
+                    favorit_disabled: false,
                     favorite_list: !prevState.favorite_list
                 }));
             })
-    };
+    }};
 
-    // onChangeWatchList = () => {
-    //     fetchApi(`${API_URL}/account/{account_id}/favorite?api_key=${API_KEY_3}&session_id=${this.props.session_id}`,
-    //         {
-    //             method: "POST",
-    //             mode: "cors",
-    //             headers: {
-    //                 "Content-type": "application/json"
-    //             },
-    //             body: JSON.stringify({
-    //                 media_type: 'movie',
-    //                 media_id: this.props.item.id,
-    //                 favorite: !this.state.watch_list
-    //             })
-    //         })
-    //         .then(() => {
-    //             this.setState(prevState => ({
-    //                 watch_list: !prevState.watch_list
-    //             }));
-    //         })
-    // };
+    onChangeWatchList = () => {
+        if (this.props.session_id===null) {
+            alert('!');
+        } else
 
-    // onChangeWatchList = () => {
-    //     this.setState(prevState => ({
-    //         watch_list: !prevState.watch_list
-    //     }));
-    // };
+        {this.setState({
+            watch_disabled: true
+        });
+
+            fetchApi(`${API_URL}/account/{account_id}/watchlist?api_key=${API_KEY_3}&session_id=${this.props.session_id}`,
+                {
+                    method: "POST",
+                    mode: "cors",
+                    headers: {
+                        "Content-type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        media_type: 'movie',
+                        media_id: this.props.item.id,
+                        watchlist: !this.state.watch_list
+                    })
+                })
+                .then(() => {
+                    this.setState(prevState => ({
+                        watch_disabled: false,
+                        watch_list: !prevState.watch_list
+                    }));
+                })
+        }};
 
   render() {
     const { item } = this.props;
@@ -85,13 +93,13 @@ class MovieItem extends React.Component {
                     icon="heart"
                     color={this.state.favorite_list ? 'red' : 'grey'}
                     onClick={this.onChangeFavouriteList}
-                    className={this.state.icon_disabled ? 'icon-disabled' : ''}
-                    // disabled=true
+                    className={this.state.favorit_disabled ? 'icon-disabled' : ''}
                 />
                 <FontAwesomeIcon
                     icon="bookmark"
                     color={this.state.watch_list ? 'red' : 'grey'}
                     onClick={this.onChangeWatchList}
+                    className={this.state.watch_disabled ? 'icon-disabled' : ''}
                 />
             </div>
         </div>
