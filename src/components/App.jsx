@@ -10,23 +10,27 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faHeart, faBookmark } from '@fortawesome/free-solid-svg-icons';
 library.add(faHeart, faBookmark);
 
-
 const cookies = new Cookies();
 
 export const AppContext = React.createContext();
+
 export default class App extends React.Component {
   constructor() {
     super()
-      this.state = {
-          user: null,
-          session_id: null,
+      this.initialFilter = {
           filters: {
-            sort_by: 'vote_average.asc',
-            primary_release_year: '2018',
-            genres: []
+              sort_by: 'vote_average.asc',
+              primary_release_year: '2018',
+              genres: []
           },
           page: 1,
           total_pages: ''
+      };
+
+      this.state = {
+          user: null,
+          session_id: null,
+          ...this.initialFilter
       };
 
       // this.initalState = {
@@ -158,7 +162,7 @@ export default class App extends React.Component {
                                           // onClick={() => {
                                           //     window.location.reload(); плохая идея перезагружать страницу, будет всё заново рендериться.
                                           onClick={(event) => {
-                                              this.setState(this.initialState);
+                                              this.setState(_.cloneDeep(this.initialFilter));
                                           }}
                                       >
                                           Очистить фильтры

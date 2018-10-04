@@ -1,80 +1,9 @@
 import React from 'react';
-import { API_URL, API_KEY_3, fetchApi } from "../../api/api";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import AppConsumerHOC from "../HOC/AppConsumerHOC";
+import FavoriteList from './Icons/FavoriteList';
+import WatchList from './Icons/WatchList';
+// import AppConsumerHOC from "../HOC/AppConsumerHOC";
 
-class MovieItem extends React.Component {
-    constructor() {
-        super();
-
-        this.state = {
-            favorite_list: false,
-            watch_list: false,
-            favorit_disabled: false,
-            watch_disabled: false
-        };
-    }
-
-    onChangeFavouriteList = () => {
-        if (this.props.session_id===null) {
-            alert('!');
-        } else
-
-        {this.setState({
-            favorit_disabled: true
-        });
-
-        fetchApi(`${API_URL}/account/{account_id}/favorite?api_key=${API_KEY_3}&session_id=${this.props.session_id}`,
-            {
-                method: "POST",
-                mode: "cors",
-                headers: {
-                    "Content-type": "application/json"
-                },
-                body: JSON.stringify({
-                    media_type: 'movie',
-                    media_id: this.props.item.id,
-                    favorite: !this.state.favorite_list
-                })
-            })
-            .then(() => {
-                this.setState(prevState => ({
-                    favorit_disabled: false,
-                    favorite_list: !prevState.favorite_list
-                }));
-            })
-    }};
-
-    onChangeWatchList = () => {
-        if (this.props.session_id===null) {
-            alert('!');
-        } else
-
-        {this.setState({
-            watch_disabled: true
-        });
-
-            fetchApi(`${API_URL}/account/{account_id}/watchlist?api_key=${API_KEY_3}&session_id=${this.props.session_id}`,
-                {
-                    method: "POST",
-                    mode: "cors",
-                    headers: {
-                        "Content-type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        media_type: 'movie',
-                        media_id: this.props.item.id,
-                        watchlist: !this.state.watch_list
-                    })
-                })
-                .then(() => {
-                    this.setState(prevState => ({
-                        watch_disabled: false,
-                        watch_list: !prevState.watch_list
-                    }));
-                })
-        }};
-
+export default class MovieItem extends React.Component {
   render() {
     const { item } = this.props;
     return (
@@ -89,18 +18,8 @@ class MovieItem extends React.Component {
           <h6 className="card-title">{item.title}</h6>
             <div className='d-flex justify-content-between align-items-center'>
                 <div className="card-text">Рейтинг: {item.vote_average}</div>
-                <FontAwesomeIcon
-                    icon="heart"
-                    color={this.state.favorite_list ? 'red' : 'grey'}
-                    onClick={this.onChangeFavouriteList}
-                    className={this.state.favorit_disabled ? 'icon-disabled' : ''}
-                />
-                <FontAwesomeIcon
-                    icon="bookmark"
-                    color={this.state.watch_list ? 'red' : 'grey'}
-                    onClick={this.onChangeWatchList}
-                    className={this.state.watch_disabled ? 'icon-disabled' : ''}
-                />
+                <FavoriteList item_id={item.id}/>
+                <WatchList item_id={item.id}/>
             </div>
         </div>
       </div>
@@ -108,4 +27,4 @@ class MovieItem extends React.Component {
   }
 }
 
-export default AppConsumerHOC(MovieItem);
+// export default AppConsumerHOC(MovieItem);
