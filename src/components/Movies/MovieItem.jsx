@@ -3,18 +3,23 @@ import { API_URL, API_KEY_3, fetchApi } from "../../api/api";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import AppConsumerHOC from "../HOC/AppConsumerHOC";
 
-export default class MovieItem extends React.Component {
+class MovieItem extends React.Component {
     constructor() {
         super();
 
         this.state = {
             favorite_list: false,
-            watch_list: false
+            watch_list: false,
+            icon_disabled: false
         };
     }
 
     onChangeFavouriteList = () => {
-        fetchApi(`${API_URL}/authentication/session?api_key=${API_KEY_3}`,
+        this.setState({
+            icon_disabled: true
+        });
+
+        fetchApi(`${API_URL}/account/{account_id}/favorite?api_key=${API_KEY_3}&session_id=${this.props.session_id}`,
             {
                 method: "POST",
                 mode: "cors",
@@ -23,22 +28,44 @@ export default class MovieItem extends React.Component {
                 },
                 body: JSON.stringify({
                     media_type: 'movie',
-                    media_id: 369972,
-                    favorite: true
+                    media_id: this.props.item.id,
+                    favorite: !this.state.favorite_list
                 })
             })
             .then(() => {
                 this.setState(prevState => ({
+                    icon_disabled: false,
                     favorite_list: !prevState.favorite_list
                 }));
             })
     };
 
-    onChangeWatchList = () => {
-        this.setState(prevState => ({
-            watch_list: !prevState.watch_list
-        }));
-    };
+    // onChangeWatchList = () => {
+    //     fetchApi(`${API_URL}/account/{account_id}/favorite?api_key=${API_KEY_3}&session_id=${this.props.session_id}`,
+    //         {
+    //             method: "POST",
+    //             mode: "cors",
+    //             headers: {
+    //                 "Content-type": "application/json"
+    //             },
+    //             body: JSON.stringify({
+    //                 media_type: 'movie',
+    //                 media_id: this.props.item.id,
+    //                 favorite: !this.state.watch_list
+    //             })
+    //         })
+    //         .then(() => {
+    //             this.setState(prevState => ({
+    //                 watch_list: !prevState.watch_list
+    //             }));
+    //         })
+    // };
+
+    // onChangeWatchList = () => {
+    //     this.setState(prevState => ({
+    //         watch_list: !prevState.watch_list
+    //     }));
+    // };
 
   render() {
     const { item } = this.props;
@@ -58,6 +85,8 @@ export default class MovieItem extends React.Component {
                     icon="heart"
                     color={this.state.favorite_list ? 'red' : 'grey'}
                     onClick={this.onChangeFavouriteList}
+                    className={this.state.icon_disabled ? 'icon-disabled' : ''}
+                    // disabled=true
                 />
                 <FontAwesomeIcon
                     icon="bookmark"
@@ -70,3 +99,5 @@ export default class MovieItem extends React.Component {
     );
   }
 }
+
+export default AppConsumerHOC(MovieItem);

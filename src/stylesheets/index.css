@@ -12,3 +12,6 @@ input.invalid {
 
 .fa-false {
   color: grey; }
+
+.icon-disabled {
+  pointer-events: none; }
