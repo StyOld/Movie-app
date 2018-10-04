@@ -1,33 +1,21 @@
 import React from 'react';
 import {Modal, ModalBody} from 'reactstrap';
 import LoginForm from './LoginForm';
+import AppConsumerHOC from "../../HOC/AppConsumerHOC";
 // import {API_URL, API_KEY_3} from '../../../api/api';
 
-export default class Login extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            showModal: false
-        };
-    }
-
-    toggleModal = () => {
-        this.setState(prevState => ({
-            showModal: !prevState.showModal
-        }))
-    };
-
+class Login extends React.Component {
     render() {
         return (
             <div>
                 <button
                     className='btn btn-success'
                     type='button'
-                    onClick={this.toggleModal}
+                    onClick={this.props.showLoginForm}
                 >
                     Войти
                 </button>
-                <Modal isOpen={this.state.showModal} toggle={this.toggleModal}>
+                <Modal isOpen={this.props.showModal} toggle={this.props.showLoginForm}>
                     <ModalBody>
                         <LoginForm />
                     </ModalBody>
@@ -36,6 +24,8 @@ export default class Login extends React.Component {
         )
     }
 }
+
+export default AppConsumerHOC(Login);
 
 // 1
 // const getRequestToken = () => {

@@ -15,7 +15,7 @@ class FavoriteList extends React.Component {
 
     onChangeFavouriteList = () => {
         if (this.props.session_id===null) {
-            alert('!');
+            this.props.showLoginForm()
         } else
 
         {this.setState({

@@ -30,6 +30,7 @@ export default class App extends React.Component {
       this.state = {
           user: null,
           session_id: null,
+          showModal: false,
           ...this.initialFilter
       };
 
@@ -52,13 +53,13 @@ export default class App extends React.Component {
   };
 
   updateSessionId = session_id => {
-        cookies.set('session_id', session_id, {
-            path: '/',
-            maxAge: 2592000
-        });
-        this.setState({
-            session_id
-        })
+      cookies.set('session_id', session_id, {
+          path: '/',
+          maxAge: 2592000
+      });
+      this.setState({
+          session_id
+      })
   };
 
   removeSessionId = () => {
@@ -69,21 +70,34 @@ export default class App extends React.Component {
       })
   };
 
-  onChangeFilters = (event) => {
-    const newFilters = {
-      ...this.state.filters,
-      [event.target.name]: event.target.value
-    };
-    this.setState(prevState => ({
-        filters: newFilters
-    }));
+  showLoginForm = () => {
+      this.setState(prevState => ({
+          showModal: !prevState.showModal
+      }))
   };
 
+  onChangeFilters = (event) => {
+      const newFilters = {
+          ...this.state.filters,
+          [event.target.name]: event.target.value
+      };
+      this.setState(prevState => ({
+          filters: newFilters
+      }));
+  };
+
+  clearFilters = (event) => {
+      this.setState(_.cloneDeep(this.initialFilter));
+  };
+
+    // onClick={() => {
+    //     window.location.reload(); плохая идея перезагружать страницу, будет всё заново рендериться.
+
   onChangePage = page => {
-    this.setState({
+      this.setState({
         // page: page
-        page
-    })
+          // page
+      })
   };
 
   getTotalPages = total_pages => {
@@ -129,16 +143,18 @@ export default class App extends React.Component {
   }
 
   render() {
-      const {filters, page, total_pages, user, session_id} = this.state;
+      const {filters, page, total_pages, user, session_id, showModal} = this.state;
 
   return (
       <AppContext.Provider
           value={{
               user: user,
               session_id: session_id,
+              showModal: showModal,
               updateUser: this.updateUser,
               updateSessionId: this.updateSessionId,
-              removeSessionId: this.removeSessionId
+              removeSessionId: this.removeSessionId,
+              showLoginForm: this.showLoginForm
           }}
       >
           <div>
@@ -146,8 +162,7 @@ export default class App extends React.Component {
                   user={user}
                   // session_id={session_id}
                   // updateUser={this.updateUser}
-                  // updateSessionId={this.updateSessionId}
-                  // removeSessionId={this.removeSessionId}
+                  //... и т.д.
               />
               <div className="container">
                   <div className="row mt-4">
@@ -159,11 +174,7 @@ export default class App extends React.Component {
                                       <button
                                           type='button'
                                           className='btn'
-                                          // onClick={() => {
-                                          //     window.location.reload(); плохая идея перезагружать страницу, будет всё заново рендериться.
-                                          onClick={(event) => {
-                                              this.setState(_.cloneDeep(this.initialFilter));
-                                          }}
+                                          onClick={this.clearFilters}
                                       >
                                           Очистить фильтры
                                       </button>
