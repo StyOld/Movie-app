@@ -7,11 +7,8 @@ import Header from "./Header/Header";
 import {API_KEY_3, API_URL, fetchApi} from '../api/api';
 import Cookies from 'universal-cookie';
 import { library } from '@fortawesome/fontawesome-svg-core';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart } from '@fortawesome/free-solid-svg-icons';
-import { faBookmark } from '@fortawesome/free-solid-svg-icons';
-library.add(faHeart);
-library.add(faBookmark);
+import { faHeart, faBookmark } from '@fortawesome/free-solid-svg-icons';
+library.add(faHeart, faBookmark);
 
 
 const cookies = new Cookies();
@@ -92,15 +89,9 @@ export default class App extends React.Component {
   };
 
   onChangeGenres = (event) => {
-      // console.log(event.target.value)
       const id = event.target.value;
 
       (event.target.checked) ? (
-              // this.setState({
-              //     filters: {
-              //         genres: [...this.state.filters.genres, id]
-              //     }
-              // })
           this.setState((prevState) =>({
               filters: {
                   ...prevState.filters,
@@ -120,7 +111,6 @@ export default class App extends React.Component {
 
   componentDidMount() {
       const session_id = cookies.get('session_id');
-      // console.log(session_id);
 
       if (session_id) {
           fetchApi(
@@ -136,7 +126,7 @@ export default class App extends React.Component {
 
   render() {
       const {filters, page, total_pages, user, session_id} = this.state;
-      // console.log(total_pages);
+
   return (
       <AppContext.Provider
           value={{

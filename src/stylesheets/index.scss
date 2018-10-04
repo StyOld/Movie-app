@@ -11,3 +11,11 @@ body {
 input.invalid {
   border-color: $error;
 }
+
+.fa-true {
+  color: red;
+}
+
+.fa-false {
+  color: grey;
+}

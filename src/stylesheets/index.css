@@ -6,3 +6,9 @@ body {
 
 input.invalid {
   border-color: #dc3545; }
+
+.fa-true {
+  color: red; }
+
+.fa-false {
+  color: grey; }
