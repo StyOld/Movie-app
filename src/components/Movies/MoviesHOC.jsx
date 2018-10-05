@@ -1,7 +1,8 @@
 import React from "react";
-import { API_URL, API_KEY_3 } from "../../api/api";
+import CallApi from "../../api/api";
 import _ from 'lodash';
-import queryString from 'query-string';
+// import { API_URL, API_KEY_3 } from "../../api/api";
+// import queryString from 'query-string';
 
 export default (Component) => class MoviesHOC extends React.Component {
     constructor() {
@@ -16,7 +17,7 @@ export default (Component) => class MoviesHOC extends React.Component {
         const {sort_by, primary_release_year, genres} = filters;
 
         const queryStringParams = {
-            api_key: API_KEY_3,
+            // api_key: API_KEY_3,
             language: 'ru-RU',
             sort_by: sort_by,
             page: page,
@@ -24,21 +25,20 @@ export default (Component) => class MoviesHOC extends React.Component {
             with_genres: genres.join(',')
         };
 
-        const link  = `${API_URL}/discover/movie?${queryString.stringify(
-            queryStringParams
-        )}`;
+        // const link  = `${API_URL}/discover/movie?${queryString.stringify(
+        //     queryStringParams
+        // )}`;
 
-        fetch(link)
-            .then(response => {
-                return response.json();
-            })
-            .then(data => {
-                this.setState({
-                    movies: data.results
-                })
+        // fetch(link)
 
-                this.props.getTotalPages(data.total_pages);
+        CallApi.get('/discover/movie', {
+            params: queryStringParams
+        }).then(data => {
+            this.setState({
+                movies: data.results
             })
+            this.props.getTotalPages(data.total_pages);
+        })
     };
 
     componentDidMount() {
@@ -57,7 +57,6 @@ export default (Component) => class MoviesHOC extends React.Component {
 
     render() {
         const { movies } = this.state;
-        // console.log(Component);
         return <Component movies = {movies} />;
     }
 }
