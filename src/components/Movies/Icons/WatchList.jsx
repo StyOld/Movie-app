@@ -1,7 +1,7 @@
 import React from 'react';
-import {API_KEY_3, API_URL, fetchApi} from "../../../api/api";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import AppConsumerHOC from "../../HOC/AppConsumerHOC";
+import CallApi from "../../../api/api";
 
 class WatchList extends React.Component {
     constructor() {
@@ -22,25 +22,22 @@ class WatchList extends React.Component {
             watch_disabled: true
         });
 
-            fetchApi(`${API_URL}/account/{account_id}/watchlist?api_key=${API_KEY_3}&session_id=${this.props.session_id}`,
-                {
-                    method: "POST",
-                    mode: "cors",
-                    headers: {
-                        "Content-type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        media_type: 'movie',
-                        media_id: this.props.item_id,
-                        watchlist: !this.state.watch_list
-                    })
-                })
-                .then(() => {
-                    this.setState(prevState => ({
-                        watch_disabled: false,
-                        watch_list: !prevState.watch_list
-                    }));
-                })
+        CallApi.post('/account/{account_id}/watchlist', {
+            params: {
+                session_id: this.props.session_id
+            },
+            body: {
+                media_type: 'movie',
+                media_id: this.props.item_id,
+                watchlist: !this.state.watch_list
+            }
+        })
+            .then(() => {
+                this.setState(prevState => ({
+                    watch_disabled: false,
+                    watch_list: !prevState.watch_list
+                }));
+            })
         }};
 
     render () {

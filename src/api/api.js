@@ -36,15 +36,6 @@ export default class CallApi {
       ...params
     };
 
-    // const link = `${API_URL}/discover/movie?${queryString.stringify(queryStringParams)}`;
-    // ulr = '/discover/movie'
-    // params = {
-    //   sort_by: sort_by,
-    //   page: page,
-    //   primary_release_year: primary_release_year,
-    //   with_genres: genres.join(',')
-    //}
-
     return fetchApi(
       `${API_URL}${url}?${queryString.stringify(queryStringParams)}`,
       {
@@ -54,6 +45,15 @@ export default class CallApi {
         }
       }
     );
+
+    // const link = `${API_URL}/discover/movie?${queryString.stringify(queryStringParams)}`;
+    // ulr = '/discover/movie'
+    // params = {
+    //   sort_by: sort_by,
+    //   page: page,
+    //   primary_release_year: primary_release_year,
+    //   with_genres: genres.join(',')
+    //}
   }
 
   static post(url, options = {}) {
@@ -67,6 +67,26 @@ export default class CallApi {
       `${API_URL}${url}?${queryString.stringify(queryStringParams)}`,
       {
         method: "POST",
+        mode: "cors",
+        headers: {
+          "Content-type": "application/json"
+        },
+        body: JSON.stringify(body)
+      }
+    );
+  }
+
+  static delete(url, options = {}) {
+    const { params = {}, body = {} } = options;
+    const queryStringParams = {
+      api_key: API_KEY_3,
+      ...params
+    };
+
+    return fetchApi(
+      `${API_URL}${url}?${queryString.stringify(queryStringParams)}`,
+      {
+        method: "DELETE",
         mode: "cors",
         headers: {
           "Content-type": "application/json"

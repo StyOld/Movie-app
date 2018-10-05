@@ -1,7 +1,7 @@
 import React from 'react';
-import {API_KEY_3, API_URL, fetchApi} from "../../../api/api";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import AppConsumerHOC from "../../HOC/AppConsumerHOC";
+import CallApi from "../../../api/api";
 
 class FavoriteList extends React.Component {
     constructor() {
@@ -22,26 +22,22 @@ class FavoriteList extends React.Component {
             favorite_disabled: true
         });
 
-            fetchApi(`${API_URL}/account/{account_id}/favorite?api_key=${API_KEY_3}&session_id=${this.props.session_id}`,
-                {
-                    method: "POST",
-                    mode: "cors",
-                    headers: {
-                        "Content-type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        media_type: 'movie',
-                        // media_id: this.props.item.id,
-                        media_id: this.props.item_id,
-                        favorite: !this.state.favorite_list
-                    })
-                })
-                .then(() => {
-                    this.setState(prevState => ({
-                        favorite_disabled: false,
-                        favorite_list: !prevState.favorite_list
-                    }));
-                })
+        CallApi.post('/account/{account_id}/favorite', {
+            params: {
+                session_id: this.props.session_id
+            },
+            body: {
+                media_type: 'movie',
+                media_id: this.props.item_id,
+                favorite: !this.state.favorite_list
+            }
+        })
+            .then(() => {
+                this.setState(prevState => ({
+                    favorite_disabled: false,
+                    favorite_list: !prevState.favorite_list
+                }));
+            })
         }};
 
     render () {

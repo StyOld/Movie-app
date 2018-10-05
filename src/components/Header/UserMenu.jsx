@@ -1,7 +1,7 @@
 import React from 'react';
-import { API_URL, API_KEY_3, fetchApi } from "../../api/api";
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import AppConsumerHOC from "../HOC/AppConsumerHOC";
+import CallApi from "../../api/api";
 // import {AppContext} from "../App";
 
 
@@ -22,20 +22,11 @@ class UserMenu extends React.Component {
     }
 
     deleteSessionId = () => {
-        fetchApi(`${API_URL}/authentication/session?api_key=${API_KEY_3}`,
-            {
-                method: "DELETE",
-                mode: "cors",
-                headers: {
-                    "Content-type": "application/json"
-                },
-                body: JSON.stringify({
-                    session_id: this.props.session_id
-                })
-            })
-            .then(() => {
-                this.props.removeSessionId();
-            })
+        CallApi.delete('/authentication/session', {
+            body: {session_id: this.props.session_id}
+        }).then(() => {
+            this.props.removeSessionId();
+        })
     };
 
     render() {

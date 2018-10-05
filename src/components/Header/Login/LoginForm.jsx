@@ -32,7 +32,6 @@ class LoginForm extends React.Component {
     };
 
     handleBlur = () => {
-        // console.log("on blur");
         const errors = this.validateFields();
         if (Object.keys(errors).length > 0) {
             this.setState(prevState => ({

@@ -4,8 +4,8 @@ import MoviesList from "./Movies/MoviesList";
 import Pagination from "./Filters/Pagination";
 import _ from "lodash";
 import Header from "./Header/Header";
-import {API_KEY_3, API_URL, fetchApi} from '../api/api';
 import Cookies from 'universal-cookie';
+import CallApi from "../api/api";
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faHeart, faBookmark } from '@fortawesome/free-solid-svg-icons';
 library.add(faHeart, faBookmark);
@@ -86,7 +86,7 @@ export default class App extends React.Component {
       }));
   };
 
-  clearFilters = (event) => {
+  clearFilters = () => {
       this.setState(_.cloneDeep(this.initialFilter));
   };
 
@@ -131,11 +131,11 @@ export default class App extends React.Component {
       const session_id = cookies.get('session_id');
 
       if (session_id) {
-          fetchApi(
-              `${API_URL}/account?api_key=${API_KEY_3}&session_id=${
-                  session_id
-                  }`
-          ).then(user => {
+          CallApi.get('/account', {
+              params: {
+                  session_id: session_id
+              }
+          }).then(user => {
               this.updateUser(user);
               this.updateSessionId(session_id);
           })

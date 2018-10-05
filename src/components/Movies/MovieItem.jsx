@@ -1,7 +1,6 @@
 import React from 'react';
 import FavoriteList from './Icons/FavoriteList';
 import WatchList from './Icons/WatchList';
-// import AppConsumerHOC from "../HOC/AppConsumerHOC";
 
 export default class MovieItem extends React.Component {
   render() {
@@ -26,5 +25,3 @@ export default class MovieItem extends React.Component {
     );
   }
 }
-
-// export default AppConsumerHOC(MovieItem);

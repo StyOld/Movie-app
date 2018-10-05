@@ -1,8 +1,6 @@
 import React from "react";
 import CallApi from "../../api/api";
 import _ from 'lodash';
-// import { API_URL, API_KEY_3 } from "../../api/api";
-// import queryString from 'query-string';
 
 export default (Component) => class MoviesHOC extends React.Component {
     constructor() {
@@ -25,18 +23,13 @@ export default (Component) => class MoviesHOC extends React.Component {
             with_genres: genres.join(',')
         };
 
-        // const link  = `${API_URL}/discover/movie?${queryString.stringify(
-        //     queryStringParams
-        // )}`;
-
-        // fetch(link)
-
         CallApi.get('/discover/movie', {
             params: queryStringParams
-        }).then(data => {
+        })
+            .then(data => {
             this.setState({
                 movies: data.results
-            })
+            });
             this.props.getTotalPages(data.total_pages);
         })
     };
