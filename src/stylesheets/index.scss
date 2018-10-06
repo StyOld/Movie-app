@@ -12,14 +12,28 @@ input.invalid {
   border-color: $error;
 }
 
-.fa-true {
-  color: red;
-}
-
-.fa-false {
-  color: grey;
-}
-
 .icon-disabled {
   pointer-events: none;
 }
+
+.circle {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  background: gray;
+  margin: 1em;
+  border-radius: 50px;
+  text-align: center;
+}
+
+//.ring {
+//  display: inline-block;
+//  margin: 5px;
+//  width: 30px;
+//  height: 30px;
+//  border-radius: 50%;
+//  text-align: center;
+//}
+//.ring:nth-child(1) {
+//  border: 4.5px solid black;
+//}

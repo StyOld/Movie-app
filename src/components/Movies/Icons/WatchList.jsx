@@ -42,12 +42,14 @@ class WatchList extends React.Component {
 
     render () {
         return (
+           <div className='circle'>
             <FontAwesomeIcon
                 icon="bookmark"
-                color={this.state.watch_list ? 'red' : 'grey'}
+                color={this.state.watch_list ? 'red' : 'white'}
                 onClick={this.onChangeWatchList}
                 className={this.state.watch_disabled ? 'icon-disabled' : ''}
             />
+           </div>
         )
     }
 }

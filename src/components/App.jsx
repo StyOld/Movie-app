@@ -4,7 +4,7 @@ import MoviePage from "./pages/MoviePage/MoviePage";
 import Header from "./Header/Header";
 import Cookies from 'universal-cookie';
 import CallApi from "../api/api";
-import { BrowserRouter, Route, Link } from 'react-router-dom'
+import { BrowserRouter, Route, Link } from 'react-router-dom';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faHeart, faBookmark } from '@fortawesome/free-solid-svg-icons';
 library.add(faHeart, faBookmark);
@@ -85,14 +85,14 @@ export default class App extends React.Component {
           >
               <div>
                   <Header user={user}/>
-                  <Link to='/movie'>go to movie</Link>
+                  {/*<Link to='/movie/1'>go to movie</Link>*/}
                   <Route exact path='/' component={MoviesPage} />
-                  <Route path='/movie' component={MoviePage} />
+                  <Route path='/movie/:id' component={MoviePage} />
                   {/*
                   <MoviesPage/>
                   <MoviePage/>
                   '/' - MoviesPage
-                  '/movie' - Movie
+                  '/movie/1' - Movie with id = 1
                   */}
               </div>
           </AppContext.Provider>

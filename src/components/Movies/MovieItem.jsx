@@ -1,6 +1,7 @@
 import React from 'react';
 import FavoriteList from './Icons/FavoriteList';
 import WatchList from './Icons/WatchList';
+import {Link} from 'react-router-dom';
 
 export default class MovieItem extends React.Component {
   render() {
@@ -14,7 +15,10 @@ export default class MovieItem extends React.Component {
           alt=""
         />
         <div className="card-body">
-          <h6 className="card-title">{item.title}</h6>
+          {/*<h6 className="card-title">{item.title}</h6>*/}
+          <Link className="card-title" to={`/movie/${item.id}`}>
+              {item.title}
+              </Link>
             <div className='d-flex justify-content-between align-items-center'>
                 <div className="card-text">Рейтинг: {item.vote_average}</div>
                 <FavoriteList item_id={item.id}/>

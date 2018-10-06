@@ -42,12 +42,14 @@ class FavoriteList extends React.Component {
 
     render () {
         return (
-            <FontAwesomeIcon
+            <div className='circle'>
+             <FontAwesomeIcon
                 icon="heart"
-                color={this.state.favorite_list ? 'red' : 'grey'}
+                color={this.state.favorite_list ? 'red' : 'white'}
                 onClick={this.onChangeFavouriteList}
                 className={this.state.favorite_disabled ? 'icon-disabled' : ''}
-            />
+             />
+            </div>
         )
     }
 }

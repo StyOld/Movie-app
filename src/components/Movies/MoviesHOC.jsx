@@ -49,6 +49,7 @@ export default (Component) => class MoviesHOC extends React.Component {
     }
 
     render() {
+        // console.log(this.state.movies);
         const { movies } = this.state;
         return <Component movies = {movies} />;
     }
