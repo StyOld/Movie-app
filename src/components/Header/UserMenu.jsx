@@ -2,8 +2,8 @@ import React from 'react';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import AppConsumerHOC from "../HOC/AppConsumerHOC";
 import CallApi from "../../api/api";
+import {Link} from  'react-router-dom';
 // import {AppContext} from "../App";
-
 
 class UserMenu extends React.Component {
     constructor(props) {
@@ -46,6 +46,7 @@ class UserMenu extends React.Component {
                     </div>
                 </DropdownToggle>
                 <DropdownMenu right>
+                    <DropdownItem><Link to='account/favorites'>Избранное</Link></DropdownItem>
                     <DropdownItem
                     onClick={this.deleteSessionId}
                     >

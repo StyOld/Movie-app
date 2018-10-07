@@ -12,7 +12,7 @@ export default (Component, type) => class AddToListByTypeHOC extends React.Compo
     }
 
     onChangeAdded = () => {
-        if (this.props.session_id===null) {
+        if (!this.props.isAuth) {
             this.props.showLoginForm()
         } else
 

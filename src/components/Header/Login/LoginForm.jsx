@@ -66,6 +66,8 @@ class LoginForm extends React.Component {
             submitting: true
         });
 
+        let session_id = null;
+
         CallApi.get('/authentication/token/new')
         // fetchApi(`${API_URL}/authentication/token/new?api_key=${API_KEY_3}`)
             .then(data => {
@@ -117,7 +119,8 @@ class LoginForm extends React.Component {
                 // );
             })
             .then(data => {
-                this.props.updateSessionId(data.session_id);
+                // this.props.updateSessionId(data.session_id);
+                session_id = data.session_id;
                 return CallApi.get('/account', {
                     params: {
                         session_id: data.session_id
@@ -132,7 +135,7 @@ class LoginForm extends React.Component {
                 this.setState({
                     submitting: false
                 }, () => {
-                    this.props.updateUser(user);
+                    this.props.updateAuth(user, session_id);
                 });
             })
             .catch(error => {
@@ -145,6 +148,10 @@ class LoginForm extends React.Component {
                 });
             });
     };
+
+    componentWillUnmount() {
+        this.props.hideLoginForm()
+    }
 
     onLogin = e => {
         e.preventDefault();
