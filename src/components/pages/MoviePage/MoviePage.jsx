@@ -1,13 +1,13 @@
 import React from 'react';
 import CallApi from "../../../api/api";
-import FavoriteList from '../../Movies/Icons/FavoriteList';
-import WatchList from '../../Movies/Icons/WatchList';
+import FavoriteList from '../../Movies/Icons/FavoriteIcon';
+import WatchList from '../../Movies/Icons/WatchIcon';
 
 export default class MoviePage extends React.Component {
     constructor() {
         super()
         this.state = {
-            movie_info: {}
+            moviesDetails: {}
         };
 };
     componentDidMount () {
@@ -16,32 +16,33 @@ export default class MoviePage extends React.Component {
         })
             .then(data => {
                 this.setState({
-                    movie_info: data
+                    moviesDetails: data
                 });
             })
     }
 
     render() {
         // console.log(this.state.movie_info);
-        const {movie_info} = this.state;
+        const {moviesDetails} = this.state;
         return (
             <div className='card'>
-                <div className='row'>
-                    <div className='col-4'>
-                        <img
-                            src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2${movie_info.backdrop_path || movie_info.poster_path}`}
-                            alt=""
-                        />
-                    </div>
-                    <div className='col-8'>
-                            <div className="card-body">
+                <div className='container'>
+                    <div className='row'>
+                        <div className='col-4'>
+                            <img
+                                className="card-img-top"
+                                src={`https://image.tmdb.org/t/p/w500${moviesDetails.backdrop_path || moviesDetails.poster_path}`}
+                                alt=""
+                            />
+                        </div>
+                        <div className='col-8'>
                                 <h5 className="card-title"><strong>Oписание фильма</strong></h5>
-                                <p className="card-text">{movie_info.overview}</p>
+                                <p className="card-text">{moviesDetails.overview}</p>
                                 <div className='d-flex align-items-center'>
-                                    <FavoriteList item_id={movie_info.id}/>
-                                    <WatchList item_id={movie_info.id}/>
+                                    <FavoriteList item_id={moviesDetails.id}/>
+                                    <WatchList item_id={moviesDetails.id}/>
                                 </div>
-                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

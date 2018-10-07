@@ -1,6 +1,6 @@
 import React from 'react';
-import FavoriteList from './Icons/FavoriteList';
-import WatchList from './Icons/WatchList';
+import FavoriteIcon from './Icons/FavoriteIcon';
+import WatchIcon from './Icons/WatchIcon';
 import {Link} from 'react-router-dom';
 
 export default class MovieItem extends React.Component {
@@ -21,8 +21,8 @@ export default class MovieItem extends React.Component {
               </Link>
             <div className='d-flex justify-content-between align-items-center'>
                 <div className="card-text">Рейтинг: {item.vote_average}</div>
-                <FavoriteList item_id={item.id}/>
-                <WatchList item_id={item.id}/>
+                <FavoriteIcon movieId={item.id}/>
+                <WatchIcon movieId={item.id}/>
             </div>
         </div>
       </div>
