@@ -11,7 +11,7 @@ export default (Component) => class MoviesHOC extends React.Component {
         };
     }
 
-    getMovies = (filters, page) => {
+        getMovies = (filters, page) => {
         const {sort_by, primary_release_year, genres} = filters;
 
         const queryStringParams = {

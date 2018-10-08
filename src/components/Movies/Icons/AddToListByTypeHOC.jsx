@@ -6,6 +6,7 @@ export default (Component, type) => class AddToListByTypeHOC extends React.Compo
         super();
 
         this.state = {
+            // added: () => (this.props.movieId !== '351064') ? false : true,
             added: false,
             disabled: false
         };

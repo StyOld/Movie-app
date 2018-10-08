@@ -13,7 +13,8 @@ class FavoriteIcon extends React.Component {
             >
                 <FontAwesomeIcon
                     icon="heart"
-                    color={this.props.added ? 'red' : 'white'}
+                    // color={this.props.added ? 'red' : 'white'}
+                    color={this.props.movieId === '351064' ? 'red' : 'white'}
                     className={this.props.disabled ? 'icon-disabled' : ''}
                 />
             </div>

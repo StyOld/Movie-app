@@ -21,7 +21,8 @@ export default class App extends React.Component {
           // session_id: null,
           session_id: cookies.get('session_id'),
           toggleModal: false,
-          isAuth: false
+          isAuth: false,
+          favoriteMovies: []
       };
   };
 
@@ -58,6 +59,20 @@ export default class App extends React.Component {
       })
   };
 
+  getFavoriteMovies = () => {
+      CallApi.get(`/account/{account_id}/favorite/movies`, {
+          params: {
+              language: 'ru-RU',
+              session_id: this.state.session_id
+            }
+      })
+          .then(data => {
+              this.setState({
+                  favoriteMovies: data.results
+              });
+          })
+  };
+
   componentDidMount() {
       const {session_id} = this.state;
 
@@ -72,8 +87,16 @@ export default class App extends React.Component {
       }
   }
 
+  componentDidUpdate(prevProps, prevStates) {
+      // console.log(this.state.favoriteMovies);
+      if (this.state.isAuth !== prevStates.isAuth) {
+          this.getFavoriteMovies()
+      }
+  }
+
   render() {
-      const {user, session_id, toggleModal, isAuth} = this.state;
+
+      const {user, session_id, toggleModal, isAuth, favoriteMovies} = this.state;
 
       return isAuth || !session_id ? (
           <BrowserRouter>
@@ -83,6 +106,7 @@ export default class App extends React.Component {
                       session_id,
                       toggleModal,
                       isAuth,
+                      favoriteMovies,
                       removeSessionId: this.removeSessionId,
                       showLoginForm: this.showLoginForm,
                       hideLoginForm: this.hideLoginForm,
