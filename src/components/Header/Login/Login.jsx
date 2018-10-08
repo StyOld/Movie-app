@@ -15,7 +15,7 @@ class Login extends React.Component {
                 >
                     Войти
                 </button>
-                <Modal isOpen={this.props.showModal} toggle={this.props.showLoginForm}>
+                <Modal isOpen={this.props.toggleModal} toggle={this.props.showLoginForm}>
                     <ModalBody>
                         <LoginForm />
                     </ModalBody>

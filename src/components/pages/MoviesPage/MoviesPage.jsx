@@ -25,9 +25,9 @@ export default class MoviesPage extends React.Component {
             ...this.state.filters,
             [event.target.name]: event.target.value
         };
-        this.setState(prevState => ({
+        this.setState({
             filters: newFilters
-        }));
+        });
     };
 
     clearFilters = () => {

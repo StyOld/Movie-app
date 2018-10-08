@@ -173,7 +173,6 @@ class LoginForm extends React.Component {
     );
 
     render() {
-        // console.log(this.state.submitting);
         const { username, password, repeatPassword, errors, submitting } = this.state;
         return (
             <div className="form-login-container">

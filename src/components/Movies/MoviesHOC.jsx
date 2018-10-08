@@ -15,13 +15,14 @@ export default (Component) => class MoviesHOC extends React.Component {
         const {sort_by, primary_release_year, genres} = filters;
 
         const queryStringParams = {
-            // api_key: API_KEY_3,
             language: 'ru-RU',
             sort_by: sort_by,
             page: page,
-            primary_release_year: primary_release_year,
-            with_genres: genres.join(',')
+            primary_release_year: primary_release_year
+            // with_genres: genres.join(',') словил баг на стороне сервака
         };
+
+        if (genres.length>0) queryStringParams.with_genres = genres.join(',');
 
         CallApi.get('/discover/movie', {
             params: queryStringParams
@@ -49,7 +50,6 @@ export default (Component) => class MoviesHOC extends React.Component {
     }
 
     render() {
-        // console.log(this.state.movies);
         const { movies } = this.state;
         return <Component movies = {movies} />;
     }

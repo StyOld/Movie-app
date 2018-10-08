@@ -20,7 +20,6 @@ export default (Component, type) => class AddToListByTypeHOC extends React.Compo
             added: !prevState.added,
             disabled: true
         }), () => {
-            // console.log(this.state.added)
             CallApi.post(`/account/{account_id}/${type}`, {
                 params: {
                     session_id: this.props.session_id
@@ -42,7 +41,6 @@ export default (Component, type) => class AddToListByTypeHOC extends React.Compo
 
     render () {
         const {added, disabled} = this.state;
-        // console.log(type)
         return (
             <Component added={added} disabled={disabled} onChangeAdded={this.onChangeAdded} />
         )

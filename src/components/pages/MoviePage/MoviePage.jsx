@@ -22,7 +22,6 @@ export default class MoviePage extends React.Component {
     }
 
     render() {
-        // console.log(this.state.movie_info);
         const {moviesDetails} = this.state;
         return (
             <div className='card'>
@@ -39,8 +38,8 @@ export default class MoviePage extends React.Component {
                                 <h5 className="card-title"><strong>Oписание фильма</strong></h5>
                                 <p className="card-text">{moviesDetails.overview}</p>
                                 <div className='d-flex align-items-center'>
-                                    <FavoriteList item_id={moviesDetails.id}/>
-                                    <WatchList item_id={moviesDetails.id}/>
+                                    <FavoriteList movieId={moviesDetails.id}/>
+                                    <WatchList movieId={moviesDetails.id}/>
                                 </div>
                         </div>
                     </div>

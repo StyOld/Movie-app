@@ -20,27 +20,10 @@ export default class App extends React.Component {
           user: null,
           // session_id: null,
           session_id: cookies.get('session_id'),
-          showModal: false,
+          toggleModal: false,
           isAuth: false
       };
   };
-
-  // updateUser = user => {
-  //     this.setState({
-  //         user,
-  //         isAuth: true
-  //     })
-  // };
-
-  // updateSessionId = session_id => {
-  //     cookies.set('session_id', session_id, {
-  //         path: '/',
-  //         maxAge: 2592000
-  //     });
-  //     this.setState({
-  //         session_id
-  //     })
-  // };
 
   updateAuth = (user, session_id) => {
       cookies.set('session_id', session_id, {
@@ -65,18 +48,17 @@ export default class App extends React.Component {
 
   showLoginForm = () => {
       this.setState(prevState => ({
-          showModal: !prevState.showModal
+          toggleModal: !prevState.toggleModal
       }))
   };
 
   hideLoginForm = () => {
       this.setState({
-          showModal: false
+          toggleModal: false
       })
   };
 
   componentDidMount() {
-      // const session_id = cookies.get('session_id');
       const {session_id} = this.state;
 
       if (session_id) {
@@ -86,25 +68,21 @@ export default class App extends React.Component {
               }
           }).then(user => {
               this.updateAuth(user,session_id);
-              // this.updateUser(user);
-              // this.updateSessionId(session_id);
           })
       }
   }
 
   render() {
-      const {user, session_id, showModal, isAuth} = this.state;
+      const {user, session_id, toggleModal, isAuth} = this.state;
 
-      return (session_id && isAuth) || !session_id ? (
+      return isAuth || !session_id ? (
           <BrowserRouter>
               <AppContext.Provider
                   value={{
                       user: user,
                       session_id,
-                      showModal,
+                      toggleModal,
                       isAuth,
-                      // updateUser: this.updateUser,
-                      // updateSessionId: this.updateSessionId,
                       removeSessionId: this.removeSessionId,
                       showLoginForm: this.showLoginForm,
                       hideLoginForm: this.hideLoginForm,
