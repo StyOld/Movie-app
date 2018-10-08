@@ -10,11 +10,12 @@ const Genres = ({genreList, genres, onChangeGenres}) => (
                     <input
                         className="form-check-input"
                         type="checkbox"
+                        id={item.id}
                         value={item.id}
                         checked={genres.includes(String(item.id))}
                         onChange={onChangeGenres}
                     />
-                    <label className="form-check-label" htmlFor="defaultCheck1">
+                    <label className="form-check-label" htmlFor={item.id}>
                         {item.name}
                     </label>
                 </div>

@@ -9,7 +9,8 @@ export default class MoviePage extends React.Component {
         this.state = {
             moviesDetails: {}
         };
-};
+    };
+
     componentDidMount () {
         CallApi.get(`/movie/${this.props.match.params.id}`, {
             params: {language: 'ru-RU'}
