@@ -13,8 +13,7 @@ class FavoriteIcon extends React.Component {
             >
                 <FontAwesomeIcon
                     icon="heart"
-                    // color={this.props.added ? 'red' : 'white'}
-                    color={this.props.movieId === '351064' ? 'red' : 'white'}
+                    color={this.props.added ? 'red' : 'white'}
                     className={this.props.disabled ? 'icon-disabled' : ''}
                 />
             </div>
@@ -22,4 +21,4 @@ class FavoriteIcon extends React.Component {
     }
 }
 
-export default AppConsumerHOC(AddToListByTypeHOC(FavoriteIcon, "favorite"))
+export default AddToListByTypeHOC(FavoriteIcon, "favorite")

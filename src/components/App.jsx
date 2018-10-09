@@ -89,7 +89,7 @@ export default class App extends React.Component {
 
   componentDidUpdate(prevProps, prevStates) {
       // console.log(this.state.favoriteMovies);
-      if (this.state.isAuth !== prevStates.isAuth) {
+      if ((this.state.isAuth !== prevStates.isAuth) && (this.state.isAuth)) {
           this.getFavoriteMovies()
       }
   }
@@ -110,7 +110,8 @@ export default class App extends React.Component {
                       removeSessionId: this.removeSessionId,
                       showLoginForm: this.showLoginForm,
                       hideLoginForm: this.hideLoginForm,
-                      updateAuth: this.updateAuth
+                      updateAuth: this.updateAuth,
+                      getFavoriteMovies: this.getFavoriteMovies
                   }}
               >
                   <div>

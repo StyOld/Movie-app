@@ -1,12 +1,13 @@
 import React from 'react';
 import CallApi from "../../../api/api";
+import AppConsumerHOC from "../../HOC/AppConsumerHOC";
+import _ from 'lodash';
 
-export default (Component, type) => class AddToListByTypeHOC extends React.Component {
+export default (Component, type) => AppConsumerHOC(class AddToListByTypeHOC extends React.Component {
     constructor() {
         super();
 
         this.state = {
-            // added: () => (this.props.movieId !== '351064') ? false : true,
             added: false,
             disabled: false
         };
@@ -34,11 +35,41 @@ export default (Component, type) => class AddToListByTypeHOC extends React.Compo
                 .then(() => {
                     this.setState({
                         disabled: false
-                    })
+                    });
+                    this.props.getFavoriteMovies()
                 })
         })
 
     };
+
+    componentDidMount() {
+        // console.log(type, this.props[`${type}Movies`])
+        if (this.props[`${type}Movies`].findIndex(item => {
+            return item.id === this.props.movieId
+        }) !== -1) {
+            this.setState({
+                added: true
+            })}
+    };
+
+    componentDidUpdate(prevProps) {
+        if (!_.isEqual(this.props[`${type}Movies`], prevProps[`${type}Movies`])) {
+            if (this.props[`${type}Movies`].findIndex(item => {
+               return item.id === this.props.movieId
+            }) !== -1) {
+                this.setState({
+                    added: true
+                })}
+        }
+    };
+
+    // static getDerivedStateFromProps(props) {
+    //     return {
+    //         added: props[`${type}Movies`].findIndex(item => {
+    //                        return item.id === props.movieId
+    //                     }) !== -1
+    //     }
+    // }
 
     render () {
         const {added, disabled} = this.state;
@@ -46,4 +77,4 @@ export default (Component, type) => class AddToListByTypeHOC extends React.Compo
             <Component added={added} disabled={disabled} onChangeAdded={this.onChangeAdded} />
         )
     }
-}
+})

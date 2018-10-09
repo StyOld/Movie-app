@@ -22,7 +22,7 @@ export default class MovieItem extends React.Component {
             <div className='d-flex justify-content-between align-items-center'>
                 <div className="card-text">Рейтинг: {item.vote_average}</div>
                 <FavoriteIcon movieId={item.id}/>
-                <WatchIcon movieId={item.id}/>
+                {/*<WatchIcon movieId={item.id}/>*/}
             </div>
         </div>
       </div>
