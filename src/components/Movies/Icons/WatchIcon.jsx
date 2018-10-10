@@ -1,6 +1,5 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import AppConsumerHOC from "../../HOC/AppConsumerHOC";
 import AddToListByTypeHOC from "./AddToListByTypeHOC";
 
 class WatchIcon extends React.Component {
@@ -21,4 +20,4 @@ class WatchIcon extends React.Component {
     }
 }
 
-export default AppConsumerHOC(AddToListByTypeHOC(WatchIcon, "watchlist"))
+export default AddToListByTypeHOC(WatchIcon, "watchlist")

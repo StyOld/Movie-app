@@ -36,7 +36,7 @@ export default (Component, type) => AppConsumerHOC(class AddToListByTypeHOC exte
                     this.setState({
                         disabled: false
                     });
-                    this.props.getFavoriteMovies()
+                    this.props.getByTypeMovies(type)
                 })
         })
 

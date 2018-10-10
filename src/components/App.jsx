@@ -22,7 +22,8 @@ export default class App extends React.Component {
           session_id: cookies.get('session_id'),
           toggleModal: false,
           isAuth: false,
-          favoriteMovies: []
+          favoriteMovies: [],
+          watchlistMovies: []
       };
   };
 
@@ -59,8 +60,8 @@ export default class App extends React.Component {
       })
   };
 
-  getFavoriteMovies = () => {
-      CallApi.get(`/account/{account_id}/favorite/movies`, {
+  getByTypeMovies = (type) => {
+      CallApi.get(`/account/{account_id}/${type}/movies`, {
           params: {
               language: 'ru-RU',
               session_id: this.state.session_id
@@ -68,7 +69,7 @@ export default class App extends React.Component {
       })
           .then(data => {
               this.setState({
-                  favoriteMovies: data.results
+                  [`${type}Movies`]: data.results
               });
           })
   };
@@ -90,13 +91,14 @@ export default class App extends React.Component {
   componentDidUpdate(prevProps, prevStates) {
       // console.log(this.state.favoriteMovies);
       if ((this.state.isAuth !== prevStates.isAuth) && (this.state.isAuth)) {
-          this.getFavoriteMovies()
+          this.getByTypeMovies('favorite');
+          this.getByTypeMovies('watchlist')
       }
   }
 
   render() {
 
-      const {user, session_id, toggleModal, isAuth, favoriteMovies} = this.state;
+      const {user, session_id, toggleModal, isAuth, favoriteMovies, watchlistMovies} = this.state;
 
       return isAuth || !session_id ? (
           <BrowserRouter>
@@ -107,11 +109,12 @@ export default class App extends React.Component {
                       toggleModal,
                       isAuth,
                       favoriteMovies,
+                      watchlistMovies,
                       removeSessionId: this.removeSessionId,
                       showLoginForm: this.showLoginForm,
                       hideLoginForm: this.hideLoginForm,
                       updateAuth: this.updateAuth,
-                      getFavoriteMovies: this.getFavoriteMovies
+                      getByTypeMovies: this.getByTypeMovies
                   }}
               >
                   <div>
