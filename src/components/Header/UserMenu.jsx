@@ -36,7 +36,7 @@ class UserMenu extends React.Component {
                 <DropdownToggle nav caret>
                     <div>
                         <img
-                            width='40'
+                            width='60'
                             className='rounded-circle'
                             src={`https://gravatar.com/avatar/${
                                 user.avatar.gravatar.hash
@@ -46,9 +46,14 @@ class UserMenu extends React.Component {
                     </div>
                 </DropdownToggle>
                 <DropdownMenu right>
-                    <DropdownItem><Link to='account/favorites'>Избранное</Link></DropdownItem>
+                    <DropdownItem>
+                        <Link to='account/favorites'>
+                            Избранное
+                        </Link>
+                    </DropdownItem>
                     <DropdownItem
-                    onClick={this.deleteSessionId}
+                        className='font-weight-bold'
+                        onClick={this.deleteSessionId}
                     >
                         Выход
                     </DropdownItem>

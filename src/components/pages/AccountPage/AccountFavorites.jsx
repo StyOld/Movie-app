@@ -4,6 +4,7 @@ import {Redirect} from 'react-router-dom';
 import CallApi from "../../../api/api";
 import MovieItem from '../../Movies/MovieItem';
 
+// Можно ли сделать переиспользованным? Что бы не создавать AccountWatchlist?
 class AccountFavorites extends React.Component {
     constructor() {
         super()
@@ -12,6 +13,7 @@ class AccountFavorites extends React.Component {
         };
     };
 
+    // Можно зарефакторить и использовать функуцию getByTypeMovies из App
     componentDidMount () {
         CallApi.get(`/account/{account_id}/favorite/movies`, {
             params: {

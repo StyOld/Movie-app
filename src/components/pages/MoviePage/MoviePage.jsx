@@ -1,7 +1,8 @@
 import React from 'react';
 import CallApi from "../../../api/api";
-import FavoriteList from '../../Movies/Icons/FavoriteIcon';
-import WatchList from '../../Movies/Icons/WatchIcon';
+import FavoriteIcon from '../../Movies/Icons/FavoriteIcon';
+import WatchIcon from '../../Movies/Icons/WatchIcon';
+
 
 export default class MoviePage extends React.Component {
     constructor() {
@@ -13,7 +14,9 @@ export default class MoviePage extends React.Component {
 
     componentDidMount () {
         CallApi.get(`/movie/${this.props.match.params.id}`, {
-            params: {language: 'ru-RU'}
+            params: {
+                language: 'ru-RU'
+            }
         })
             .then(data => {
                 this.setState({
@@ -36,12 +39,13 @@ export default class MoviePage extends React.Component {
                             />
                         </div>
                         <div className='col-8'>
-                                <h5 className="card-title"><strong>Oписание фильма</strong></h5>
-                                <p className="card-text">{moviesDetails.overview}</p>
-                                <div className='d-flex align-items-center'>
-                                    <FavoriteList movieId={moviesDetails.id}/>
-                                    <WatchList movieId={moviesDetails.id}/>
-                                </div>
+                            <h5 className="card-title"><strong>Oписание фильма</strong></h5>
+                            <p className="card-text">{moviesDetails.overview}</p>
+                        <div className='d-flex align-items-center'>
+                            {/*Почему тут не работают иконки? А срабатывает только при перезагрузке страницы?*/}
+                            <FavoriteIcon movieId={moviesDetails.id}/>
+                            <WatchIcon movieId={moviesDetails.id}/>
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -49,4 +53,3 @@ export default class MoviePage extends React.Component {
         )
     }
 }
-

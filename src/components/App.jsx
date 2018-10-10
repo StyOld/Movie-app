@@ -65,7 +65,7 @@ export default class App extends React.Component {
           params: {
               language: 'ru-RU',
               session_id: this.state.session_id
-            }
+          }
       })
           .then(data => {
               this.setState({
@@ -75,6 +75,7 @@ export default class App extends React.Component {
   };
 
   componentDidMount() {
+      // console.log('render didmount')
       const {session_id} = this.state;
 
       if (session_id) {
@@ -89,7 +90,7 @@ export default class App extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevStates) {
-      // console.log(this.state.favoriteMovies);
+      // console.log('render didupdate', this.state.favoriteMovies);
       if ((this.state.isAuth !== prevStates.isAuth) && (this.state.isAuth)) {
           this.getByTypeMovies('favorite');
           this.getByTypeMovies('watchlist')
