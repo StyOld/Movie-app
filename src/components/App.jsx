@@ -1,11 +1,11 @@
 import React from "react";
 import MoviesPage from "./pages/MoviesPage/MoviesPage";
 import MoviePage from "./pages/MoviePage/MoviePage";
-import AccountFavorites from "./pages/AccountPage/AccountFavorites";
+import AccountListByType from "./pages/AccountPage/AccountListByType";
 import Header from "./Header/Header";
 import Cookies from 'universal-cookie';
 import CallApi from "../api/api";
-import { BrowserRouter, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faHeart, faBookmark } from '@fortawesome/free-solid-svg-icons';
 library.add(faHeart, faBookmark);
@@ -75,7 +75,6 @@ export default class App extends React.Component {
   };
 
   componentDidMount() {
-      // console.log('render didmount')
       const {session_id} = this.state;
 
       if (session_id) {
@@ -90,7 +89,6 @@ export default class App extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevStates) {
-      // console.log('render didupdate', this.state.favoriteMovies);
       if ((this.state.isAuth !== prevStates.isAuth) && (this.state.isAuth)) {
           this.getByTypeMovies('favorite');
           this.getByTypeMovies('watchlist')
@@ -98,7 +96,6 @@ export default class App extends React.Component {
   }
 
   render() {
-
       const {user, session_id, toggleModal, isAuth, favoriteMovies, watchlistMovies} = this.state;
 
       return isAuth || !session_id ? (
@@ -122,13 +119,8 @@ export default class App extends React.Component {
                       <Header user={user}/>
                       <Route exact path='/' component={MoviesPage} />
                       <Route path='/movie/:id' component={MoviePage} />
-                      <Route path='/account/favorites' component={AccountFavorites}/>
-                      {/*
-                  <MoviesPage/>
-                  <MoviePage/>
-                  '/' - MoviesPage
-                  '/movie/1' - Movie with id = 1
-                  */}
+                      <Route path='/account/favorites' component={AccountListByType('favorite')}/>
+                      <Route path='/account/watchlist' component={AccountListByType('watchlist')}/>
                   </div>
               </AppContext.Provider>
           </BrowserRouter>

@@ -51,6 +51,11 @@ class UserMenu extends React.Component {
                             Избранное
                         </Link>
                     </DropdownItem>
+                    <DropdownItem>
+                        <Link to='account/watchlist'>
+                            Список просмотра
+                        </Link>
+                    </DropdownItem>
                     <DropdownItem
                         className='font-weight-bold'
                         onClick={this.deleteSessionId}

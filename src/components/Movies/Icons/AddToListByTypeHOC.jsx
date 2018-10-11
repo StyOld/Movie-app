@@ -39,11 +39,9 @@ export default (Component, type) => AppConsumerHOC(class AddToListByTypeHOC exte
                     this.props.getByTypeMovies(type)
                 })
         })
-
     };
 
     componentDidMount() {
-        // console.log(type, this.props[`${type}Movies`])
         if (this.props[`${type}Movies`].findIndex(item => {
             return item.id === this.props.movieId
         }) !== -1) {
@@ -52,7 +50,7 @@ export default (Component, type) => AppConsumerHOC(class AddToListByTypeHOC exte
             })}
     };
 
-    componentDidUpdate(prevProps) {
+    componentDidUpdate(prevProps, prevState) {
         if (!_.isEqual(this.props[`${type}Movies`], prevProps[`${type}Movies`])) {
             if (this.props[`${type}Movies`].findIndex(item => {
                return item.id === this.props.movieId
