@@ -47,12 +47,12 @@ class UserMenu extends React.Component {
                 </DropdownToggle>
                 <DropdownMenu right>
                     <DropdownItem>
-                        <Link to='account/favorites'>
+                        <Link to='/account/favorites'>
                             Избранное
                         </Link>
                     </DropdownItem>
                     <DropdownItem>
-                        <Link to='account/watchlist'>
+                        <Link to='/account/watchlist'>
                             Список просмотра
                         </Link>
                     </DropdownItem>
