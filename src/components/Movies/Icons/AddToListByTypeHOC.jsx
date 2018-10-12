@@ -40,7 +40,7 @@ export default (Component, type) => AppConsumerHOC(class AddToListByTypeHOC exte
                 })
         })
     };
-ы
+
     componentDidMount() {
         if (this.props[`${type}Movies`].findIndex(item => {
             return item.id === this.props.movieId

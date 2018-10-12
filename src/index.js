@@ -5,6 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./stylesheets/index.css";
 import {createStore} from 'redux';
 import Cookies from 'universal-cookie';
+import CallApi from "./api/api";
 
 const cookies = new Cookies();
 
@@ -15,7 +16,7 @@ export const actionCreactorUpdateAuth = (payload) => {
     }
 };
 
-export const actionCreactorRemoveSessionId = () => {
+export const actionCreactorOnLogOut = () => {
     return {
         type: 'LOGOUT'
     }
@@ -32,6 +33,12 @@ export const actionCreactorHideLoginForm = () => {
         type: 'HIDE_LOGINFORM'
     }
 };
+
+// export const actionCreactorGetByTypeMovies = () => {
+//     return {
+//         type: 'GET_BY_TYPE_MOVIES'
+//     }
+// };
 
 const initialState = {
     user: null,
@@ -76,6 +83,24 @@ const reducerApp = (state = initialState, action) => {
                 ...state,
                 toggleModal: false
             };
+
+        // case 'GET_BY_TYPE_MOVIES':
+        //     CallApi.get(`/account/{account_id}/${type}/movies`, {
+        //         params: {
+        //             language: 'ru-RU',
+        //             session_id: this.state.session_id
+        //         }
+        //     })
+        //         .then(data => {
+        //             this.setState({
+        //                 [`${type}Movies`]: data.results
+        //             });
+        //         })
+            //
+            // return {
+            //     ...state,
+            //     toggleModal: false
+            // };
 
         default:
             return state;

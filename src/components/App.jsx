@@ -5,7 +5,7 @@ import AccountListByType from "./pages/AccountPage/AccountListByType";
 import Header from "./Header/Header";
 import Cookies from 'universal-cookie';
 import CallApi from "../api/api";
-import { actionCreactorUpdateAuth, actionCreactorRemoveSessionId,
+import { actionCreactorUpdateAuth, actionCreactorOnLogOut,
     actionCreactorShowLoginForm, actionCreactorHideLoginForm } from '../';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -16,61 +16,61 @@ const cookies = new Cookies();
 export const AppContext = React.createContext();
 
 export default class App extends React.Component {
-  constructor() {
-    super()
-      this.state = {
-          // session_id: null,
-          session_id: cookies.get('session_id'),
-          user: null,
-          isAuth: false,
-          toggleModal: false,
-          favoriteMovies: [],
-          watchlistMovies: []
-      };
-  };
+  // constructor() {
+  //   super()
+  //     this.state = {
+  //         // session_id: null,
+  //         session_id: cookies.get('session_id'),
+  //         user: null,
+  //         isAuth: false,
+  //         toggleModal: false,
+  //         favoriteMovies: [],
+  //         watchlistMovies: []
+  //     };
+  // };
 
   updateAuth = (user, session_id) => {
-      // this.props.store.dispath(actionCreactorUpdateAuth({
-      //     user,
-      //     session_id
-      // }))
-
-      cookies.set('session_id', session_id, {
-          path: '/',
-          maxAge: 2592000
-      });
-      this.setState({
-          session_id,
+      this.props.store.dispatch(actionCreactorUpdateAuth({
           user,
-          isAuth: true
-      })
+          session_id
+      }))
+
+      // cookies.set('session_id', session_id, {
+      //     path: '/',
+      //     maxAge: 2592000
+      // });
+      // this.setState({
+      //     session_id,
+      //     user,
+      //     isAuth: true
+      // })
   };
 
   onLogOut = () => {
-      // this.props.store.dispatch(actionCreactorRemoveSessionId())
+      this.props.store.dispatch(actionCreactorOnLogOut())
 
-      cookies.remove('session_id');
-      this.setState({
-          session_id: null,
-          user: null,
-          isAuth: false
-      })
+      // cookies.remove('session_id');
+      // this.setState({
+      //     session_id: null,
+      //     user: null,
+      //     isAuth: false
+      // })
   };
 
   showLoginForm = () => {
-      // this.props.store.dispatch(actionCreactorShowLoginForm())
+      this.props.store.dispatch(actionCreactorShowLoginForm())
 
-      this.setState(prevState => ({
-          toggleModal: !prevState.toggleModal
-      }))
+      // this.setState(prevState => ({
+      //     toggleModal: !prevState.toggleModal
+      // }))
   };
 
   hideLoginForm = () => {
-      // this.props.store.dispatch(actionCreactorHideLoginForm())
+      this.props.store.dispatch(actionCreactorHideLoginForm())
 
-      this.setState({
-          toggleModal: false
-      })
+      // this.setState({
+      //     toggleModal: false
+      // })
   };
 
   getByTypeMovies = (type) => {
@@ -88,12 +88,12 @@ export default class App extends React.Component {
   };
 
   componentDidMount() {
-      // this.props.store.subscribe(() => {
-      //     console.log('change', this.props.store.getState());
-      //     this.forceUpdate();
-      // });
+      const {session_id} = this.props.store.getState();
 
-      const {session_id} = this.state;
+      this.props.store.subscribe(() => {
+          console.log('change', session_id);
+          this.forceUpdate();
+      });
 
       if (session_id) {
           CallApi.get('/account', {
@@ -106,22 +106,23 @@ export default class App extends React.Component {
       }
   }
 
-  componentDidUpdate(prevProps, prevStates) {
-      if ((this.state.isAuth !== prevStates.isAuth) && (this.state.isAuth)) {
-          this.getByTypeMovies('favorite');
-          this.getByTypeMovies('watchlist')
-      }
-  }
+  // componentDidUpdate(prevProps, prevStates) {
+  //     if ((this.state.isAuth !== prevStates.isAuth) && (this.state.isAuth)) {
+  //         this.getByTypeMovies('favorite');
+  //         this.getByTypeMovies('watchlist')
+  //     }
+  // }
 
   render() {
-      // const {user, session_id, toggleModal, isAuth, favoriteMovies, watchlistMovies} = this.props.store.getState();
-      const {user, session_id, toggleModal, isAuth, favoriteMovies, watchlistMovies} = this.state;
+      const {user, session_id, toggleModal, isAuth, favoriteMovies, watchlistMovies} = this.props.store.getState();
+      // const {user, session_id, toggleModal, isAuth, favoriteMovies, watchlistMovies} = this.state;
 
       return isAuth || !session_id ? (
           <BrowserRouter>
               <AppContext.Provider
                   value={{
-                      user: user,
+                      // user: user,
+                      user,
                       session_id,
                       toggleModal,
                       isAuth,
