@@ -51,7 +51,6 @@ export default (Component, type) => AppConsumerHOC(class AddToListByTypeHOC exte
     };
 
     componentDidUpdate(prevProps) {
-        console.log(prevProps, this.props)
         if (!_.isEqual(this.props[`${type}Movies`], prevProps[`${type}Movies`]) || this.props.movieId !== prevProps.movieId) {
             if (this.props[`${type}Movies`].findIndex(item => {
                return item.id === this.props.movieId
@@ -72,7 +71,6 @@ export default (Component, type) => AppConsumerHOC(class AddToListByTypeHOC exte
 
     render () {
         const {added, disabled} = this.state;
-        console.log(this.props)
         return (
             <Component added={added} disabled={disabled} onChangeAdded={this.onChangeAdded} />
         )

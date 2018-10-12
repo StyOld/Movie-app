@@ -5,6 +5,8 @@ import AccountListByType from "./pages/AccountPage/AccountListByType";
 import Header from "./Header/Header";
 import Cookies from 'universal-cookie';
 import CallApi from "../api/api";
+import { actionCreactorUpdateAuth, actionCreactorRemoveSessionId,
+    actionCreactorShowLoginForm, actionCreactorHideLoginForm } from '../';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faHeart, faBookmark } from '@fortawesome/free-solid-svg-icons';
@@ -17,17 +19,22 @@ export default class App extends React.Component {
   constructor() {
     super()
       this.state = {
-          user: null,
           // session_id: null,
           session_id: cookies.get('session_id'),
-          toggleModal: false,
+          user: null,
           isAuth: false,
+          toggleModal: false,
           favoriteMovies: [],
           watchlistMovies: []
       };
   };
 
   updateAuth = (user, session_id) => {
+      // this.props.store.dispath(actionCreactorUpdateAuth({
+      //     user,
+      //     session_id
+      // }))
+
       cookies.set('session_id', session_id, {
           path: '/',
           maxAge: 2592000
@@ -39,7 +46,9 @@ export default class App extends React.Component {
       })
   };
 
-  removeSessionId = () => {
+  onLogOut = () => {
+      // this.props.store.dispatch(actionCreactorRemoveSessionId())
+
       cookies.remove('session_id');
       this.setState({
           session_id: null,
@@ -49,12 +58,16 @@ export default class App extends React.Component {
   };
 
   showLoginForm = () => {
+      // this.props.store.dispatch(actionCreactorShowLoginForm())
+
       this.setState(prevState => ({
           toggleModal: !prevState.toggleModal
       }))
   };
 
   hideLoginForm = () => {
+      // this.props.store.dispatch(actionCreactorHideLoginForm())
+
       this.setState({
           toggleModal: false
       })
@@ -75,6 +88,11 @@ export default class App extends React.Component {
   };
 
   componentDidMount() {
+      // this.props.store.subscribe(() => {
+      //     console.log('change', this.props.store.getState());
+      //     this.forceUpdate();
+      // });
+
       const {session_id} = this.state;
 
       if (session_id) {
@@ -96,6 +114,7 @@ export default class App extends React.Component {
   }
 
   render() {
+      // const {user, session_id, toggleModal, isAuth, favoriteMovies, watchlistMovies} = this.props.store.getState();
       const {user, session_id, toggleModal, isAuth, favoriteMovies, watchlistMovies} = this.state;
 
       return isAuth || !session_id ? (
@@ -108,7 +127,7 @@ export default class App extends React.Component {
                       isAuth,
                       favoriteMovies,
                       watchlistMovies,
-                      removeSessionId: this.removeSessionId,
+                      onLogOut: this.onLogOut,
                       showLoginForm: this.showLoginForm,
                       hideLoginForm: this.hideLoginForm,
                       updateAuth: this.updateAuth,

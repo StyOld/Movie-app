@@ -31,7 +31,7 @@ export default (type) => AppConsumerHOC(class AccountListByType extends React.Co
             <div className='container'>
                 <div className="row mt-2">
                     {this.props[`${type}Movies`].map(movieItem => (
-                        <div className="col-12 mb-2" key={movieItem.id}>
+                        <div className="col-6 mb-2" key={movieItem.id}>
                             <MovieItem
                                 item={movieItem}
                             />
