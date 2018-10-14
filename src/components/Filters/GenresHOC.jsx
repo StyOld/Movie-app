@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 
 const mapStateToProps = (state) => {
     return {
-        genreList: state.genreList
+        genreList: state.authentification.genreList
     }
 };
 

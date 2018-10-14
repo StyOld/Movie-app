@@ -135,7 +135,7 @@ class LoginForm extends React.Component {
                 this.setState({
                     submitting: false
                 }, () => {
-                    this.props.updateAuth(user, session_id);
+                    this.props.updateAuth({user, session_id});
                 });
             })
             .catch(error => {

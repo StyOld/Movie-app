@@ -8,6 +8,7 @@ import { actionCreactorUpdateAuth, actionCreactorOnLogOut,
     actionCreactorShowLoginForm, actionCreactorHideLoginForm,
     actionCreactorGetByTypeMovies } from '../actions/actions';
 import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faHeart, faBookmark } from '@fortawesome/free-solid-svg-icons';
@@ -58,7 +59,7 @@ class App extends React.Component {
                   session_id
               }
           }).then(user => {
-              this.props.updateAuth(user,session_id);
+              this.props.updateAuth({user,session_id});
           })
       }
   };
@@ -106,26 +107,43 @@ class App extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        user: state.user,
-        session_id: state.session_id,
-        toggleModal: state.toggleModal,
-        isAuth: state.isAuth,
-        favoriteMovies: state.favoriteMovies,
-        watchlistMovies: state.watchlistMovies
+        user: state.authentification.user,
+        session_id: state.authentification.session_id,
+        toggleModal: state.authentification.toggleModal,
+        isAuth: state.authentification.isAuth,
+        favoriteMovies: state.authentification.favoriteMovies,
+        watchlistMovies: state.authentification.watchlistMovies
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
-    return {
-        updateAuth: (user, session_id) => dispatch(actionCreactorUpdateAuth({
-            user,
-            session_id
-        })),
-        onLogOut: () => dispatch(actionCreactorOnLogOut()),
-        showLoginForm: () => dispatch(actionCreactorShowLoginForm()),
-        hideLoginForm: () => dispatch(actionCreactorHideLoginForm()),
-        getByTypeMoviesAction: (payload) => dispatch(actionCreactorGetByTypeMovies(payload))
-    }
+    return bindActionCreators(
+        {
+        updateAuth: actionCreactorUpdateAuth,
+        onLogOut: actionCreactorOnLogOut,
+        showLoginForm: actionCreactorShowLoginForm,
+        hideLoginForm: actionCreactorHideLoginForm,
+        getByTypeMoviesAction: actionCreactorGetByTypeMovies
+        }
+        ,dispatch)
 };
+    // return {
+    //     updateAuth: bindActionCreators(actionCreactorUpdateAuth, dispatch),
+    //     onLogOut: bindActionCreators(actionCreactorOnLogOut, dispatch),
+    //     showLoginForm: bindActionCreators(actionCreactorShowLoginForm, dispatch),
+    //     hideLoginForm: bindActionCreators(actionCreactorHideLoginForm, dispatch),
+    //     getByTypeMoviesAction: bindActionCreators(actionCreactorGetByTypeMovies, dispatch)
+    // }
+
+    // return {
+    //     updateAuth: (user, session_id) => dispatch(actionCreactorUpdateAuth({
+    //         user,
+    //         session_id
+    //     })),
+    //     onLogOut: () => dispatch(actionCreactorOnLogOut()),
+    //     showLoginForm: () => dispatch(actionCreactorShowLoginForm()),
+    //     hideLoginForm: () => dispatch(actionCreactorHideLoginForm()),
+    //     getByTypeMoviesAction: (payload) => dispatch(actionCreactorGetByTypeMovies(payload))
+    // }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

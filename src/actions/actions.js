@@ -1,8 +1,17 @@
-export const actionCreactorUpdateAuth = (payload) => {
-    return {
+import CallApi from '../api/api';
+
+// export const actionCreactorUpdateAuth = dispatch(payload => {
+//     return {
+//         type: 'UPDATE_AUTH',
+//         payload
+//     }
+// });
+
+export const actionCreactorUpdateAuth = payload => dispatch => {
+        return dispatch({
         type: 'UPDATE_AUTH',
         payload
-    }
+    })
 };
 
 export const actionCreactorOnLogOut = () => {
@@ -50,3 +59,33 @@ export const actionCreactorGetGenresList = (payload) => {
         }
     }
 };
+
+export const actionCreactorUpdateMovies = (movies) => {
+    return {
+        type: 'UPDATE_MOVIES',
+        payload: movies
+    }
+};
+
+export const actionCreactorGetMovies = (params) => {
+    return dispatch => {
+        dispatch({
+            type: 'FETCHING_MOVIES'
+        });
+    
+        CallApi.get('/discover/movie', {
+            params: params
+        }).then(data => {
+            dispatch({
+                type: 'UPDATE_MOVIES',
+                payload: data.results
+        })
+    }).catch(error => {
+            dispatch({
+                type: 'ERROR_GET_MOVIES',
+                payload: error
+            })
+        })
+}
+}
+
