@@ -2,16 +2,10 @@ import React from 'react';
 import CallApi from "../../../api/api";
 import FavoriteIcon from '../../Movies/Icons/FavoriteIcon';
 import WatchIcon from '../../Movies/Icons/WatchIcon';
+import { actionCreactorGetMovieDetails } from "../../../actions/actions";
+import {connect} from 'react-redux';
 
-
-export default class MoviePage extends React.Component {
-    constructor() {
-        super()
-        this.state = {
-            moviesDetails: {}
-        };
-    };
-
+class MoviePage extends React.Component {
     componentDidMount () {
         CallApi.get(`/movie/${this.props.match.params.id}`, {
             params: {
@@ -19,14 +13,14 @@ export default class MoviePage extends React.Component {
             }
         })
             .then(data => {
-                this.setState({
-                    moviesDetails: data
-                });
+                this.props.actionCreactorGetMovieDetails({
+                    data
+                })
             })
     }
 
     render() {
-        const {moviesDetails} = this.state;
+        const {moviesDetails} = this.props;
         return (
             <div className='card'>
                 <div className='container'>
@@ -42,7 +36,6 @@ export default class MoviePage extends React.Component {
                             <h5 className="card-title"><strong>Oписание фильма</strong></h5>
                             <p className="card-text">{moviesDetails.overview}</p>
                         <div className='d-flex align-items-center'>
-                            {/*Почему тут не работают иконки? А срабатывает только при перезагрузке страницы?*/}
                             <FavoriteIcon movieId={moviesDetails.id}/>
                             <WatchIcon movieId={moviesDetails.id}/>
                         </div>
@@ -53,3 +46,17 @@ export default class MoviePage extends React.Component {
         )
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        moviesDetails: state.moviesDetails
+    }
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        actionCreactorGetMovieDetails: (payload) => dispatch(actionCreactorGetMovieDetails(payload))
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MoviePage);

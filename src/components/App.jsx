@@ -1,7 +1,7 @@
 import React from "react";
 import MoviesPage from "./pages/MoviesPage/MoviesPage";
 import MoviePage from "./pages/MoviePage/MoviePage";
-import AccountListByType from "./pages/AccountPage/AccountListByType";
+import AccountListByTypePage from "./pages/AccountPage/AccountListByTypePage";
 import Header from "./Header/Header";
 import CallApi from "../api/api";
 import { actionCreactorUpdateAuth, actionCreactorOnLogOut,
@@ -43,11 +43,10 @@ class App extends React.Component {
           }
       })
           .then(data => {
-              // this.props.store.dispatch(actionCreactorGetByTypeMovies())
-              this.setState({
-                  [`${type}Movies`]: data.results
-              });
-          })
+              this.props.getByTypeMoviesAction({
+                  type,
+                  data: data.results
+              })})
   };
 
   componentDidMount() {
@@ -62,18 +61,18 @@ class App extends React.Component {
               this.props.updateAuth(user,session_id);
           })
       }
-  }
+  };
 
-  // componentDidUpdate(prevProps, prevStates) {
-  //     if ((this.state.isAuth !== prevStates.isAuth) && (this.state.isAuth)) {
-  //         this.getByTypeMovies('favorite');
-  //         this.getByTypeMovies('watchlist')
-  //     }
-  // }
+  componentDidUpdate(prevProps) {
+      if ((this.props.isAuth !== prevProps.isAuth) && (this.props.isAuth)) {
+          this.getByTypeMovies('favorite');
+          this.getByTypeMovies('watchlist')
+      }
+  }
 
   render() {
       const {user, session_id, toggleModal, isAuth, favoriteMovies, watchlistMovies,
-          updateAuth, onLogOut, showLoginForm, hideLoginForm, getByTypeMovies} = this.props;
+          updateAuth, onLogOut, showLoginForm, hideLoginForm} = this.props;
 
       return isAuth || !session_id ? (
           <BrowserRouter>
@@ -89,15 +88,15 @@ class App extends React.Component {
                       showLoginForm,
                       hideLoginForm,
                       updateAuth,
-                      getByTypeMovies
+                      getByTypeMovies: this.getByTypeMovies
                   }}
               >
                   <div>
                       <Header user={user}/>
                       <Route exact path='/' component={MoviesPage} />
                       <Route path='/movie/:id' component={MoviePage} />
-                      <Route path='/account/favorites' component={AccountListByType('favorite')}/>
-                      <Route path='/account/watchlist' component={AccountListByType('watchlist')}/>
+                      <Route path='/account/favorites' component={AccountListByTypePage('favorite')}/>
+                      <Route path='/account/watchlist' component={AccountListByTypePage('watchlist')}/>
                   </div>
               </AppContext.Provider>
           </BrowserRouter>
@@ -125,7 +124,7 @@ const mapDispatchToProps = (dispatch) => {
         onLogOut: () => dispatch(actionCreactorOnLogOut()),
         showLoginForm: () => dispatch(actionCreactorShowLoginForm()),
         hideLoginForm: () => dispatch(actionCreactorHideLoginForm()),
-        getByTypeMovies: () => dispatch(actionCreactorGetByTypeMovies())
+        getByTypeMoviesAction: (payload) => dispatch(actionCreactorGetByTypeMovies(payload))
     }
 };
 

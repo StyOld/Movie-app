@@ -1,15 +1,21 @@
 import React from "react";
 import CallApi from "../../api/api";
+import {actionCreactorGetGenresList} from "../../actions/actions";
+import {connect} from 'react-redux';
 
-export default (Component) => class GenresHOC extends React.PureComponent {
-    constructor() {
-        super();
-
-        this.state = {
-            genreList: []
-        };
+const mapStateToProps = (state) => {
+    return {
+        genreList: state.genreList
     }
+};
 
+const mapDispatchToProps = (dispatch) => {
+    return {
+        actionCreactorGetGenresList: (payload) => dispatch(actionCreactorGetGenresList(payload))
+    }
+};
+
+export default (Component) => connect(mapStateToProps, mapDispatchToProps)(class GenresHOC extends React.PureComponent {
     getGenres = () => {
         CallApi.get('/genre/movie/list', {
             params: {
@@ -17,8 +23,8 @@ export default (Component) => class GenresHOC extends React.PureComponent {
             }
         })
             .then(data => {
-                this.setState({
-                    genreList: data.genres
+                this.props.actionCreactorGetGenresList({
+                    data: data.genres
                 })
             })
     };
@@ -28,8 +34,8 @@ export default (Component) => class GenresHOC extends React.PureComponent {
     }
 
     render() {
-        const { genreList } = this.state;
+        const { genreList } = this.props;
         const {genres, onChangeGenres} = this.props;
         return <Component genreList={genreList} genres={genres} onChangeGenres={onChangeGenres}/>;
     }
-}
+})

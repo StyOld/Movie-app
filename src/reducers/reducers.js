@@ -8,7 +8,9 @@ const initialState = {
     toggleModal: false,
     isAuth: false,
     favoriteMovies: [],
-    watchlistMovies: []
+    watchlistMovies: [],
+    moviesDetails: {},
+    genreList: []
 };
 
 const reducerApp = (state = initialState, action) => {
@@ -46,11 +48,23 @@ const reducerApp = (state = initialState, action) => {
                 toggleModal: false
             };
 
-        // case 'GET_BY_TYPE_MOVIES':
-        //     return {
-        //         ...state,
-        //         [`${type}Movies`]: data.results
-        //     };
+        case 'GET_BY_TYPE_MOVIES':
+            return {
+                ...state,
+                [`${action.payload.type}Movies`]: action.payload.data
+            };
+
+        case 'GET_MOVIE_DETAILS':
+            return {
+                ...state,
+                moviesDetails: action.payload.data
+            };
+
+        case 'GET_GENRES_LIST':
+            return {
+                ...state,
+                genreList: action.payload.data
+            };
 
         default:
             return state;
