@@ -1,6 +1,6 @@
 import React from "react";
 import CallApi from "../../api/api";
-import {actionCreactorGetGenresList} from "../../actions/actions";
+import {actionCreatorGetGenresList} from "../../actions/actions";
 import {connect} from 'react-redux';
 
 const mapStateToProps = (state) => {
@@ -11,7 +11,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getGenresList: (payload) => dispatch(actionCreactorGetGenresList(payload))
+        getGenresList: (payload) => dispatch(actionCreatorGetGenresList(payload))
     }
 };
 

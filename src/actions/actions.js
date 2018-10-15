@@ -7,42 +7,39 @@ import CallApi from '../api/api';
 //     }
 // });
 
-export const actionCreactorUpdateAuth = payload => dispatch => {
-        return dispatch({
+// export const actionCreactorUpdateAuth = payload => dispatch => {
+//         return dispatch({
+//         type: 'UPDATE_AUTH',
+//         payload
+//     })
+// };
+
+export const actionCreatorUpdateAuth = payload => {
+    return {
         type: 'UPDATE_AUTH',
         payload
-    })
+    }
 };
 
-export const actionCreactorOnLogOut = () => {
+export const actionCreatorOnLogOut = () => {
     return {
         type: 'LOGOUT'
     }
 };
 
-export const actionCreactorShowLoginForm = () => {
+export const actionCreatorShowLoginForm = () => {
     return {
         type: 'SHOW_LOGINFORM'
     }
 };
 
-export const actionCreactorHideLoginForm = () => {
+export const actionCreatorHideLoginForm = () => {
     return {
         type: 'HIDE_LOGINFORM'
     }
 };
 
-export const actionCreactorGetByTypeMovies = (payload) => {
-    return {
-        type: 'GET_BY_TYPE_MOVIES',
-        payload: {
-            type: payload.type,
-            data: payload.data
-        }
-    }
-};
-
-export const actionCreactorGetMovieDetails = (payload) => {
+export const actionCreatorGetMovieDetails = (payload) => {
     return {
         type: 'GET_MOVIE_DETAILS',
         payload: {
@@ -51,7 +48,7 @@ export const actionCreactorGetMovieDetails = (payload) => {
     }
 };
 
-export const actionCreactorGetGenresList = (payload) => {
+export const actionCreatorGetGenresList = (payload) => {
     return {
         type: 'GET_GENRES_LIST',
         payload: {
@@ -60,14 +57,7 @@ export const actionCreactorGetGenresList = (payload) => {
     }
 };
 
-export const actionCreactorUpdateMovies = (movies) => {
-    return {
-        type: 'UPDATE_MOVIES',
-        payload: movies
-    }
-};
-
-export const actionCreactorGetMovies = (params) => {
+export const actionCreatorGetMovies = (params) => {
     return dispatch => {
         dispatch({
             type: 'FETCHING_MOVIES'
@@ -89,5 +79,33 @@ export const actionCreactorGetMovies = (params) => {
                 })
             })
     }
-}
+};
+
+export const actionCreatorGetByTypeMovies = (params, type) => {
+    return dispatch => {
+        dispatch({
+            type: 'FETCHING_MOVIES_BY_TYPE'
+        });
+
+        CallApi.get(`/account/{account_id}/${type}/movies`, {
+            params: params
+        })
+            .then(data => {
+                dispatch({
+                    type: 'GET_BY_TYPE_MOVIES',
+                    payload: {
+                        type,
+                        data: data.results
+                    }
+                })
+            })
+            .catch(error => {
+                dispatch({
+                    type: 'ERROR_GET_MOVIES',
+                    payload: error
+                })
+            })
+    }
+};
+
 

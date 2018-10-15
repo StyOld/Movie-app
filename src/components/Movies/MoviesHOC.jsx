@@ -3,7 +3,7 @@ import React from "react";
 import _ from 'lodash';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {actionCreactorGetMovies} from '../../actions/actions'
+import {actionCreatorGetMovies} from '../../actions/actions'
 
 const mapStateToProps = (state) => {
     return {
@@ -13,7 +13,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
-        getMovies: actionCreactorGetMovies
+        getMovies: actionCreatorGetMovies
     }, dispatch)
 };
 
@@ -37,7 +37,8 @@ export default (Component) => connect(mapStateToProps, mapDispatchToProps)(class
             };
     
             if (genres.length>0) queryStringParams.with_genres = genres.join(',');
-    
+            this.props.getMovies(queryStringParams)
+
             // CallApi.get('/discover/movie', {
             //     params: queryStringParams
             // })
@@ -47,7 +48,7 @@ export default (Component) => connect(mapStateToProps, mapDispatchToProps)(class
             //     //     movies: data.results
             //     // });
             //     this.props.getTotalPages(data.total_pages);
-                this.props.getMovies(queryStringParams)
+
         };
     
         componentDidMount() {
