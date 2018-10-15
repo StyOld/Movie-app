@@ -2,18 +2,15 @@ import React from 'react';
 import CallApi from "../../../api/api";
 import FavoriteIcon from '../../Movies/Icons/FavoriteIcon';
 import WatchIcon from '../../Movies/Icons/WatchIcon';
-import { actionCreactorGetMovieDetails } from "../../../actions/actions";
+import {actionCreactorGetMovieDetails} from "../../../actions/actions";
 import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 
 class MoviePage extends React.Component {
     componentDidMount () {
-        CallApi.get(`/movie/${this.props.match.params.id}`, {
-            params: {
-                language: 'ru-RU'
-            }
-        })
+        CallApi.get(`/movie/${this.props.match.params.id}`)
             .then(data => {
-                this.props.actionCreactorGetMovieDetails({
+                this.props.getMovieDetails({
                     data
                 })
             })
@@ -49,14 +46,16 @@ class MoviePage extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        moviesDetails: state.moviesDetails
+        moviesDetails: state.movies.moviesDetails
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
-    return {
-        actionCreactorGetMovieDetails: (payload) => dispatch(actionCreactorGetMovieDetails(payload))
-    }
+    return bindActionCreators(
+        {
+            getMovieDetails: actionCreactorGetMovieDetails
+        }
+        ,dispatch)
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MoviePage);

@@ -30,7 +30,6 @@ export default (Component) => connect(mapStateToProps, mapDispatchToProps)(class
             const {sort_by, primary_release_year, genres} = filters;
     
             const queryStringParams = {
-                language: 'ru-RU',
                 sort_by: sort_by,
                 page: page,
                 primary_release_year: primary_release_year

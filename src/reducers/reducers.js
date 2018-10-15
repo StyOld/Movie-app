@@ -1,10 +1,12 @@
-import reducerAuthentification from './reducerAuthentification';
+import reducerAuthentication from './reducerAuthentication';
 import reducerMovies from './reducerMovies';
 import {combineReducers} from 'redux';
+import reducerAccount from "./reducerAccount";
 
 const reducers = combineReducers({
-    authentification: reducerAuthentification,
-    movies: reducerMovies
+    authentication: reducerAuthentication,
+    account: reducerAccount,
+    movies: reducerMovies,
 });
 
 export default reducers;

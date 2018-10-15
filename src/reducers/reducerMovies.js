@@ -1,5 +1,6 @@
 const initialState = {
-    data: []
+    data: [],
+    moviesDetails: {}
 };
 
 const reducerMovies = (state = initialState, action) => {
@@ -9,6 +10,12 @@ const reducerMovies = (state = initialState, action) => {
                 ...state,
                 data: action.payload
         };
+
+        case 'GET_MOVIE_DETAILS':
+            return {
+                ...state,
+                moviesDetails: action.payload.data
+            };
 
         default:
             return state;

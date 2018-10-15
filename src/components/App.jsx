@@ -39,7 +39,6 @@ class App extends React.Component {
   getByTypeMovies = (type) => {
       CallApi.get(`/account/{account_id}/${type}/movies`, {
           params: {
-              language: 'ru-RU',
               session_id: this.props.session_id
           }
       })
@@ -107,12 +106,12 @@ class App extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        user: state.authentification.user,
-        session_id: state.authentification.session_id,
-        toggleModal: state.authentification.toggleModal,
-        isAuth: state.authentification.isAuth,
-        favoriteMovies: state.authentification.favoriteMovies,
-        watchlistMovies: state.authentification.watchlistMovies
+        user: state.authentication.user,
+        session_id: state.authentication.session_id,
+        toggleModal: state.authentication.toggleModal,
+        isAuth: state.authentication.isAuth,
+        favoriteMovies: state.account.favoriteMovies,
+        watchlistMovies: state.account.watchlistMovies
     }
 };
 

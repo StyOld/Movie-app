@@ -72,20 +72,22 @@ export const actionCreactorGetMovies = (params) => {
         dispatch({
             type: 'FETCHING_MOVIES'
         });
-    
+
         CallApi.get('/discover/movie', {
             params: params
-        }).then(data => {
-            dispatch({
-                type: 'UPDATE_MOVIES',
-                payload: data.results
         })
-    }).catch(error => {
-            dispatch({
-                type: 'ERROR_GET_MOVIES',
-                payload: error
+            .then(data => {
+                dispatch({
+                    type: 'UPDATE_MOVIES',
+                    payload: data.results
+                })
             })
-        })
-}
+            .catch(error => {
+                dispatch({
+                    type: 'ERROR_GET_MOVIES',
+                    payload: error
+                })
+            })
+    }
 }
 

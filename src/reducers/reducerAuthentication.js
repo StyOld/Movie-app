@@ -7,13 +7,10 @@ const initialState = {
     session_id: cookies.get('session_id'),
     toggleModal: false,
     isAuth: false,
-    favoriteMovies: [],
-    watchlistMovies: [],
-    moviesDetails: {},
     genreList: []
 };
 
-const reducerAuthentification = (state = initialState, action) => {
+const reducerAuthentication = (state = initialState, action) => {
     switch(action.type) {
         case 'UPDATE_AUTH':
             cookies.set('session_id', action.payload.session_id, {
@@ -48,18 +45,6 @@ const reducerAuthentification = (state = initialState, action) => {
                 toggleModal: false
             };
 
-        case 'GET_BY_TYPE_MOVIES':
-            return {
-                ...state,
-                [`${action.payload.type}Movies`]: action.payload.data
-            };
-
-        case 'GET_MOVIE_DETAILS':
-            return {
-                ...state,
-                moviesDetails: action.payload.data
-            };
-
         case 'GET_GENRES_LIST':
             return {
                 ...state,
@@ -71,4 +56,4 @@ const reducerAuthentification = (state = initialState, action) => {
     }
 };
 
-export default reducerAuthentification;
+export default reducerAuthentication;
