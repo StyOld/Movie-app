@@ -14,10 +14,6 @@ export default (Component, type) => AppConsumerHOC(class AddToListByTypeHOC exte
     };
 
     onChangeAdded = () => {
-        if (!this.props.isAuth) {
-            this.props.toggleLoginForm()
-        } else
-
         this.setState(prevState => ({
             added: !prevState.added,
             disabled: true

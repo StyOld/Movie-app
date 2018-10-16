@@ -7,13 +7,12 @@ class FavoriteIcon extends React.Component {
     render () {
         return (
             <div
-                className='circle'
+                className={this.props.disabled ? 'circle-disabled' : 'circle'}
                 onClick={this.props.onChangeAdded}
             >
                 <FontAwesomeIcon
                     icon="heart"
                     color={this.props.added ? 'red' : 'white'}
-                    className={this.props.disabled ? 'icon-disabled' : ''}
                 />
             </div>
         )
