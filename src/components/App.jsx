@@ -4,9 +4,13 @@ import MoviePage from "./pages/MoviePage/MoviePage";
 import AccountListByTypePage from "./pages/AccountPage/AccountListByTypePage";
 import Header from "./Header/Header";
 import CallApi from "../api/api";
-import { actionCreatorUpdateAuth, actionCreatorOnLogOut,
-    actionCreatorShowLoginForm, actionCreatorHideLoginForm,
-    actionCreatorGetByTypeMovies } from '../actions/actions';
+import {
+    actionCreatorUpdateAuth,
+    actionCreatorOnLogOut,
+    actionCreatorToggleLoginForm,
+    actionCreatorHideLoginForm,
+    actionCreatorGetByTypeMovies
+} from '../actions/actions';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import { BrowserRouter, Route } from 'react-router-dom';
@@ -39,8 +43,8 @@ class App extends React.Component {
   }
 
   render() {
-      const {user, session_id, toggleModal, isAuth, favoriteMovies, watchlistMovies,
-          updateAuth, onLogOut, showLoginForm, hideLoginForm, getByTypeMovies} = this.props;
+      const {user, session_id, showModal, isAuth, favoriteMovies, watchlistMovies,
+          updateAuth, onLogOut, toggleLoginForm, hideLoginForm, getByTypeMovies} = this.props;
 
       return isAuth || !session_id ? (
           <BrowserRouter>
@@ -48,16 +52,15 @@ class App extends React.Component {
                   value={{
                       user,
                       session_id,
-                      toggleModal,
+                      showModal,
                       isAuth,
                       favoriteMovies,
                       watchlistMovies,
                       onLogOut,
-                      showLoginForm,
+                      toggleLoginForm,
                       hideLoginForm,
                       updateAuth,
                       getByTypeMovies
-                      // getByTypeMovies: this.getByTypeMovies
                   }}
               >
                   <div>
@@ -77,7 +80,7 @@ const mapStateToProps = (state) => {
     return {
         user: state.authentication.user,
         session_id: state.authentication.session_id,
-        toggleModal: state.authentication.toggleModal,
+        showModal: state.authentication.showModal,
         isAuth: state.authentication.isAuth,
         favoriteMovies: state.account.favoriteMovies,
         watchlistMovies: state.account.watchlistMovies
@@ -89,20 +92,99 @@ const mapDispatchToProps = (dispatch) => {
         {
         updateAuth: actionCreatorUpdateAuth,
         onLogOut: actionCreatorOnLogOut,
-        showLoginForm: actionCreatorShowLoginForm,
+        toggleLoginForm: actionCreatorToggleLoginForm,
         hideLoginForm: actionCreatorHideLoginForm,
         getByTypeMovies: actionCreatorGetByTypeMovies
         }
         ,dispatch)
 };
-    // return {
-    //     updateAuth: bindActionCreators(actionCreactorUpdateAuth, dispatch),
-    // ...
-    // }
-
-    // return {
-    //     onLogOut: () => dispatch(actionCreactorOnLogOut()),
-    // ...
-    // }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
+
+// return {
+//     updateAuth: bindActionCreators(actionCreactorUpdateAuth, dispatch),
+// ...
+// }
+
+// return {
+//     onLogOut: () => dispatch(actionCreactorOnLogOut()),
+// ...
+// }
+
+// constructor() {
+//   super()
+//     this.state = {
+//         // session_id: null,
+//         session_id: cookies.get('session_id'),
+//         user: null,
+//         isAuth: false,
+//         toggleModal: false,
+//         favoriteMovies: [],
+//         watchlistMovies: []
+//     };
+// };
+
+// updateAuth = (user, session_id) => {
+// cookies.set('session_id', session_id, {
+//     path: '/',
+//     maxAge: 2592000
+// });
+// this.setState({
+//     session_id,
+//     user,
+//     isAuth: true
+// })
+// };
+
+// onLogOut = () => {
+// cookies.remove('session_id');
+// this.setState({
+//     session_id: null,
+//     user: null,
+//     isAuth: false
+// })
+// };
+
+// showLoginForm = () => {
+// this.setState(prevState => ({
+//     toggleModal: !prevState.toggleModal
+// }))
+// };
+
+// hideLoginForm = () => {
+// this.setState({
+//     toggleModal: false
+// })
+// };
+
+// getByTypeMovies = (type) => {
+//     CallApi.get(`/account/{account_id}/${type}/movies`, {
+//         params: {
+//             language: 'ru-RU',
+//             session_id: this.props.store.getState().session_id
+//         }
+//     })
+//         .then(data => {
+//             this.setState({
+//                 [`${type}Movies`]: data.results
+//             });
+//         })
+// };
+
+// const {user, session_id, toggleModal, isAuth, favoriteMovies, watchlistMovies} = this.state;
+
+// value={{
+//     // user: user,
+//     user,
+//         session_id,
+//         toggleModal,
+//         isAuth,
+//         favoriteMovies,
+//         watchlistMovies,
+//         onLogOut: this.onLogOut,
+//         showLoginForm: this.showLoginForm,
+//         hideLoginForm: this.hideLoginForm,
+//         updateAuth: this.updateAuth,
+//         getByTypeMovies: this.getByTypeMovies
+// }}
+// >

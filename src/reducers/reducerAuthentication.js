@@ -5,9 +5,9 @@ const cookies = new Cookies();
 const initialState = {
     user: null,
     session_id: cookies.get('session_id'),
-    toggleModal: false,
+    showModal: false,
     isAuth: false,
-    dropDownToggle: false
+    showDropDown: false
 };
 
 const reducerAuthentication = (state = initialState, action) => {
@@ -33,22 +33,22 @@ const reducerAuthentication = (state = initialState, action) => {
                 isAuth: false
             };
 
-        case 'SHOW_LOGINFORM':
+        case 'TOGGLE_LOGINFORM':
             return {
                 ...state,
-                toggleModal: !state.toggleModal
+                showModal: !state.showModal
             };
 
         case 'HIDE_LOGINFORM':
             return {
                 ...state,
-                toggleModal: false
+                showModal: false
             };
 
-        case 'DROP_DOWN_TOGGLE':
+        case 'TOGGLE_DROP_DOWN':
             return {
                 ...state,
-                dropDownToggle: !state.dropDownToggle
+                showDropDown: !state.showDropDown
             };
 
         default:

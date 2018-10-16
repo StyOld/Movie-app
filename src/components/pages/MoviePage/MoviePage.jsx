@@ -57,3 +57,23 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MoviePage);
+
+// constructor() {
+//     super()
+//     this.state = {
+//         moviesDetails: {}
+//     };
+// };
+
+// componentDidMount () {
+//     CallApi.get(`/movie/${this.props.match.params.id}`, {
+//         params: {
+//             language: 'ru-RU'
+//         }
+//     })
+//         .then(data => {
+//             this.setState({
+//                 moviesDetails: data
+//             })
+//         })
+// }

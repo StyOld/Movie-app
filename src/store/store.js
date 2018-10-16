@@ -8,7 +8,6 @@ import reducers from "../reducers/reducers";
 // }
 
 const async = ({getState, dispatch}) => next => action => {
-    // console.log(action);
     if (typeof action === 'function') {
         action(dispatch);
     } else {

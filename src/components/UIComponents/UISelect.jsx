@@ -1,29 +1,12 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import UILabel from "./UILabel";
-// import _ from 'lodash'
-
 
 export default class UISelect extends React.PureComponent {
     static propTypes = {
         name: PropTypes.string.isRequired,
         onChange: PropTypes.func.isRequired
     };
-
-    // shouldComponentUpdate(nextProps, nextStage) {
-    //     return _.isEqual(nextProps, this.props) ? false : true
-    // }
-
-    // shouldComponentUpdate(nextProps, nextStage) {
-    //     // console.log('this.props', this.props);
-    //     // console.log('nextProps', nextProps);
-    //
-    //     if (nextProps.value !== this.props.value) {
-    //         return true;
-    //     } else {
-    //         return false;
-    //     }
-    // }
 
     render() {
         const {id, name, value, onChange, label, children} = this.props;
@@ -60,3 +43,20 @@ export default class UISelect extends React.PureComponent {
         );
     }
 }
+
+// import _ from 'lodash'
+
+// shouldComponentUpdate(nextProps, nextStage) {
+//     return _.isEqual(nextProps, this.props) ? false : true
+// }
+
+// shouldComponentUpdate(nextProps, nextStage) {
+//     // console.log('this.props', this.props);
+//     // console.log('nextProps', nextProps);
+//
+//     if (nextProps.value !== this.props.value) {
+//         return true;
+//     } else {
+//         return false;
+//     }
+// }

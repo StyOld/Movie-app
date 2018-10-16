@@ -1,16 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import UISelect from "../UIComponents/UISelect";
-// import _ from "lodash";
-
-// Один из способов задать ссылку на массив, что бы каждый раз не было лишнего рендера, но эти данные не передаються с компонентом.
-// const options = [
-//     {
-//         label: 'Популярные по убыванию',
-//         value: 'popularity.desc'
-//     },
-//     ...
-// ];
 
 export default class SortBy extends React.PureComponent {
     static propTypes = {
@@ -39,10 +29,6 @@ export default class SortBy extends React.PureComponent {
         ]
     };
 
-    // shouldComponentUpdate(nextProps, nextStage) {
-    //     return _.isEqual(nextProps, this.props) ? false : true
-    // }
-
     render () {
         const {sort_by, onChangeFilters, optionsType} = this.props;
         const LabelText = () => <div>Сортировать по:</div>;
@@ -70,3 +56,17 @@ export default class SortBy extends React.PureComponent {
     }
 }
 
+// import _ from "lodash";
+
+// Один из способов задать ссылку на массив, что бы каждый раз не было лишнего рендера, но эти данные не передаються с компонентом.
+// const options = [
+//     {
+//         label: 'Популярные по убыванию',
+//         value: 'popularity.desc'
+//     },
+//     ...
+// ];
+
+// shouldComponentUpdate(nextProps, nextStage) {
+//     return _.isEqual(nextProps, this.props) ? false : true
+// }

@@ -27,9 +27,9 @@ export const actionCreatorOnLogOut = () => {
     }
 };
 
-export const actionCreatorShowLoginForm = () => {
+export const actionCreatorToggleLoginForm = () => {
     return {
-        type: 'SHOW_LOGINFORM'
+        type: 'TOGGLE_LOGINFORM'
     }
 };
 
@@ -76,10 +76,6 @@ export const actionCreatorGetMovies = (params) => {
 
 export const actionCreatorGetByTypeMovies = (params, type) => {
     return dispatch => {
-        dispatch({
-            type: 'FETCHING_MOVIES_BY_TYPE'
-        });
-
         CallApi.get(`/account/{account_id}/${type}/movies`, {
             params: params
         })
@@ -103,10 +99,6 @@ export const actionCreatorGetByTypeMovies = (params, type) => {
 
 export const actionCreatorGetGenresList = () => {
     return dispatch => {
-        dispatch({
-            type: 'FETCHING_MOVIES_BY_TYPE'
-        });
-
         CallApi.get('/genre/movie/list')
             .then(data => {
                 dispatch({
@@ -125,25 +117,20 @@ export const actionCreatorGetGenresList = () => {
     }
 };
 
-export const actionCreatorDropDownToggle = () => {
+export const actionCreatorToggleDropDown = () => {
     return {
-        type: 'DROP_DOWN_TOGGLE'
+        type: 'TOGGLE_DROP_DOWN'
     }
 };
 
 export const actionCreatorDeleteSession = (params) => {
     return dispatch => {
-        dispatch({
-            type: 'FETCHING_DELETE_SESSION'
-        });
-
-        CallApi.get('/authentication/session', {
+        CallApi.delete('/authentication/session', {
             params: params
         })
-            .then(data => {
+            .then(() => {
                 dispatch({
                     type: 'LOGOUT'
-                    // ,payload: data
                 })
             })
             .catch(error => {

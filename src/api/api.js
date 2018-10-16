@@ -46,15 +46,6 @@ export default class CallApi {
         }
       }
     );
-
-    // const link = `${API_URL}/discover/movie?${queryString.stringify(queryStringParams)}`;
-    // ulr = '/discover/movie'
-    // params = {
-    //   sort_by: sort_by,
-    //   page: page,
-    //   primary_release_year: primary_release_year,
-    //   with_genres: genres.join(',')
-    //}
   }
 
   static post(url, options = {}) {
@@ -97,3 +88,12 @@ export default class CallApi {
     );
   }
 }
+
+// const link = `${API_URL}/discover/movie?${queryString.stringify(queryStringParams)}`;
+// ulr = '/discover/movie'
+// params = {
+//   sort_by: sort_by,
+//   page: page,
+//   primary_release_year: primary_release_year,
+//   with_genres: genres.join(',')
+//}
