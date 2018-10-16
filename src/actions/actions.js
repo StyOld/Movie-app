@@ -1,13 +1,13 @@
 import CallApi from '../api/api';
 
-// export const actionCreactorUpdateAuth = dispatch(payload => {
+// export const actionCreatorUpdateAuth = dispatch(payload => {
 //     return {
 //         type: 'UPDATE_AUTH',
 //         payload
 //     }
 // });
 
-// export const actionCreactorUpdateAuth = payload => dispatch => {
+// export const actionCreatorUpdateAuth = payload => dispatch => {
 //         return dispatch({
 //         type: 'UPDATE_AUTH',
 //         payload
@@ -42,18 +42,10 @@ export const actionCreatorHideLoginForm = () => {
 export const actionCreatorGetMovieDetails = (payload) => {
     return {
         type: 'GET_MOVIE_DETAILS',
-        payload: {
-            data: payload.data
-        }
-    }
-};
-
-export const actionCreatorGetGenresList = (payload) => {
-    return {
-        type: 'GET_GENRES_LIST',
-        payload: {
-            data: payload.data
-        }
+        payload
+        // payload: {
+        //     data: payload.data
+        // }
     }
 };
 
@@ -69,7 +61,8 @@ export const actionCreatorGetMovies = (params) => {
             .then(data => {
                 dispatch({
                     type: 'UPDATE_MOVIES',
-                    payload: data.results
+                    // payload: data.results
+                    payload: data
                 })
             })
             .catch(error => {
@@ -108,4 +101,56 @@ export const actionCreatorGetByTypeMovies = (params, type) => {
     }
 };
 
+export const actionCreatorGetGenresList = () => {
+    return dispatch => {
+        dispatch({
+            type: 'FETCHING_MOVIES_BY_TYPE'
+        });
 
+        CallApi.get('/genre/movie/list')
+            .then(data => {
+                dispatch({
+                    type: 'GET_GENRES_LIST',
+                    payload: {
+                        data: data.genres
+                    }
+                })
+            })
+            .catch(error => {
+                dispatch({
+                    type: 'ERROR_GET_GENRES',
+                    payload: error
+                })
+            })
+    }
+};
+
+export const actionCreatorDropDownToggle = () => {
+    return {
+        type: 'DROP_DOWN_TOGGLE'
+    }
+};
+
+export const actionCreatorDeleteSession = (params) => {
+    return dispatch => {
+        dispatch({
+            type: 'FETCHING_DELETE_SESSION'
+        });
+
+        CallApi.get('/authentication/session', {
+            params: params
+        })
+            .then(data => {
+                dispatch({
+                    type: 'LOGOUT'
+                    // ,payload: data
+                })
+            })
+            .catch(error => {
+                dispatch({
+                    type: 'ERROR_DELETE_SESSION',
+                    payload: error
+                })
+            })
+    }
+};

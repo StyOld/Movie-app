@@ -7,7 +7,7 @@ const initialState = {
     session_id: cookies.get('session_id'),
     toggleModal: false,
     isAuth: false,
-    genreList: []
+    dropDownToggle: false
 };
 
 const reducerAuthentication = (state = initialState, action) => {
@@ -45,10 +45,10 @@ const reducerAuthentication = (state = initialState, action) => {
                 toggleModal: false
             };
 
-        case 'GET_GENRES_LIST':
+        case 'DROP_DOWN_TOGGLE':
             return {
                 ...state,
-                genreList: action.payload.data
+                dropDownToggle: !state.dropDownToggle
             };
 
         default:

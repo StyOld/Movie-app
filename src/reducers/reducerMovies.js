@@ -1,5 +1,5 @@
 const initialState = {
-    data: [],
+    moviesData: {},
     moviesDetails: {}
 };
 
@@ -8,12 +8,13 @@ const reducerMovies = (state = initialState, action) => {
         case 'UPDATE_MOVIES':
             return {
                 ...state,
-                data: action.payload
+                moviesData: action.payload
         };
 
         case 'GET_MOVIE_DETAILS':
             return {
                 ...state,
+                // moviesDetails: action.payload
                 moviesDetails: action.payload.data
             };
 

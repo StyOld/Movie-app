@@ -1,13 +1,15 @@
 import React from "react";
-// import CallApi from "../../api/api";
 import _ from 'lodash';
+// import CallApi from "../../api/api";
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {actionCreatorGetMovies} from '../../actions/actions'
 
 const mapStateToProps = (state) => {
     return {
-        movies: state.movies.data
+        movies: state.movies.moviesData
+        // movies: state.movies.moviesData.results
+        // total_pag: state.movies.moviesData.total_pages
     }
 };
 
@@ -20,7 +22,7 @@ const mapDispatchToProps = (dispatch) => {
 export default (Component) => connect(mapStateToProps, mapDispatchToProps)(class MoviesHOC extends React.Component {
         // constructor() {
         //     super();
-    
+
         //     this.state = {
         //         movies: []
         //     };
@@ -37,7 +39,10 @@ export default (Component) => connect(mapStateToProps, mapDispatchToProps)(class
             };
     
             if (genres.length>0) queryStringParams.with_genres = genres.join(',');
-            this.props.getMovies(queryStringParams)
+            this.props.getMovies(queryStringParams);
+
+            // Дочинить баг
+            // this.props.getTotalPages(this.props.total_pag);
 
             // CallApi.get('/discover/movie', {
             //     params: queryStringParams
@@ -67,7 +72,7 @@ export default (Component) => connect(mapStateToProps, mapDispatchToProps)(class
     
         render() {
             const { movies } = this.props;
-            return <Component movies = {movies} />;
+            return <Component movies = {movies.results}/>;
         }
     }    
 ) 

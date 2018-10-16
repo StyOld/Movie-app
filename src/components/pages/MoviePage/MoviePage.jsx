@@ -51,11 +51,9 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators(
-        {
+    return bindActionCreators({
             getMovieDetails: actionCreatorGetMovieDetails
-        }
-        ,dispatch)
+    },dispatch)
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MoviePage);

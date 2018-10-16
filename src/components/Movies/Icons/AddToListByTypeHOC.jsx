@@ -36,7 +36,7 @@ export default (Component, type) => AppConsumerHOC(class AddToListByTypeHOC exte
                     this.setState({
                         disabled: false
                     });
-                    this.props.getByTypeMovies(type)
+                    this.props.getByTypeMovies({session_id: this.props.session_id}, type)
                 })
         })
     };

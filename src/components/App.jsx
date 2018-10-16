@@ -17,10 +17,6 @@ library.add(faHeart, faBookmark);
 export const AppContext = React.createContext();
 
 class App extends React.Component {
-  getByTypeMovies = (type) => {
-      this.props.getByTypeMovies({session_id: this.props.session_id}, type)
-  };
-
   componentDidMount() {
       const {session_id} = this.props;
 
@@ -37,14 +33,14 @@ class App extends React.Component {
 
   componentDidUpdate(prevProps) {
       if ((this.props.isAuth !== prevProps.isAuth) && (this.props.isAuth)) {
-          this.getByTypeMovies('favorite');
-          this.getByTypeMovies('watchlist')
+          this.props.getByTypeMovies({session_id: this.props.session_id},'favorite');
+          this.props.getByTypeMovies({session_id: this.props.session_id},'watchlist')
       }
   }
 
   render() {
       const {user, session_id, toggleModal, isAuth, favoriteMovies, watchlistMovies,
-          updateAuth, onLogOut, showLoginForm, hideLoginForm} = this.props;
+          updateAuth, onLogOut, showLoginForm, hideLoginForm, getByTypeMovies} = this.props;
 
       return isAuth || !session_id ? (
           <BrowserRouter>
@@ -60,7 +56,8 @@ class App extends React.Component {
                       showLoginForm,
                       hideLoginForm,
                       updateAuth,
-                      getByTypeMovies: this.getByTypeMovies
+                      getByTypeMovies
+                      // getByTypeMovies: this.getByTypeMovies
                   }}
               >
                   <div>

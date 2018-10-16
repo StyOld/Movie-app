@@ -3,6 +3,9 @@ import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap
 import AppConsumerHOC from "../HOC/AppConsumerHOC";
 import CallApi from "../../api/api";
 import {Link} from  'react-router-dom';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {actionCreatorDropDownToggle, actionCreatorDeleteSession} from '../../actions/actions'
 // import {AppContext} from "../App";
 
 class UserMenu extends React.Component {
@@ -10,29 +13,30 @@ class UserMenu extends React.Component {
         super(props);
 
         this.toggle = this.toggle.bind(this);
-        this.state = {
-            dropdownOpen: false
-        };
+        // this.state = {
+        //     dropdownOpen: false
+        // };
     }
 
     toggle() {
-        this.setState(prevState => ({
-            dropdownOpen: !prevState.dropdownOpen
-        }));
+        this.props.dropDownToggle()
+        // this.setState(prevState => ({
+        //     dropdownOpen: !prevState.dropdownOpen
+        // }));
     }
 
-    deleteSessionId = () => {
-        CallApi.delete('/authentication/session', {
-            body: {session_id: this.props.session_id}
-        }).then(() => {
-            this.props.onLogOut();
-        })
-    };
+    // deleteSessionId = () => {
+    //     CallApi.delete('/authentication/session', {
+    //         body: {session_id: this.props.session_id}
+    //     }).then(() => {
+    //         this.props.onLogOut();
+    //     })
+    // };
 
     render() {
-        const {user} = this.props;
+        const {user, dropDownToggle, deleteSession} = this.props;
         return (
-            <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+            <Dropdown isOpen={dropDownToggle} toggle={this.toggle}>
                 <DropdownToggle nav caret>
                     <div>
                         <img
@@ -58,7 +62,7 @@ class UserMenu extends React.Component {
                     </DropdownItem>
                     <DropdownItem
                         className='font-weight-bold'
-                        onClick={this.deleteSessionId}
+                        onClick={deleteSession({session_id: this.props.session_id})}
                     >
                         Выход
                     </DropdownItem>
@@ -68,7 +72,22 @@ class UserMenu extends React.Component {
     }
 }
 
-export default AppConsumerHOC(UserMenu);
+const mapStateToProps = (state) => {
+    return {
+        dropDownToggle: state.authentication.dropDownToggle
+    }
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({
+        dropDownToggle: actionCreatorDropDownToggle,
+        deleteSession: actionCreatorDeleteSession
+    }, dispatch)
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AppConsumerHOC(UserMenu));
+
+// export default AppConsumerHOC(UserMenu);
 
 // export default props => {
 //     return (
