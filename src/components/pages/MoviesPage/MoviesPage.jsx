@@ -3,8 +3,11 @@ import Filters from "../../Filters/Filters";
 import MoviesList from "../../Movies/MoviesList";
 import Pagination from "../../Filters/Pagination";
 import _ from "lodash";
+import {actionCreatorChangePage, actionCreatorGetTotalPage} from "../../../actions/actions";
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 
-export default class MoviesPage extends React.Component {
+class MoviesPage extends React.Component {
     constructor() {
         super()
         this.state = {
@@ -13,8 +16,8 @@ export default class MoviesPage extends React.Component {
                 primary_release_year: '2018',
                 genres: []
             },
-            page: 1,
-            total_pages: ''
+            // page: 1,
+            // total_pages: ''
         };
 
         this.initialState = _.cloneDeep(this.state)
@@ -34,18 +37,11 @@ export default class MoviesPage extends React.Component {
         this.setState(this.initialState);
     };
 
-    onChangePage = page => {
-        this.setState({
-            // page: page
-            page
-        })
-    };
-
-    getTotalPages = total_pages => {
-        this.setState({
-            total_pages
-        });
-    };
+    // getTotalPages = total_pages => {
+    //     this.setState({
+    //         total_pages
+    //     });
+    // };
 
     onChangeGenres = (event) => {
         const id = event.target.value;
@@ -69,7 +65,9 @@ export default class MoviesPage extends React.Component {
     };
 
     render() {
-        const {filters, page, total_pages} = this.state;
+        const {page, total_pages, onChangePage, getTotalPages} = this.props;
+        // const {filters, page, total_pages} = this.state;
+        const {filters} = this.state;
 
         return (
             <div className="container">
@@ -92,13 +90,13 @@ export default class MoviesPage extends React.Component {
                                     page={page}
                                     total_pages={total_pages}
                                     onChangeFilters={this.onChangeFilters}
-                                    onChangePage={this.onChangePage}
+                                    onChangePage={onChangePage}
                                     onChangeGenres={this.onChangeGenres}
                                 />
                                 <Pagination
                                     page={page}
                                     total_pages={total_pages}
-                                    onChangePage={this.onChangePage}
+                                    onChangePage={onChangePage}
                                 />
                             </div>
                         </div>
@@ -107,8 +105,8 @@ export default class MoviesPage extends React.Component {
                         <MoviesList
                             page={page}
                             filters={filters}
-                            onChangePage={this.onChangePage}
-                            getTotalPages={this.getTotalPages}
+                            onChangePage={onChangePage}
+                            getTotalPages={getTotalPages}
                         />
                     </div>
                 </div>
@@ -116,3 +114,19 @@ export default class MoviesPage extends React.Component {
         );
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        page: state.movies.page,
+        total_pages: state.movies.total_pages
+    }
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({
+        onChangePage: actionCreatorChangePage,
+        getTotalPages: actionCreatorGetTotalPage
+    },dispatch)
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MoviesPage);

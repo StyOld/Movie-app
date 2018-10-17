@@ -19,6 +19,7 @@ export default class Pagination extends React.PureComponent {
                     type="button"
                     className="btn btn-light mr-2"
                     disabled={page >= total_pages}
+                    // onClick={() => this.props.actionCreatorChangePage(page + 1)}
                     onClick={onChangePage.bind(null, page + 1)}
                 >
                     Вперёд

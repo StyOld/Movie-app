@@ -70,7 +70,9 @@ export const actionCreatorGetMovies = (params) => {
                     type: 'ERROR_GET_MOVIES',
                     payload: error
                 })
-            })
+            });
+
+        actionCreatorGetTotalPage()
     }
 };
 
@@ -142,46 +144,16 @@ export const actionCreatorDeleteSession = (params) => {
     }
 };
 
-export const actionCreatorChangeAdded = (params) => {
-    return dispatch => {
-
-        CallApi.delete('/authentication/session', {
-            params: params
-        })
-            .then(() => {
-                dispatch({
-                    type: 'LOGOUT'
-                })
-            })
-            .catch(error => {
-                dispatch({
-                    type: 'ERROR_DELETE_SESSION',
-                    payload: error
-                })
-            })
+export const actionCreatorChangePage = (payload) => {
+    return {
+        type: 'CHANGE_PAGE',
+        payload
     }
 };
 
-// onChangeAdded = () => {
-//     this.setState(prevState => ({
-//         added: !prevState.added,
-//         disabled: true
-//     }), () => {
-//         CallApi.post(`/account/{account_id}/${type}`, {
-//             params: {
-//                 session_id: this.props.session_id
-//             },
-//             body: {
-//                 media_type: 'movie',
-//                 media_id: this.props.movieId,
-//                 [type]: this.state.added
-//             }
-//         })
-//             .then(() => {
-//                 this.setState({
-//                     disabled: false
-//                 });
-//                 this.props.getByTypeMovies({session_id: this.props.session_id}, type)
-//             })
-//     })
-// };
+export const actionCreatorGetTotalPage = (payload) => {
+    return {
+        type: 'GET_TOTAL_PAGE',
+        payload
+    }
+};

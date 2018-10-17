@@ -2,13 +2,11 @@ import React from "react";
 import _ from 'lodash';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {actionCreatorGetMovies} from '../../actions/actions'
+import {actionCreatorGetMovies, actionCreatorGetTotalPage} from '../../actions/actions'
 
 const mapStateToProps = (state) => {
     return {
         movies: state.movies.moviesData
-        // movies: state.movies.moviesData.results
-        // total_pag: state.movies.moviesData.total_pages
     }
 };
 
@@ -30,10 +28,11 @@ export default (Component) => connect(mapStateToProps, mapDispatchToProps)(class
         };
 
         if (genres.length>0) queryStringParams.with_genres = genres.join(',');
+
         this.props.getMovies(queryStringParams);
 
-        // Дочинить баг
-        // this.props.getTotalPages(this.props.total_pag);
+        // Не работает
+        this.props.getTotalPages(this.props.movies.total_pages);
     };
 
     componentDidMount() {
@@ -51,6 +50,7 @@ export default (Component) => connect(mapStateToProps, mapDispatchToProps)(class
     }
 
     render() {
+        // console.log(this.props.movies.total_pages)
         const { movies } = this.props;
         return <Component movies = {movies.results}/>;
     }

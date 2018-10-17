@@ -1,7 +1,14 @@
 const initialState = {
     moviesData: {},
     moviesDetails: {},
-    genreList: []
+    genreList: [],
+    filters: {
+        sort_by: 'vote_average.asc',
+        primary_release_year: '2018',
+        genres: []
+    },
+    page: 3,
+    // total_pages: ''
 };
 
 const reducerMovies = (state = initialState, action) => {
@@ -23,6 +30,18 @@ const reducerMovies = (state = initialState, action) => {
             return {
                 ...state,
                 genreList: action.payload.data
+            };
+
+        case 'CHANGE_PAGE':
+            return {
+                ...state,
+                page: action.payload
+            };
+
+        case 'GET_TOTAL_PAGE':
+            return {
+                ...state,
+                total_pages: action.payload
             };
 
         default:
