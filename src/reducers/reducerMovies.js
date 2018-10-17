@@ -7,8 +7,8 @@ const initialState = {
         primary_release_year: '2018',
         genres: []
     },
-    page: 3,
-    // total_pages: ''
+    page: 1,
+    total_pages: ''
 };
 
 const reducerMovies = (state = initialState, action) => {
