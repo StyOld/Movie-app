@@ -1,6 +1,7 @@
 const initialState = {
     moviesData: {},
-    moviesDetails: {}
+    moviesDetails: {},
+    genreList: []
 };
 
 const reducerMovies = (state = initialState, action) => {
@@ -16,6 +17,12 @@ const reducerMovies = (state = initialState, action) => {
                 ...state,
                 // moviesDetails: action.payload
                 moviesDetails: action.payload.data
+            };
+
+        case 'GET_GENRES_LIST':
+            return {
+                ...state,
+                genreList: action.payload.data
             };
 
         default:

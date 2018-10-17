@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import AddToListByTypeHOC from "./AddToListByTypeHOC";
+import AddToListByTypeHOC from "../../HOC/AddToListByTypeHOC";
 
 class FavoriteIcon extends React.Component {
 

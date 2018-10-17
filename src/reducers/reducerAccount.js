@@ -1,8 +1,6 @@
 const initialState = {
     favoriteMovies: [],
-    watchlistMovies: [],
-    added: false,
-    disabled: false
+    watchlistMovies: []
 };
 
 const reducerAccount = (state = initialState, action) => {

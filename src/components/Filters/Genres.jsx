@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import GenresHOC from './GenresHOC';
+import GenresHOC from '../HOC/GenresHOC';
 
 const Genres = ({genreList, genres, onChangeGenres}) => (
     <div className="container">

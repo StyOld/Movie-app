@@ -5,8 +5,8 @@ const cookies = new Cookies();
 const initialState = {
     user: null,
     session_id: cookies.get('session_id'),
-    showModal: false,
     isAuth: false,
+    showModal: false,
     showDropDown: false
 };
 

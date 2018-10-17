@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 
 const mapStateToProps = (state) => {
     return {
-        genreList: state.filters.genreList
+        genreList: state.movies.genreList
     }
 };
 

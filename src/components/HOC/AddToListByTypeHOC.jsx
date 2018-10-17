@@ -1,6 +1,6 @@
 import React from 'react';
-import CallApi from "../../../api/api";
-import AppConsumerHOC from "../../HOC/AppConsumerHOC";
+import CallApi from "../../api/api";
+import AppConsumerHOC from "./AppConsumerHOC";
 import _ from 'lodash';
 
 export default (Component, type) => AppConsumerHOC(class AddToListByTypeHOC extends React.Component {
@@ -14,7 +14,11 @@ export default (Component, type) => AppConsumerHOC(class AddToListByTypeHOC exte
     };
 
     onChangeAdded = () => {
-        this.setState(prevState => ({
+        if (!this.props.isAuth) {
+            this.props.toggleLoginForm()
+        } else
+
+            this.setState(prevState => ({
             added: !prevState.added,
             disabled: true
         }), () => {

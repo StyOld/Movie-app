@@ -1,4 +1,4 @@
-import {createStore, applyMiddleware} from 'redux';
+import {createStore, applyMiddleware, compose} from 'redux';
 import reducers from "../reducers/reducers";
 
 // const logger = ({getState, dispatch}) => next => action => {
@@ -15,6 +15,6 @@ const async = ({getState, dispatch}) => next => action => {
     }
 }
 
-const store = createStore(reducers, applyMiddleware(async));
+const store = createStore(reducers, compose(applyMiddleware(async),window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() ));
 
 export default store;
