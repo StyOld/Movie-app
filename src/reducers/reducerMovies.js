@@ -26,6 +26,12 @@ const reducerMovies = (state = initialState, action) => {
                 moviesDetails: action.payload.data
             };
 
+        case 'UPDATE_MOVIE':
+            return {
+                ...state,
+                moviesDetails: {}
+            };
+
         case 'GET_GENRES_LIST':
             return {
                 ...state,

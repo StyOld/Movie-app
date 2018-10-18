@@ -2,7 +2,7 @@ import React from 'react';
 import CallApi from "../../../api/api";
 import FavoriteIcon from '../../Movies/Icons/FavoriteIcon';
 import WatchIcon from '../../Movies/Icons/WatchIcon';
-import {actionCreatorGetMovieDetails} from "../../../actions/actions";
+import {actionCreatorGetMovieDetails, actionCreatorUpdateMovie} from "../../../actions/actions";
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
@@ -14,6 +14,10 @@ class MoviePage extends React.Component {
                     data
                 })
             })
+    }
+
+    componentWillUnmount() {
+        this.props.updateMovie()
     }
 
     render() {
@@ -52,7 +56,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
-            getMovieDetails: actionCreatorGetMovieDetails
+            getMovieDetails: actionCreatorGetMovieDetails,
+            updateMovie: actionCreatorUpdateMovie
     },dispatch)
 };
 

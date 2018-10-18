@@ -49,6 +49,12 @@ export const actionCreatorGetMovieDetails = (payload) => {
     }
 };
 
+export const actionCreatorUpdateMovie = () => {
+  return {
+      type: 'UPDATE_MOVIE'
+  }
+};
+
 export const actionCreatorGetMovies = (params) => {
     return dispatch => {
         dispatch({
