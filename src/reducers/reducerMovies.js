@@ -44,6 +44,46 @@ const reducerMovies = (state = initialState, action) => {
                 total_pages: action.payload
             };
 
+        case 'CLEAR_FILTERS':
+            return {
+                ...state,
+                filters: {
+                sort_by: 'vote_average.asc',
+                    primary_release_year: '2018',
+                    genres: []},
+                page: 1,
+                total_pages: ''
+            };
+
+        case 'CHANGE_FILTERS':
+            const newFilters = {
+                ...state.filters,
+                [action.payload.target.name]: action.payload.target.value};
+            return {
+                ...state,
+                filters: newFilters
+            };
+
+        case 'CHECKED_GENRE':
+            return {
+                ...state,
+                filters: {
+                    ...state.filters,
+                    genres: [...state.filters.genres, action.payload.target.value]
+                }
+            };
+
+        case 'UNCHECKED_GENRE':
+            return {
+                ...state,
+                filters: {
+                    ...state.filters,
+                    genres: state.filters.genres.filter(genreId => {
+                        return genreId !== action.payload.target.value
+                    })
+                }
+            };
+
         default:
             return state;
     }

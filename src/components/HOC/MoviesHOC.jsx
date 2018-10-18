@@ -2,7 +2,7 @@ import React from "react";
 import _ from 'lodash';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {actionCreatorGetMovies, actionCreatorGetTotalPage} from '../../actions/actions'
+import {actionCreatorGetMovies} from '../../actions/actions'
 
 const mapStateToProps = (state) => {
     return {
@@ -31,7 +31,7 @@ export default (Component) => connect(mapStateToProps, mapDispatchToProps)(class
 
         this.props.getMovies(queryStringParams);
 
-        // Не работает
+        // Не работает. Ясто что при первом рендере total_pages пустое, поэтому при первой загрузке страницы данные не показываются
         this.props.getTotalPages(this.props.movies.total_pages);
     };
 

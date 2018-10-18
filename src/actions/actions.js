@@ -72,7 +72,7 @@ export const actionCreatorGetMovies = (params) => {
                 })
             });
 
-        actionCreatorGetTotalPage()
+        // actionCreatorGetTotalPage()
     }
 };
 
@@ -155,5 +155,33 @@ export const actionCreatorGetTotalPage = (payload) => {
     return {
         type: 'GET_TOTAL_PAGE',
         payload
+    }
+};
+
+export const actionCreatorClearFilters = () => {
+    return {
+        type: 'CLEAR_FILTERS'
+    }
+};
+
+export const actionCreatorChangeFilters = (payload) => {
+    return {
+        type: 'CHANGE_FILTERS',
+        payload
+    }
+};
+export const actionCreatorChangeGenres = (payload) => {
+    return dispatch => {
+        (payload.target.checked) ? (
+            dispatch({
+                type: 'CHECKED_GENRE',
+                payload
+            })
+            ) : (
+            dispatch({
+                type: 'UNCHECKED_GENRE',
+                payload
+            })
+            )
     }
 };
