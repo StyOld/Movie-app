@@ -1,6 +1,9 @@
 import React from 'react';
+import * as actions from "../../actions/actions";
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 
-export default class Pagination extends React.PureComponent {
+class Pagination extends React.PureComponent {
     render() {
         const {page, total_pages, onChangePage}=this.props;
 
@@ -19,7 +22,6 @@ export default class Pagination extends React.PureComponent {
                     type="button"
                     className="btn btn-light mr-2"
                     disabled={page >= total_pages}
-                    // onClick={() => this.props.actionCreatorChangePage(page + 1)}
                     onClick={onChangePage.bind(null, page + 1)}
                 >
                     Вперёд
@@ -31,3 +33,18 @@ export default class Pagination extends React.PureComponent {
         )
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        page: state.movies.page,
+        total_pages: state.movies.total_pages,
+    }
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({
+        onChangePage: actions.actionCreatorChangePage
+    }, dispatch)
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Pagination);

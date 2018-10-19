@@ -2,7 +2,7 @@ import React from 'react';
 import CallApi from "../../../api/api";
 import FavoriteIcon from '../../Movies/Icons/FavoriteIcon';
 import WatchIcon from '../../Movies/Icons/WatchIcon';
-import {actionCreatorGetMovieDetails, actionCreatorUpdateMovie} from "../../../actions/actions";
+import * as actions from "../../../actions/actions";
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
@@ -56,8 +56,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
-            getMovieDetails: actionCreatorGetMovieDetails,
-            updateMovie: actionCreatorUpdateMovie
+            getMovieDetails: actions.actionCreatorGetMovieDetails,
+            updateMovie: actions.actionCreatorUpdateMovie
     },dispatch)
 };
 

@@ -4,13 +4,7 @@ import MoviePage from "./pages/MoviePage/MoviePage";
 import AccountListByTypePage from "./pages/AccountPage/AccountListByTypePage";
 import Header from "./Header/Header";
 import CallApi from "../api/api";
-import {
-    actionCreatorUpdateAuth,
-    actionCreatorOnLogOut,
-    actionCreatorToggleLoginForm,
-    actionCreatorHideLoginForm,
-    actionCreatorGetByTypeMovies
-} from '../actions/actions';
+import * as actions from '../actions/actions';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import { BrowserRouter, Route } from 'react-router-dom';
@@ -43,26 +37,10 @@ class App extends React.Component {
   }
 
   render() {
-      const {user, session_id, showModal, isAuth, favoriteMovies, watchlistMovies,
-          updateAuth, onLogOut, toggleLoginForm, hideLoginForm, getByTypeMovies} = this.props;
+      const {user, session_id, isAuth} = this.props;
 
       return isAuth || !session_id ? (
           <BrowserRouter>
-              <AppContext.Provider
-                  value={{
-                      user,
-                      session_id,
-                      showModal,
-                      isAuth,
-                      favoriteMovies,
-                      watchlistMovies,
-                      onLogOut,
-                      toggleLoginForm,
-                      hideLoginForm,
-                      updateAuth,
-                      getByTypeMovies
-                  }}
-              >
                   <div>
                       <Header user={user}/>
                       <Route exact path='/' component={MoviesPage} />
@@ -70,7 +48,6 @@ class App extends React.Component {
                       <Route path='/account/favorites' component={AccountListByTypePage('favorite')}/>
                       <Route path='/account/watchlist' component={AccountListByTypePage('watchlist')}/>
                   </div>
-              </AppContext.Provider>
           </BrowserRouter>
           ) : (<p>...Loading</p>)
   }
@@ -80,21 +57,15 @@ const mapStateToProps = (state) => {
     return {
         user: state.authentication.user,
         session_id: state.authentication.session_id,
-        showModal: state.authentication.showModal,
-        isAuth: state.authentication.isAuth,
-        favoriteMovies: state.account.favoriteMovies,
-        watchlistMovies: state.account.watchlistMovies
+        isAuth: state.authentication.isAuth
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators(
         {
-        updateAuth: actionCreatorUpdateAuth,
-        onLogOut: actionCreatorOnLogOut,
-        toggleLoginForm: actionCreatorToggleLoginForm,
-        hideLoginForm: actionCreatorHideLoginForm,
-        getByTypeMovies: actionCreatorGetByTypeMovies
+        updateAuth: actions.actionCreatorUpdateAuth,
+        getByTypeMovies: actions.actionCreatorGetByTypeMovies
         }
         ,dispatch)
 };
@@ -188,3 +159,20 @@ export default connect(mapStateToProps, mapDispatchToProps)(App);
 //         getByTypeMovies: this.getByTypeMovies
 // }}
 // >
+
+// <AppContext.Provider
+//     value={{
+//         user,
+//         session_id,
+//         showModal,
+//         isAuth,
+//         favoriteMovies,
+//         watchlistMovies,
+//         onLogOut,
+//         toggleLoginForm,
+//         hideLoginForm,
+//         updateAuth,
+//         getByTypeMovies
+//     }
+// >
+// </AppContext.Provider>

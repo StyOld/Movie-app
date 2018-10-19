@@ -1,7 +1,7 @@
 import React from "react";
-import {bindActionCreators} from 'redux';
-import {actionCreatorGetGenresList} from "../../actions/actions";
+import * as actions from "../../actions/actions";
 import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 
 const mapStateToProps = (state) => {
     return {
@@ -11,7 +11,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
-        getGenresList: actionCreatorGetGenresList
+        getGenresList: actions.actionCreatorGetGenresList
     }, dispatch)
 };
 

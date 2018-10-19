@@ -1,9 +1,26 @@
 import React from 'react';
-import AppConsumerHOC from '../../HOC/AppConsumerHOC';
 import {Redirect} from 'react-router-dom';
 import MovieItem from '../../Movies/MovieItem';
+import {connect} from 'react-redux';
+// import * as actions from "../../../actions/actions";
+// import {bindActionCreators} from 'redux';
 
-export default (type) => AppConsumerHOC(class AccountListByTypePage extends React.Component {
+const mapStateToProps = (state) => {
+    return {
+        isAuth: state.authentication.isAuth,
+        favoriteMovies: state.account.favoriteMovies,
+        watchlistMovies: state.account.watchlistMovies
+    }
+};
+
+// const mapDispatchToProps = (dispatch) => {
+//     return bindActionCreators(
+//         {
+//         }
+//         ,dispatch)
+// };
+
+export default (type) => connect(mapStateToProps)(class AccountListByTypePage extends React.Component {
     render() {
         return this.props.isAuth ? (
             <div className='container'>
@@ -22,3 +39,7 @@ export default (type) => AppConsumerHOC(class AccountListByTypePage extends Reac
         )
     }
 })
+
+// import AppConsumerHOC from '../../HOC/AppConsumerHOC';
+
+// export default (type) => AppConsumerHOC(class AccountListByTypePage extends React.Component {

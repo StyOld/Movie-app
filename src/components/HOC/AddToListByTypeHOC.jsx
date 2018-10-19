@@ -1,9 +1,29 @@
 import React from 'react';
 import CallApi from "../../api/api";
-import AppConsumerHOC from "./AppConsumerHOC";
 import _ from 'lodash';
+import * as actions from "../../actions/actions";
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 
-export default (Component, type) => AppConsumerHOC(class AddToListByTypeHOC extends React.Component {
+const mapStateToProps = (state) => {
+    return {
+        isAuth: state.authentication.isAuth,
+        session_id: state.authentication.session_id,
+        favoriteMovies: state.account.favoriteMovies,
+        watchlistMovies: state.account.watchlistMovies
+    }
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators(
+        {
+            toggleLoginForm: actions.actionCreatorToggleLoginForm,
+            getByTypeMovies: actions.actionCreatorGetByTypeMovies
+        }
+        ,dispatch)
+};
+
+export default (Component, type) => connect(mapStateToProps, mapDispatchToProps)(class AddToListByTypeHOC extends React.Component {
     constructor() {
         super();
 
@@ -76,3 +96,7 @@ export default (Component, type) => AppConsumerHOC(class AddToListByTypeHOC exte
         )
     }
 })
+
+// import AppConsumerHOC from "./AppConsumerHOC";
+
+// export default (Component, type) => AppConsumerHOC(class AddToListByTypeHOC extends React.Component {

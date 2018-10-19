@@ -1,7 +1,9 @@
 import React from "react";
 import CallApi from "../../../api/api";
 import classNames from 'classnames';
-import AppConsumerHOC from "../../HOC/AppConsumerHOC";
+import * as actions from "../../../actions/actions";
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 
 class LoginForm extends React.Component {
     state = {
@@ -208,7 +210,25 @@ class LoginForm extends React.Component {
     }
 }
 
-export default AppConsumerHOC(LoginForm);
+const mapStateToProps = () => {
+    return {
+    }
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators(
+        {
+            updateAuth: actions.actionCreatorUpdateAuth,
+            hideLoginForm: actions.actionCreatorHideLoginForm
+        }
+        ,dispatch)
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
+
+// import AppConsumerHOC from "../../HOC/AppConsumerHOC";
+
+// export default AppConsumerHOC(LoginForm);
 
 // import {AppContext} from "../../App";
 

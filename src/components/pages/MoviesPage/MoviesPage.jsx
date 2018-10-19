@@ -2,7 +2,7 @@ import React from "react";
 import Filters from "../../Filters/Filters";
 import MoviesList from "../../Movies/MoviesList";
 import Pagination from "../../Filters/Pagination";
-import {actionCreatorChangePage, actionCreatorGetTotalPage, actionCreatorClearFilters, actionCreatorChangeFilters, actionCreatorChangeGenres} from "../../../actions/actions";
+import * as actions from "../../../actions/actions";
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
@@ -67,11 +67,11 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
-        onChangePage: actionCreatorChangePage,
-        getTotalPages: actionCreatorGetTotalPage,
-        clearFilters : actionCreatorClearFilters,
-        onChangeFilters: actionCreatorChangeFilters,
-        onChangeGenres: actionCreatorChangeGenres
+        onChangePage: actions.actionCreatorChangePage,
+        getTotalPages: actions.actionCreatorGetTotalPage,
+        clearFilters : actions.actionCreatorClearFilters,
+        onChangeFilters: actions.actionCreatorChangeFilters,
+        onChangeGenres: actions.actionCreatorChangeGenres
     },dispatch)
 };
 

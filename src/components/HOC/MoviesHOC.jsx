@@ -1,18 +1,22 @@
 import React from "react";
 import _ from 'lodash';
+import * as actions from "../../actions/actions";
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {actionCreatorGetMovies} from '../../actions/actions'
 
 const mapStateToProps = (state) => {
     return {
-        movies: state.movies.moviesData
+        movies: state.movies.moviesData,
+        page: state.movies.page,
+        total_pages: state.movies.total_pages,
+        filters: state.movies.filters
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
-        getMovies: actionCreatorGetMovies
+        getMovies: actions.actionCreatorGetMovies,
+        getTotalPages: actions.actionCreatorGetTotalPage
     }, dispatch)
 };
 

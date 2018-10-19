@@ -1,10 +1,9 @@
 import React from 'react';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
-import AppConsumerHOC from "../HOC/AppConsumerHOC";
 import {Link} from  'react-router-dom';
+import * as actions from "../../actions/actions";
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {actionCreatorToggleDropDown, actionCreatorDeleteSession} from '../../actions/actions'
 
 class UserMenu extends React.Component {
     constructor(props) {
@@ -46,7 +45,8 @@ class UserMenu extends React.Component {
                     </DropdownItem>
                     <DropdownItem
                         className='font-weight-bold'
-                        onClick={() => deleteSession({session_id: this.props.session_id})}
+                        // onClick={() => deleteSession({session_id: this.props.session_id})}
+                        onClick={(session_id) => deleteSession({session_id})}
                     >
                         Выход
                     </DropdownItem>
@@ -58,18 +58,23 @@ class UserMenu extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
+        user: state.authentication.user,
         showDropDown: state.authentication.showDropDown
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
-        toggleDropDown: actionCreatorToggleDropDown,
-        deleteSession: actionCreatorDeleteSession
+        toggleDropDown: actions.actionCreatorToggleDropDown,
+        deleteSession: actions.actionCreatorDeleteSession
     }, dispatch)
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AppConsumerHOC(UserMenu));
+export default connect(mapStateToProps, mapDispatchToProps)(UserMenu);
+
+// import AppConsumerHOC from "../HOC/AppConsumerHOC";
+
+// export default connect(mapStateToProps, mapDispatchToProps)(AppConsumerHOC(UserMenu));
 
 // export default props => {
 //     return (
