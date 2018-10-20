@@ -31,7 +31,7 @@ class MoviesPage extends React.Component {
                                     filters={filters}
                                     page={page}
                                     total_pages={total_pages}
-                                    onChangeFilters={(event) => {onChangeFilters(event)}}
+                                    onChangeFilters={onChangeFilters}
                                     onChangePage={onChangePage}
                                     onChangeGenres={onChangeGenres}
                                 />

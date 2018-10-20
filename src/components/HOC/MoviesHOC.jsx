@@ -8,15 +8,13 @@ const mapStateToProps = (state) => {
     return {
         movies: state.movies.moviesData,
         page: state.movies.page,
-        total_pages: state.movies.total_pages,
         filters: state.movies.filters
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
-        getMovies: actions.actionCreatorGetMovies,
-        getTotalPages: actions.actionCreatorGetTotalPage
+        getMovies: actions.actionCreatorGetMovies
     }, dispatch)
 };
 
@@ -34,9 +32,6 @@ export default (Component) => connect(mapStateToProps, mapDispatchToProps)(class
         if (genres.length>0) queryStringParams.with_genres = genres.join(',');
 
         this.props.getMovies(queryStringParams);
-
-        // Не работает. Ясто что при первом рендере total_pages пустое, поэтому при первой загрузке страницы данные не показываются
-        this.props.getTotalPages(this.props.movies.total_pages);
     };
 
     componentDidMount() {
@@ -54,7 +49,6 @@ export default (Component) => connect(mapStateToProps, mapDispatchToProps)(class
     }
 
     render() {
-        // console.log(this.props.movies.total_pages)
         const { movies } = this.props;
         return <Component movies = {movies.results}/>;
     }

@@ -22,8 +22,8 @@ const reducerMovies = (state = initialState, action) => {
         case 'GET_MOVIE_DETAILS':
             return {
                 ...state,
-                // moviesDetails: action.payload
                 moviesDetails: action.payload.data
+                // moviesDetails: action.payload
             };
 
         case 'UPDATE_MOVIE':
@@ -62,12 +62,18 @@ const reducerMovies = (state = initialState, action) => {
             };
 
         case 'CHANGE_FILTERS':
-            const newFilters = {
-                ...state.filters,
-                [action.payload.target.name]: action.payload.target.value};
             return {
                 ...state,
-                filters: newFilters
+                filters: {
+                    ...state.filters,
+                    [action.payload.name]: action.payload.value
+                }
+            // return {
+            //     ...state,
+            //     filters: {
+            //         ...state.filters,
+            //         [action.payload.target.name]: action.payload.target.value
+            //     }
             };
 
         case 'CHECKED_GENRE':
@@ -75,7 +81,8 @@ const reducerMovies = (state = initialState, action) => {
                 ...state,
                 filters: {
                     ...state.filters,
-                    genres: [...state.filters.genres, action.payload.target.value]
+                    genres: [...state.filters.genres, action.payload]
+                    // genres: [...state.filters.genres, action.payload.target.value]
                 }
             };
 
@@ -85,7 +92,8 @@ const reducerMovies = (state = initialState, action) => {
                 filters: {
                     ...state.filters,
                     genres: state.filters.genres.filter(genreId => {
-                        return genreId !== action.payload.target.value
+                        return genreId !== action.payload
+                        // return genreId !== action.payload.target.value
                     })
                 }
             };

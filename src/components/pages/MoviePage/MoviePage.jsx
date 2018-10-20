@@ -34,6 +34,7 @@ class MoviePage extends React.Component {
                             />
                         </div>
                         <div className='col-8'>
+                            <h4 className="card-title"><strong>{moviesDetails.title}</strong></h4>
                             <h5 className="card-title"><strong>Oписание фильма</strong></h5>
                             <p className="card-text">{moviesDetails.overview}</p>
                         <div className='d-flex align-items-center'>

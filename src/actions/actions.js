@@ -67,18 +67,20 @@ export const actionCreatorGetMovies = (params) => {
             .then(data => {
                 dispatch({
                     type: 'UPDATE_MOVIES',
-                    // payload: data.results
                     payload: data
+                    // payload: data.results
+                });
+                dispatch({
+                    type: 'GET_TOTAL_PAGE',
+                    payload: data.total_pages
                 })
             })
             .catch(error => {
                 dispatch({
                     type: 'ERROR_GET_MOVIES',
                     payload: error
-                })
+                });
             });
-
-        // actionCreatorGetTotalPage()
     }
 };
 
@@ -170,24 +172,33 @@ export const actionCreatorClearFilters = () => {
     }
 };
 
-export const actionCreatorChangeFilters = (payload) => {
+export const actionCreatorChangeFilters = (event) => {
     return {
         type: 'CHANGE_FILTERS',
-        payload
+        payload: {
+            name: event.target.name,
+            value: event.target.value
+        // payload
+        }
     }
 };
-export const actionCreatorChangeGenres = (payload) => {
+
+export const actionCreatorChangeGenres = payload => {
     return dispatch => {
-        (payload.target.checked) ? (
-            dispatch({
-                type: 'CHECKED_GENRE',
-                payload
-            })
-            ) : (
-            dispatch({
-                type: 'UNCHECKED_GENRE',
-                payload
-            })
-            )
-    }
+        dispatch({
+            type: payload.target.checked ? "CHECKED_GENRE" : "UNCHECKED_GENRE",
+            payload: payload.target.value
+        });
+    };
+// (payload.target.checked) ? (
+//     dispatch({
+//         type: 'CHECKED_GENRE',
+//         payload
+//     })
+//     ) : (
+//     dispatch({
+//         type: 'UNCHECKED_GENRE',
+//         payload
+//     })
+//     )
 };
