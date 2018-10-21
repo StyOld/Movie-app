@@ -1,230 +1,243 @@
 import React from "react";
 import CallApi from "../../../api/api";
-import classNames from 'classnames';
+import classNames from "classnames";
 import * as actions from "../../../actions/actions";
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
 class LoginForm extends React.Component {
-    state = {
-        username: "",
-        password: "",
-        repeatPassword: '',
+  state = {
+    username: "",
+    password: "",
+    repeatPassword: "",
+    errors: {
+      username: false,
+      password: false,
+      repeatPassword: false
+    },
+    submitting: false
+  };
+
+  onChange = e => {
+    const name = e.target.name;
+    const value = e.target.value;
+    this.setState(prevState => ({
+      [name]: value,
+      errors: {
+        ...prevState.errors,
+        base: null,
+        [name]: null
+      }
+    }));
+  };
+
+  handleBlur = event => {
+    // нужно показывать ошибку данного поля, а так ты после первого onBlur валидируешь все поля и показываешь ошибки
+    const nameError = event.target.name;
+    const errors = this.validateFields();
+    if (Object.keys(errors).length > 0) {
+      this.setState(prevState => ({
         errors: {
-            username: false,
-            password: false,
-            repeatPassword: false
-        },
-        submitting: false
-    };
-
-    onChange = e => {
-        const name = e.target.name;
-        const value = e.target.value;
-        this.setState(prevState => ({
-            [name]: value,
-            errors: {
-                ...prevState.errors,
-                base: null,
-                [name]: null
-            }
-        }));
-    };
-
-    handleBlur = () => {
-        const errors = this.validateFields();
-        if (Object.keys(errors).length > 0) {
-            this.setState(prevState => ({
-                errors: {
-                    ...prevState.errors,
-                    ...errors
-                }
-            }));
+          ...prevState.errors,
+          [nameError]: errors[nameError]
         }
-    };
+      }));
+    }
+  };
 
-    validateFields = () => {
-        const errors = {};
+  validateFields = () => {
+    const errors = {};
 
-        if (this.state.username === "") {
-            errors.username = "Not empty";
-        }
+    if (this.state.username === "") {
+      errors.username = "Not empty";
+    }
 
-        if (this.state.password === '') {
-            errors.password = 'Not empty';
-        }
+    if (this.state.password === "") {
+      errors.password = "Not empty";
+    }
 
-        if (this.state.password !== this.state.repeatPassword) {
-            errors.repeatPassword = 'Must be equal password';
-        }
+    if (this.state.password !== this.state.repeatPassword) {
+      errors.repeatPassword = "Must be equal password";
+    }
 
-        return errors;
-    };
+    return errors;
+  };
 
-    onSubmit = () => {
-        this.setState({
-            submitting: true
+  onSubmit = () => {
+    this.setState({
+      submitting: true
+    });
+
+    let session_id = null;
+
+    CallApi.get("/authentication/token/new")
+      .then(data => {
+        return CallApi.post("/authentication/token/validate_with_login", {
+          body: {
+            // username: this.state.username,
+            // password: this.state.password,
+            username: "StyOld",
+            password: "Agressor2805!",
+            request_token: data.request_token
+          }
         });
-
-        let session_id = null;
-
-        CallApi.get('/authentication/token/new')
-            .then(data => {
-                return CallApi.post('/authentication/token/validate_with_login', {
-                    body: {
-                        // username: this.state.username,
-                        // password: this.state.password,
-                        username: 'StyOld',
-                        password: 'Agressor2805!',
-                        request_token: data.request_token
-                    }
-                })
-            })
-            .then(data => {
-                return CallApi.post('/authentication/session/new', {
-                    body: {
-                        request_token: data.request_token
-                    }
-                })
-            })
-            .then(data => {
-                // this.props.updateSessionId(data.session_id);
-                session_id = data.session_id;
-                return CallApi.get('/account', {
-                    params: {
-                        session_id: data.session_id
-                    }
-                })
-            })
-            .then(user => {
-                this.setState({
-                    submitting: false
-                }, () => {
-                    this.props.updateAuth({user, session_id});
-                });
-            })
-            .catch(error => {
-                console.log("error", error);
-                this.setState({
-                    submitting: false,
-                    errors: {
-                        base: error.status_message
-                    }
-                });
-            });
-    };
-
-    componentWillUnmount() {
-        this.props.hideLoginForm()
-    }
-
-    onLogin = e => {
-        e.preventDefault();
-        const errors = this.validateFields();
-        if (Object.keys(errors).length > 0) {
-            this.setState(prevState => ({
-                errors: {
-                    ...prevState.errors,
-                    ...errors
-                }
-            }));
-        } else {
-            this.onSubmit();
-        }
-    };
-
-    getClassForInput = key => (
-        classNames('form-control', {'invalid': this.state.errors[key]})
-    );
-
-    render() {
-        const { username, password, repeatPassword, errors, submitting } = this.state;
-        return (
-            <div className="form-login-container">
-                <form className="form-login">
-                    <h1 className="h3 mb-3 font-weight-normal text-center">
-                        Авторизация
-                    </h1>
-                    <div className="form-group">
-                        <label htmlFor="username">Пользователь</label>
-                        <input
-                            type="text"
-                            className={this.getClassForInput('username')}
-                            id="username"
-                            placeholder="Пользователь"
-                            name="username"
-                            value={username}
-                            onChange={this.onChange}
-                            onBlur={this.handleBlur}
-                        />
-                        {errors.username && (
-                            <div className="invalid-feedback">{errors.username}</div>
-                        )}
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="password">Пароль</label>
-                        <input
-                            type="password"
-                            className={this.getClassForInput('password')}
-                            id="password"
-                            placeholder="Пароль"
-                            name="password"
-                            value={password}
-                            onChange={this.onChange}
-                            onBlur={this.handleBlur}
-                        />
-                        {errors.password && (
-                            <div className="invalid-feedback">{errors.password}</div>
-                        )}
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="password">Повторите Пароль</label>
-                        <input
-                            type="password"
-                            className={this.getClassForInput('repeatPassword')}
-                            id="repeatPassword"
-                            placeholder="Повторите Пароль"
-                            name="repeatPassword"
-                            value={repeatPassword}
-                            onChange={this.onChange}
-                            onBlur={this.handleBlur}
-                        />
-                        {errors.repeatPassword && (
-                            <div className="invalid-feedback">{errors.repeatPassword}</div>
-                        )}
-                    </div>
-                    <button
-                        type="submit"
-                        className="btn btn-lg btn-primary btn-block"
-                        onClick={this.onLogin}
-                        disabled={submitting}
-                    >
-                        Вход
-                    </button>
-                    {errors.base && (
-                        <div className="invalid-feedback text-center">{errors.base}</div>
-                    )}
-                </form>
-            </div>
+      })
+      .then(data => {
+        return CallApi.post("/authentication/session/new", {
+          body: {
+            request_token: data.request_token
+          }
+        });
+      })
+      .then(data => {
+        // this.props.updateSessionId(data.session_id);
+        session_id = data.session_id;
+        return CallApi.get("/account", {
+          params: {
+            session_id: data.session_id
+          }
+        });
+      })
+      .then(user => {
+        this.setState(
+          {
+            submitting: false
+          },
+          () => {
+            this.props.updateAuth({ user, session_id });
+          }
         );
+      })
+      .catch(error => {
+        console.log("error", error);
+        this.setState({
+          submitting: false,
+          errors: {
+            base: error.status_message
+          }
+        });
+      });
+  };
+
+  componentWillUnmount() {
+    this.props.hideLoginForm();
+  }
+
+  onLogin = e => {
+    e.preventDefault();
+    const errors = this.validateFields();
+    if (Object.keys(errors).length > 0) {
+      this.setState(prevState => ({
+        errors: {
+          ...prevState.errors,
+          ...errors
+        }
+      }));
+    } else {
+      this.onSubmit();
     }
+  };
+
+  getClassForInput = key =>
+    classNames("form-control", { invalid: this.state.errors[key] });
+
+  render() {
+    const {
+      username,
+      password,
+      repeatPassword,
+      errors,
+      submitting
+    } = this.state;
+    return (
+      <div className="form-login-container">
+        <form className="form-login">
+          <h1 className="h3 mb-3 font-weight-normal text-center">
+            Авторизация
+          </h1>
+          <div className="form-group">
+            <label htmlFor="username">Пользователь</label>
+            <input
+              type="text"
+              className={this.getClassForInput("username")}
+              id="username"
+              placeholder="Пользователь"
+              name="username"
+              value={username}
+              onChange={this.onChange}
+              onBlur={this.handleBlur}
+            />
+            {errors.username && (
+              <div className="invalid-feedback">{errors.username}</div>
+            )}
+          </div>
+          <div className="form-group">
+            <label htmlFor="password">Пароль</label>
+            <input
+              type="password"
+              className={this.getClassForInput("password")}
+              id="password"
+              placeholder="Пароль"
+              name="password"
+              value={password}
+              onChange={this.onChange}
+              onBlur={this.handleBlur}
+            />
+            {errors.password && (
+              <div className="invalid-feedback">{errors.password}</div>
+            )}
+          </div>
+          <div className="form-group">
+            <label htmlFor="password">Повторите Пароль</label>
+            <input
+              type="password"
+              className={this.getClassForInput("repeatPassword")}
+              id="repeatPassword"
+              placeholder="Повторите Пароль"
+              name="repeatPassword"
+              value={repeatPassword}
+              onChange={this.onChange}
+              onBlur={this.handleBlur}
+            />
+            {errors.repeatPassword && (
+              <div className="invalid-feedback">{errors.repeatPassword}</div>
+            )}
+          </div>
+          <button
+            type="submit"
+            className="btn btn-lg btn-primary btn-block"
+            onClick={this.onLogin}
+            disabled={submitting}
+          >
+            Вход
+          </button>
+          {errors.base && (
+            <div className="invalid-feedback text-center">{errors.base}</div>
+          )}
+        </form>
+      </div>
+    );
+  }
 }
 
 const mapStateToProps = () => {
-    return {
-    }
+  return {};
 };
 
-const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators(
-        {
-            updateAuth: actions.actionCreatorUpdateAuth,
-            hideLoginForm: actions.actionCreatorHideLoginForm
-        }
-        ,dispatch)
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {
+      updateAuth: actions.actionCreatorUpdateAuth,
+      hideLoginForm: actions.actionCreatorHideLoginForm
+    },
+    dispatch
+  );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LoginForm);
 
 // import AppConsumerHOC from "../../HOC/AppConsumerHOC";
 
