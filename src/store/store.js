@@ -19,10 +19,10 @@ const async = ({getState, dispatch}) => next => action => {
 
 const getAccountList = ({ getState, dispatch }) => next => action => {
     if (action.type === "UPDATE_AUTH") {
-        const {session_id} = action.payload;
+        const {user, session_id} = action.payload;
         // console.log(action);
-        dispatch(actions.actionCreatorGetByTypeMovies({session_id},'favorite'));
-        dispatch(actions.actionCreatorGetByTypeMovies({session_id},'watchlist'));
+        dispatch(actions.actionCreatorGetByTypeMovies(user.id,{session_id},'favorite'));
+        dispatch(actions.actionCreatorGetByTypeMovies(user.id,{session_id},'watchlist'));
     }
         return next(action);
 };

@@ -7,6 +7,7 @@ import {bindActionCreators} from 'redux';
 
 const mapStateToProps = (state) => {
     return {
+        user: state.authentication.user,
         isAuth: state.authentication.isAuth,
         session_id: state.authentication.session_id,
         favoriteMovies: state.account.favoriteMovies,
@@ -42,7 +43,7 @@ export default (Component, type) => connect(mapStateToProps, mapDispatchToProps)
             added: !prevState.added,
             disabled: true
         }), () => {
-            CallApi.post(`/account/{account_id}/${type}`, {
+            CallApi.post(`/account/${this.props.user.id}/${type}`, {
                 params: {
                     session_id: this.props.session_id
                 },
@@ -56,7 +57,7 @@ export default (Component, type) => connect(mapStateToProps, mapDispatchToProps)
                     this.setState({
                         disabled: false
                     });
-                    this.props.getByTypeMovies({session_id: this.props.session_id}, type)
+                    this.props.getByTypeMovies(this.props.user.id, {session_id: this.props.session_id}, type)
                 })
         })
     };

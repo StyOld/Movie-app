@@ -8,11 +8,7 @@ import * as actions from '../actions/actions';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import { BrowserRouter, Route } from 'react-router-dom';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faHeart, faBookmark } from '@fortawesome/free-solid-svg-icons';
-library.add(faHeart, faBookmark);
-
-export const AppContext = React.createContext();
+import './fortawesome';
 
 class App extends React.Component {
   componentDidMount() {
@@ -27,23 +23,17 @@ class App extends React.Component {
           }).then(user => {
               this.props.updateAuth({user,session_id});
           })
+//           this.props.getAccount(session_id, {user, session_id})
       }
   };
 
-//   componentDidUpdate(prevProps) {
-//       if ((this.props.isAuth !== prevProps.isAuth) && (this.props.isAuth)) {
-//           this.props.getByTypeMovies({session_id: this.props.session_id},'favorite');
-//           this.props.getByTypeMovies({session_id: this.props.session_id},'watchlist')
-//       }
-//   }
-
   render() {
-      const {user, session_id, isAuth} = this.props;
+      const {session_id, isAuth} = this.props;
 
       return isAuth || !session_id ? (
           <BrowserRouter>
                   <div>
-                      <Header user={user}/>
+                      <Header />
                       <Route exact path='/' component={MoviesPage} />
                       <Route path='/movie/:id' component={MoviePage}/>
                       <Route path='/account/favorites' component={AccountListByTypePage('favorite')}/>
@@ -56,7 +46,6 @@ class App extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        user: state.authentication.user,
         session_id: state.authentication.session_id,
         isAuth: state.authentication.isAuth
     }
@@ -66,7 +55,8 @@ const mapDispatchToProps = (dispatch) => {
     return bindActionCreators(
         {
         updateAuth: actions.actionCreatorUpdateAuth,
-        getByTypeMovies: actions.actionCreatorGetByTypeMovies
+        getByTypeMovies: actions.actionCreatorGetByTypeMovies,
+        getAccount: actions.actionCreatorGetAccount
         }
         ,dispatch)
 };
@@ -95,6 +85,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(App);
 //         watchlistMovies: []
 //     };
 // };
+
+//   componentDidUpdate(prevProps) {
+//       if ((this.props.isAuth !== prevProps.isAuth) && (this.props.isAuth)) {
+//           this.props.getByTypeMovies({session_id: this.props.session_id},'favorite');
+//           this.props.getByTypeMovies({session_id: this.props.session_id},'watchlist')
+//       }
+//   }
 
 // updateAuth = (user, session_id) => {
 // cookies.set('session_id', session_id, {

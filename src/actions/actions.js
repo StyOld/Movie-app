@@ -1,6 +1,7 @@
 import * as constants from '../constants/contsants'
 import CallApi from '../api/api';
 import Cookies from 'universal-cookie';
+const cookies = new Cookies();
 
 // export const actionCreatorUpdateAuth = dispatch(payload => {
 //     return {
@@ -17,10 +18,10 @@ import Cookies from 'universal-cookie';
 // };
 
 export const actionCreatorUpdateAuth = payload => {
-    // cookies.set('session_id', session_id, {
-    //     path: '/',
-    //     maxAge: 2592000
-    // });
+    cookies.set('session_id', payload.session_id, {
+        path: '/',
+        maxAge: 2592000
+    });
     return {
         type: constants.UPDATE_AUTH,
         payload
@@ -29,25 +30,25 @@ export const actionCreatorUpdateAuth = payload => {
 
 export const actionCreatorOnLogOut = () => {
     return {
-        type: 'LOGOUT'
+        type: constants.LOGOUT
     }
 };
 
 export const actionCreatorToggleLoginForm = () => {
     return {
-        type: 'TOGGLE_LOGINFORM'
+        type: constants.TOGGLE_LOGINFORM
     }
 };
 
 export const actionCreatorHideLoginForm = () => {
     return {
-        type: 'HIDE_LOGINFORM'
+        type: constants.HIDE_LOGINFORM
     }
 };
 
 export const actionCreatorGetMovieDetails = (payload) => {
     return {
-        type: 'GET_MOVIE_DETAILS',
+        type: constants.GET_MOVIE_DETAILS,
         payload
         // payload: {
         //     data: payload.data
@@ -57,14 +58,14 @@ export const actionCreatorGetMovieDetails = (payload) => {
 
 export const actionCreatorUpdateMovie = () => {
   return {
-      type: 'UPDATE_MOVIE'
+      type: constants.UPDATE_MOVIE
   }
 };
 
 export const actionCreatorGetMovies = (params) => {
     return dispatch => {
         dispatch({
-            type: 'FETCHING_MOVIES'
+            type: constants.FETCHING_MOVIES
         });
 
         CallApi.get('/discover/movie', {
@@ -72,32 +73,33 @@ export const actionCreatorGetMovies = (params) => {
         })
             .then(data => {
                 dispatch({
-                    type: 'UPDATE_MOVIES',
+                    type: constants.UPDATE_MOVIES,
                     payload: data
                     // payload: data.results
                 });
                 dispatch({
-                    type: 'GET_TOTAL_PAGE',
+                    type: constants.GET_TOTAL_PAGE,
                     payload: data.total_pages
                 })
             })
             .catch(error => {
                 dispatch({
-                    type: 'ERROR_GET_MOVIES',
+                    type: constants.ERROR_GET_MOVIES,
                     payload: error
                 });
             });
     }
 };
 
-export const actionCreatorGetByTypeMovies = (params, type) => {
+export const actionCreatorGetByTypeMovies = (user_id, params, type) => {
     return dispatch => {
-        CallApi.get(`/account/{account_id}/${type}/movies`, {
+        // CallApi.get(`/account/{account_id}/${type}/movies`, {
+        CallApi.get(`/account/${user_id}/${type}/movies`, {
             params: params
         })
             .then(data => {
                 dispatch({
-                    type: 'GET_BY_TYPE_MOVIES',
+                    type: constants.GET_BY_TYPE_MOVIES,
                     payload: {
                         type,
                         data: data.results
@@ -106,7 +108,7 @@ export const actionCreatorGetByTypeMovies = (params, type) => {
             })
             .catch(error => {
                 dispatch({
-                    type: 'ERROR_GET_MOVIES',
+                    type: constants.ERROR_GET_MOVIES,
                     payload: error
                 })
             })
@@ -118,7 +120,7 @@ export const actionCreatorGetGenresList = () => {
         CallApi.get('/genre/movie/list')
             .then(data => {
                 dispatch({
-                    type: 'GET_GENRES_LIST',
+                    type: constants.GET_GENRES_LIST,
                     payload: {
                         data: data.genres
                     }
@@ -126,7 +128,7 @@ export const actionCreatorGetGenresList = () => {
             })
             .catch(error => {
                 dispatch({
-                    type: 'ERROR_GET_GENRES',
+                    type: constants.ERROR_GET_GENRES,
                     payload: error
                 })
             })
@@ -135,7 +137,7 @@ export const actionCreatorGetGenresList = () => {
 
 export const actionCreatorToggleDropDown = () => {
     return {
-        type: 'TOGGLE_DROP_DOWN'
+        type: constants.TOGGLE_DROP_DOWN
     }
 };
 
@@ -146,12 +148,12 @@ export const actionCreatorDeleteSession = (params) => {
         })
             .then(() => {
                 dispatch({
-                    type: 'LOGOUT'
+                    type: constants.LOGOUT
                 })
             })
             .catch(error => {
                 dispatch({
-                    type: 'ERROR_DELETE_SESSION',
+                    type: constants.ERROR_DELETE_SESSION,
                     payload: error
                 })
             })
@@ -160,27 +162,27 @@ export const actionCreatorDeleteSession = (params) => {
 
 export const actionCreatorChangePage = (payload) => {
     return {
-        type: 'CHANGE_PAGE',
+        type: constants.CHANGE_PAGE,
         payload
     }
 };
 
 export const actionCreatorGetTotalPage = (payload) => {
     return {
-        type: 'GET_TOTAL_PAGE',
+        type: constants.GET_TOTAL_PAGE,
         payload
     }
 };
 
 export const actionCreatorClearFilters = () => {
     return {
-        type: 'CLEAR_FILTERS'
+        type: constants.CLEAR_FILTERS
     }
 };
 
 export const actionCreatorChangeFilters = (event) => {
     return {
-        type: 'CHANGE_FILTERS',
+        type: constants.CHANGE_FILTERS,
         payload: {
             name: event.target.name,
             value: event.target.value
@@ -192,7 +194,7 @@ export const actionCreatorChangeFilters = (event) => {
 export const actionCreatorChangeGenres = payload => {
     return dispatch => {
         dispatch({
-            type: payload.target.checked ? "CHECKED_GENRE" : "UNCHECKED_GENRE",
+            type: payload.target.checked ? constants.CHECKED_GENRE : constants.UNCHECKED_GENRE,
             payload: payload.target.value
         });
     };
@@ -209,11 +211,17 @@ export const actionCreatorChangeGenres = payload => {
 //     )
 };
 
-// export const acitionCreatorGetA
-// CallApi.get('/account', {
-//     params: {
-//         session_id
-//     }
-// }).then(user => {
-//     this.props.updateAuth({user,session_id});
-// })
+export const actionCreatorGetAccount = (params, payload) => {
+    return dispatch => {
+        CallApi.get('/account', {
+            params: params
+        })
+            .then(() => {
+                // dispatch({
+                //     type: constants.UPDATE_AUTH,
+                //     payload
+                // })
+            // this.actionCreatorUpdateAuth({user,session_id});
+        })
+    }
+};
