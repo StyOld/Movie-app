@@ -14,7 +14,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
-        getMovies: actions.actionCreatorGetMovies
+        getMovies: actions.actionCreatorGetMovies,
+        onChangePage: actions.actionCreatorChangePage,
     }, dispatch)
 };
 

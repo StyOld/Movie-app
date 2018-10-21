@@ -8,8 +8,8 @@ import {bindActionCreators} from 'redux';
 
 class MoviesPage extends React.Component {
     render() {
-        const {page, total_pages, filters, onChangePage, getTotalPages, clearFilters, onChangeFilters, onChangeGenres} = this.props;
-
+        // const {page, total_pages, filters, onChangePage, getTotalPages, clearFilters, onChangeFilters, onChangeGenres} = this.props;
+        const {clearFilters} = this.props;
         return (
             <div className="container">
                 <div className="row mt-4">
@@ -28,27 +28,27 @@ class MoviesPage extends React.Component {
                                     </button>
                                 </div>
                                 <Filters
-                                    filters={filters}
-                                    page={page}
-                                    total_pages={total_pages}
-                                    onChangeFilters={onChangeFilters}
-                                    onChangePage={onChangePage}
-                                    onChangeGenres={onChangeGenres}
+                                    // filters={filters}
+                                    // page={page}
+                                    // total_pages={total_pages}
+                                    // onChangeFilters={onChangeFilters}
+                                    // onChangePage={onChangePage}
+                                    // onChangeGenres={onChangeGenres}
                                 />
                                 <Pagination
-                                    page={page}
-                                    total_pages={total_pages}
-                                    onChangePage={onChangePage}
+                                    // page={page}
+                                    // total_pages={total_pages}
+                                    // onChangePage={onChangePage}
                                 />
                             </div>
                         </div>
                     </div>
                     <div className="col-8">
                         <MoviesList
-                            page={page}
-                            filters={filters}
-                            onChangePage={onChangePage}
-                            getTotalPages={getTotalPages}
+                            // page={page}
+                            // filters={filters}
+                            // onChangePage={onChangePage}
+                            // getTotalPages={getTotalPages}
                         />
                     </div>
                 </div>
@@ -59,19 +59,19 @@ class MoviesPage extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        page: state.movies.page,
-        total_pages: state.movies.total_pages,
-        filters: state.movies.filters
+        // page: state.movies.page,
+        // total_pages: state.movies.total_pages,
+        // filters: state.movies.filters
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
-        onChangePage: actions.actionCreatorChangePage,
-        getTotalPages: actions.actionCreatorGetTotalPage,
+        // onChangePage: actions.actionCreatorChangePage,
+        // getTotalPages: actions.actionCreatorGetTotalPage,
         clearFilters : actions.actionCreatorClearFilters,
-        onChangeFilters: actions.actionCreatorChangeFilters,
-        onChangeGenres: actions.actionCreatorChangeGenres
+        // onChangeFilters: actions.actionCreatorChangeFilters,
+        // onChangeGenres: actions.actionCreatorChangeGenres
     },dispatch)
 };
 

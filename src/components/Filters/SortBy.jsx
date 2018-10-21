@@ -1,8 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import UISelect from "../UIComponents/UISelect";
+import * as actions from "../../actions/actions";
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 
-export default class SortBy extends React.PureComponent {
+
+class SortBy extends React.Component {
     static propTypes = {
         sort_by: PropTypes.string.isRequired,
         onChangeFilters: PropTypes.func.isRequired
@@ -55,6 +59,20 @@ export default class SortBy extends React.PureComponent {
         )
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        sort_by: state.movies.filters.sort_by
+    }
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({
+        onChangeFilters: actions.actionCreatorChangeFilters
+    },dispatch)
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SortBy);
 
 // import _ from "lodash";
 

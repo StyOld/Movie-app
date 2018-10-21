@@ -3,7 +3,7 @@ import * as actions from "../../actions/actions";
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
-class Pagination extends React.PureComponent {
+class Pagination extends React.Component {
     render() {
         const {page, total_pages, onChangePage}=this.props;
 
@@ -37,14 +37,14 @@ class Pagination extends React.PureComponent {
 const mapStateToProps = (state) => {
     return {
         page: state.movies.page,
-        total_pages: state.movies.total_pages,
+        total_pages: state.movies.total_pages
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
         onChangePage: actions.actionCreatorChangePage
-    }, dispatch)
+    },dispatch)
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Pagination);

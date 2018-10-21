@@ -1,8 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import UISelect from "../UIComponents/UISelect";
+import * as actions from "../../actions/actions";
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 
-export default class PrimaryReleaseYear extends React.PureComponent {
+class PrimaryReleaseYear extends React.Component {
     static propTypes = {
         primary_release_year: PropTypes.string.isRequired,
         onChangeFilters: PropTypes.func.isRequired
@@ -54,3 +57,17 @@ export default class PrimaryReleaseYear extends React.PureComponent {
         )
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        primary_release_year: state.movies.filters.primary_release_year
+    }
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({
+        onChangeFilters: actions.actionCreatorChangeFilters
+    },dispatch)
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(PrimaryReleaseYear);

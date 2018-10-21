@@ -18,6 +18,7 @@ class UserMenu extends React.Component {
 
     render() {
         const {user, showDropDown, deleteSession} = this.props;
+        console.log("render")
         return (
             <Dropdown isOpen={showDropDown} toggle={this.toggle}>
                 <DropdownToggle nav caret>

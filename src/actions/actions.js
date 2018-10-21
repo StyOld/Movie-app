@@ -1,4 +1,6 @@
+import * as constants from '../constants/contsants'
 import CallApi from '../api/api';
+import Cookies from 'universal-cookie';
 
 // export const actionCreatorUpdateAuth = dispatch(payload => {
 //     return {
@@ -15,8 +17,12 @@ import CallApi from '../api/api';
 // };
 
 export const actionCreatorUpdateAuth = payload => {
+    // cookies.set('session_id', session_id, {
+    //     path: '/',
+    //     maxAge: 2592000
+    // });
     return {
-        type: 'UPDATE_AUTH',
+        type: constants.UPDATE_AUTH,
         payload
     }
 };
@@ -202,3 +208,12 @@ export const actionCreatorChangeGenres = payload => {
 //     })
 //     )
 };
+
+// export const acitionCreatorGetA
+// CallApi.get('/account', {
+//     params: {
+//         session_id
+//     }
+// }).then(user => {
+//     this.props.updateAuth({user,session_id});
+// })

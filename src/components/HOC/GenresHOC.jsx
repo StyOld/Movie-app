@@ -5,17 +5,19 @@ import {bindActionCreators} from 'redux';
 
 const mapStateToProps = (state) => {
     return {
-        genreList: state.movies.genreList
+        genreList: state.movies.genreList,
+        genres: state.movies.filters.genres
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
-        getGenresList: actions.actionCreatorGetGenresList
+        getGenresList: actions.actionCreatorGetGenresList,
+        onChangeGenres: actions.actionCreatorChangeGenres
     }, dispatch)
 };
 
-export default (Component) => connect(mapStateToProps, mapDispatchToProps)(class GenresHOC extends React.PureComponent {
+export default (Component) => connect(mapStateToProps, mapDispatchToProps)(class GenresHOC extends React.Component {
     componentDidMount() {
         this.props.getGenresList()
     }

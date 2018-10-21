@@ -19,6 +19,7 @@ class App extends React.Component {
       const {session_id} = this.props;
 
       if (session_id) {
+//перенести в actions
           CallApi.get('/account', {
               params: {
                   session_id
@@ -29,12 +30,12 @@ class App extends React.Component {
       }
   };
 
-  componentDidUpdate(prevProps) {
-      if ((this.props.isAuth !== prevProps.isAuth) && (this.props.isAuth)) {
-          this.props.getByTypeMovies({session_id: this.props.session_id},'favorite');
-          this.props.getByTypeMovies({session_id: this.props.session_id},'watchlist')
-      }
-  }
+//   componentDidUpdate(prevProps) {
+//       if ((this.props.isAuth !== prevProps.isAuth) && (this.props.isAuth)) {
+//           this.props.getByTypeMovies({session_id: this.props.session_id},'favorite');
+//           this.props.getByTypeMovies({session_id: this.props.session_id},'watchlist')
+//       }
+//   }
 
   render() {
       const {user, session_id, isAuth} = this.props;
@@ -44,7 +45,7 @@ class App extends React.Component {
                   <div>
                       <Header user={user}/>
                       <Route exact path='/' component={MoviesPage} />
-                      <Route path='/movie/:id' component={MoviePage} />
+                      <Route path='/movie/:id' component={MoviePage}/>
                       <Route path='/account/favorites' component={AccountListByTypePage('favorite')}/>
                       <Route path='/account/watchlist' component={AccountListByTypePage('watchlist')}/>
                   </div>
