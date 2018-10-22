@@ -13,10 +13,6 @@ const initialState = {
 const reducerAuthentication = (state = initialState, action) => {
     switch(action.type) {
         case constants.UPDATE_AUTH:
-            // cookies.set('session_id', action.payload.session_id, {
-            //     path: '/',
-            //     maxAge: 2592000
-            // });
             return {
                 ...state,
                 user: action.payload.user,
@@ -57,3 +53,9 @@ const reducerAuthentication = (state = initialState, action) => {
 };
 
 export default reducerAuthentication;
+
+// case constants.UPDATE_AUTH:
+// cookies.set('session_id', action.payload.session_id, {
+//     path: '/',
+//     maxAge: 2592000
+// });

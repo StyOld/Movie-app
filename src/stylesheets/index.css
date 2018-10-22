@@ -7,16 +7,6 @@ body {
 input.invalid {
   border-color: #dc3545; }
 
-.circle-disabled {
-  pointer-events: none;
-  width: 40px;
-  height: 40px;
-  line-height: 40px;
-  background: gray;
-  margin: 1em;
-  border-radius: 50px;
-  text-align: center; }
-
 .circle {
   width: 40px;
   height: 40px;
@@ -25,6 +15,8 @@ input.invalid {
   margin: 1em;
   border-radius: 50px;
   text-align: center; }
+  .circle.is-disabled {
+    pointer-events: none; }
 
 .card-img--height {
   max-height: 161.84px;

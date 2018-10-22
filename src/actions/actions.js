@@ -17,7 +17,7 @@ const cookies = new Cookies();
 //     })
 // };
 
-export const actionCreatorUpdateAuth = payload => {
+export const actionCreatorUpdateAuth = (payload) => {
     cookies.set('session_id', payload.session_id, {
         path: '/',
         maxAge: 2592000
@@ -62,7 +62,18 @@ export const actionCreatorUpdateMovie = () => {
   }
 };
 
-export const actionCreatorGetMovies = (params) => {
+export const actionCreatorGetMovies = ({filters, page}) => {
+    const {sort_by, primary_release_year, genres} = filters;
+
+    const params = {
+        sort_by: sort_by,
+        page: page,
+        primary_release_year: primary_release_year
+        // with_genres: genres.join(',') словил баг на стороне сервака
+    };
+
+    if (genres.length>0) params.with_genres = genres.join(',');
+
     return dispatch => {
         dispatch({
             type: constants.FETCHING_MOVIES
@@ -91,10 +102,9 @@ export const actionCreatorGetMovies = (params) => {
     }
 };
 
-export const actionCreatorGetByTypeMovies = (user_id, params, type) => {
+export const actionCreatorGetByTypeMovies = ({userId, params, type}) => {
     return dispatch => {
-        // CallApi.get(`/account/{account_id}/${type}/movies`, {
-        CallApi.get(`/account/${user_id}/${type}/movies`, {
+        CallApi.get(`/account/${userId}/${type}/movies`, {
             params: params
         })
             .then(data => {
@@ -113,6 +123,7 @@ export const actionCreatorGetByTypeMovies = (user_id, params, type) => {
                 })
             })
     }
+    // CallApi.get(`/account/{account_id}/${type}/movies`,
 };
 
 export const actionCreatorGetGenresList = () => {
@@ -211,17 +222,26 @@ export const actionCreatorChangeGenres = payload => {
 //     )
 };
 
-export const actionCreatorGetAccount = (params, payload) => {
+export const actionCreatorGetAccount = (params) => {
     return dispatch => {
-        CallApi.get('/account', {
-            params: params
-        })
-            .then(() => {
-                // dispatch({
-                //     type: constants.UPDATE_AUTH,
-                //     payload
-                // })
-            // this.actionCreatorUpdateAuth({user,session_id});
-        })
+        if (params.session_id) {
+            CallApi.get('/account', {
+                params: params
+            })
+                .then((user) => {
+                    console.log(user);
+                    cookies.set('session_id', params.session_id, {
+                        path: '/',
+                        maxAge: 2592000
+                    });
+                    dispatch({
+                        type: constants.UPDATE_AUTH,
+                        payload: {
+                            user,
+                            session_id: params.session_id
+                        }
+                    })
+                })
+        }
     }
 };

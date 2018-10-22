@@ -8,7 +8,6 @@ import {bindActionCreators} from 'redux';
 
 class MoviesPage extends React.Component {
     render() {
-        // const {page, total_pages, filters, onChangePage, getTotalPages, clearFilters, onChangeFilters, onChangeGenres} = this.props;
         const {clearFilters} = this.props;
         return (
             <div className="container">
@@ -27,28 +26,13 @@ class MoviesPage extends React.Component {
                                         Очистить фильтры
                                     </button>
                                 </div>
-                                <Filters
-                                    // filters={filters}
-                                    // page={page}
-                                    // total_pages={total_pages}
-                                    // onChangeFilters={onChangeFilters}
-                                    // onChangePage={onChangePage}
-                                    // onChangeGenres={onChangeGenres}
-                                />
-                                <Pagination
-                                    // page={page}
-                                    // total_pages={total_pages}
-                                    // onChangePage={onChangePage}
-                                />
+                                <Filters/>
+                                <Pagination/>
                             </div>
                         </div>
                     </div>
                     <div className="col-8">
                         <MoviesList
-                            // page={page}
-                            // filters={filters}
-                            // onChangePage={onChangePage}
-                            // getTotalPages={getTotalPages}
                         />
                     </div>
                 </div>
@@ -57,21 +41,14 @@ class MoviesPage extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = () => {
     return {
-        // page: state.movies.page,
-        // total_pages: state.movies.total_pages,
-        // filters: state.movies.filters
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
-        // onChangePage: actions.actionCreatorChangePage,
-        // getTotalPages: actions.actionCreatorGetTotalPage,
-        clearFilters : actions.actionCreatorClearFilters,
-        // onChangeFilters: actions.actionCreatorChangeFilters,
-        // onChangeGenres: actions.actionCreatorChangeGenres
+        clearFilters : actions.actionCreatorClearFilters
     },dispatch)
 };
 
@@ -142,3 +119,45 @@ export default connect(mapStateToProps, mapDispatchToProps)(MoviesPage);
 // };
 
 // const {filters, page, total_pages} = this.state;
+
+// const {page, total_pages, filters, onChangePage, getTotalPages, clearFilters, onChangeFilters, onChangeGenres} = this.props;
+
+//<Filters
+//    filters={filters}
+//    page={page}
+//    total_pages={total_pages}
+//    onChangeFilters={onChangeFilters}
+//    onChangePage={onChangePage}
+//    onChangeGenres={onChangeGenres}
+///>
+
+//<Pagination
+//    page={page}
+//    total_pages={total_pages}
+//    onChangePage={onChangePage}
+///>
+
+//<MoviesList
+//    page={page}
+//    filters={filters}
+//    onChangePage={onChangePage}
+//    getTotalPages={getTotalPages}
+///>
+
+// const mapStateToProps = (state) => {
+//     return {
+//         page: state.movies.page,
+//         total_pages: state.movies.total_pages,
+//         filters: state.movies.filters
+//     }
+// };
+
+// const mapDispatchToProps = (dispatch) => {
+//     return bindActionCreators({
+//         onChangePage: actions.actionCreatorChangePage,
+//         getTotalPages: actions.actionCreatorGetTotalPage,
+//         clearFilters : actions.actionCreatorClearFilters,
+//         onChangeFilters: actions.actionCreatorChangeFilters,
+//         onChangeGenres: actions.actionCreatorChangeGenres
+//     },dispatch)
+// };

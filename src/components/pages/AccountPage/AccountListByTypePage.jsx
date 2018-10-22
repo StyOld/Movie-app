@@ -3,7 +3,7 @@ import {Redirect} from 'react-router-dom';
 import MovieItem from '../../Movies/MovieItem';
 import {connect} from 'react-redux';
 // import * as actions from "../../../actions/actions";
-// import {bindActionCreators} from 'redux';
+import {bindActionCreators} from 'redux';
 
 const mapStateToProps = (state) => {
     return {
@@ -13,14 +13,14 @@ const mapStateToProps = (state) => {
     }
 };
 
-// const mapDispatchToProps = (dispatch) => {
-//     return bindActionCreators(
-//         {
-//         }
-//         ,dispatch)
-// };
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators(
+        {
+        }
+        ,dispatch)
+};
 
-export default (type) => connect(mapStateToProps)(class AccountListByTypePage extends React.Component {
+export default (type) => connect(mapStateToProps, mapDispatchToProps)(class AccountListByTypePage extends React.Component {
     render() {
         return this.props.isAuth ? (
             <div className='container'>

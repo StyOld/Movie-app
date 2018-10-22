@@ -67,13 +67,8 @@ const reducerMovies = (state = initialState, action) => {
                 filters: {
                     ...state.filters,
                     [action.payload.name]: action.payload.value
+                    // [action.payload.target.name]: action.payload.target.value
                 }
-            // return {
-            //     ...state,
-            //     filters: {
-            //         ...state.filters,
-            //         [action.payload.target.name]: action.payload.target.value
-            //     }
             };
 
         case 'CHECKED_GENRE':

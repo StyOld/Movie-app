@@ -3,7 +3,6 @@ import MoviesPage from "./pages/MoviesPage/MoviesPage";
 import MoviePage from "./pages/MoviePage/MoviePage";
 import AccountListByTypePage from "./pages/AccountPage/AccountListByTypePage";
 import Header from "./Header/Header";
-import CallApi from "../api/api";
 import * as actions from '../actions/actions';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
@@ -12,20 +11,10 @@ import './fortawesome';
 
 class App extends React.Component {
   componentDidMount() {
-      const {session_id} = this.props;
-
-      if (session_id) {
-//перенести в actions
-          CallApi.get('/account', {
-              params: {
-                  session_id
-              }
-          }).then(user => {
-              this.props.updateAuth({user,session_id});
+          this.props.getAccount({
+              session_id: this.props.session_id
           })
-//           this.props.getAccount(session_id, {user, session_id})
       }
-  };
 
   render() {
       const {session_id, isAuth} = this.props;
@@ -85,6 +74,18 @@ export default connect(mapStateToProps, mapDispatchToProps)(App);
 //         watchlistMovies: []
 //     };
 // };
+
+// componentDidMount() {
+//     const {session_id} = this.props;
+//     if (session_id) {
+//         CallApi.get('/account', {
+//             params: {
+//                 session_id
+//             }
+//         }).then(user => {
+//             this.props.updateAuth({user,session_id});
+//         })
+// }
 
 //   componentDidUpdate(prevProps) {
 //       if ((this.props.isAuth !== prevProps.isAuth) && (this.props.isAuth)) {

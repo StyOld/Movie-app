@@ -12,19 +12,8 @@ input.invalid {
   border-color: $error;
 }
 
-.circle-disabled {
-  pointer-events: none;
-  width: 40px;
-  height: 40px;
-  line-height: 40px;
-  background: gray;
-  margin: 1em;
-  border-radius: 50px;
-  text-align: center;
-}
 
 .circle {
-  //pointer-events: none;
   width: 40px;
   height: 40px;
   line-height: 40px;
@@ -32,6 +21,10 @@ input.invalid {
   margin: 1em;
   border-radius: 50px;
   text-align: center;
+
+  &.is-disabled {
+    pointer-events: none;
+  }
 }
 
 .card-img--height {

@@ -57,7 +57,13 @@ export default (Component, type) => connect(mapStateToProps, mapDispatchToProps)
                     this.setState({
                         disabled: false
                     });
-                    this.props.getByTypeMovies(this.props.user.id, {session_id: this.props.session_id}, type)
+                    this.props.getByTypeMovies({
+                        userId: this.props.user.id,
+                        params: {
+                            session_id: this.props.session_id
+                        },
+                        type
+                    })
                 })
         })
     };
