@@ -5,6 +5,7 @@ import WatchIcon from '../../Movies/Icons/WatchIcon';
 import * as actions from "../../../actions/actions";
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import MovieTabs from "./MovieTabs";
 
 class MoviePage extends React.Component {
     componentDidMount () {
@@ -45,6 +46,7 @@ class MoviePage extends React.Component {
                         </div>
                     </div>
                 </div>
+                <MovieTabs />
             </div>
         )
     }

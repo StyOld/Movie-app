@@ -39,27 +39,27 @@ const getAccountList = ({ getState, dispatch }) => next => action => {
         return next(action);
 };
 
-const getMoviesOnChangeFilters = ({ getState, dispatch }) => next => action => {
-    if (action.type === constants.CHANGE_FILTERS) {
-        dispatch(actions.actionCreatorChangePage(1));
-        dispatch(actions.actionCreatorGetMovies({
-            filters: action.payload.filters,
-            page: 1
-        }));
-    }
-    return next(action);
-};
-
-const getMoviesOnChangePage = ({ getState, dispatch }) => next => action => {
-    if (action.type === constants.CHANGE_PAGE) {
-        // const {filters: {sort_by, primary_release_year, genres}, page} = action.payload;
-        dispatch(actions.actionCreatorGetMovies({
-            filters: action.payload.filters,
-            page: action.payload.page
-        }));
-    }
-    return next(action);
-};
+// const getMoviesOnChangeFilters = ({ getState, dispatch }) => next => action => {
+//     if (action.type === constants.CHANGE_FILTERS) {
+//         dispatch(actions.actionCreatorChangePage(1));
+//         dispatch(actions.actionCreatorGetMovies({
+//             filters: action.payload.filters,
+//             page: 1
+//         }));
+//     }
+//     return next(action);
+// };
+//
+// const getMoviesOnChangePage = ({ getState, dispatch }) => next => action => {
+//     if (action.type === constants.CHANGE_PAGE) {
+//         // const {filters: {sort_by, primary_release_year, genres}, page} = action.payload;
+//         dispatch(actions.actionCreatorGetMovies({
+//             filters: action.payload.filters,
+//             page: action.payload.page
+//         }));
+//     }
+//     return next(action);
+// };
 
 // componentDidUpdate(prevProps) {
 //     if (!_.isEqual(this.props.filters, prevProps.filters)) {
@@ -73,6 +73,6 @@ const getMoviesOnChangePage = ({ getState, dispatch }) => next => action => {
 
 // const store = createStore(reducers, compose(applyMiddleware(async),window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() ));
 
-const store = createStore(reducers, composeWithDevTools(applyMiddleware(async, getAccountList, getMoviesOnChangeFilters, getMoviesOnChangePage)));
+const store = createStore(reducers, composeWithDevTools(applyMiddleware(async, getAccountList)));
 
 export default store;
