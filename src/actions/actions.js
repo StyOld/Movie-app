@@ -65,14 +65,14 @@ export const actionCreatorUpdateMovie = () => {
 export const actionCreatorGetMovies = ({filters, page}) => {
     const {sort_by, primary_release_year, genres} = filters;
 
-    const params = {
+    const queryStringParams = {
         sort_by: sort_by,
         page: page,
         primary_release_year: primary_release_year
         // with_genres: genres.join(',') словил баг на стороне сервака
     };
 
-    if (genres.length>0) params.with_genres = genres.join(',');
+    if (genres.length>0) queryStringParams.with_genres = genres.join(',');
 
     return dispatch => {
         dispatch({
@@ -80,7 +80,7 @@ export const actionCreatorGetMovies = ({filters, page}) => {
         });
 
         CallApi.get('/discover/movie', {
-            params: params
+            params: queryStringParams
         })
             .then(data => {
                 dispatch({
@@ -229,7 +229,6 @@ export const actionCreatorGetAccount = (params) => {
                 params: params
             })
                 .then((user) => {
-                    console.log(user);
                     cookies.set('session_id', params.session_id, {
                         path: '/',
                         maxAge: 2592000
