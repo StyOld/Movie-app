@@ -1,7 +1,8 @@
 import React from 'react';
 import CallApi from "../../api/api";
 import _ from 'lodash';
-import * as actions from "../../actions/actions";
+import * as actionsAccount from "../../actions/actionsAccount";
+import * as actionsAuthentication from "../../actions/actionsAuthentication";
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
@@ -18,8 +19,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators(
         {
-            toggleLoginForm: actions.actionCreatorToggleLoginForm,
-            getByTypeMovies: actions.actionCreatorGetByTypeMovies
+            toggleLoginForm: actionsAuthentication.actionCreatorToggleLoginForm,
+            getByTypeMovies: actionsAccount.actionCreatorGetByTypeMovies
         }
         ,dispatch)
 };

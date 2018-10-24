@@ -1,5 +1,5 @@
 import React from "react";
-import * as actions from "../../actions/actions";
+import * as actionsMovies from "../../actions/actionsMovies";
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
@@ -12,8 +12,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
-        getGenresList: actions.actionCreatorGetGenresList,
-        onChangeGenres: actions.actionCreatorChangeGenres
+        getGenresList: actionsMovies.actionCreatorGetGenresList,
+        onChangeGenres: actionsMovies.actionCreatorChangeGenres
     }, dispatch)
 };
 

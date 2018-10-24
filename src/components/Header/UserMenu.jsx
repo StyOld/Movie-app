@@ -1,7 +1,7 @@
 import React from 'react';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import {Link} from  'react-router-dom';
-import * as actions from "../../actions/actions";
+import * as actionsAuthentication from "../../actions/actionsAuthentication";
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
@@ -65,8 +65,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
-        toggleDropDown: actions.actionCreatorToggleDropDown,
-        deleteSession: actions.actionCreatorDeleteSession
+        toggleDropDown: actionsAuthentication.actionCreatorToggleDropDown,
+        deleteSession: actionsAuthentication.actionCreatorDeleteSession
     }, dispatch)
 };
 

@@ -2,7 +2,6 @@ import React from 'react';
 import Login from './Login/Login';
 import UserMenu from "./UserMenu";
 import {Link} from  'react-router-dom';
-// import * as actions from "../../actions/actions";
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 

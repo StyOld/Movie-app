@@ -3,7 +3,8 @@ import MoviesPage from "./pages/MoviesPage/MoviesPage";
 import MoviePage from "./pages/MoviePage/MoviePage";
 import AccountListByTypePage from "./pages/AccountPage/AccountListByTypePage";
 import Header from "./Header/Header";
-import * as actions from '../actions/actions';
+import * as actionsAccount from '../actions/actionsAccount';
+import * as actionsAuthentication from '../actions/actionsAuthentication';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import { BrowserRouter, Route } from 'react-router-dom';
@@ -43,9 +44,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators(
         {
-        updateAuth: actions.actionCreatorUpdateAuth,
-        getByTypeMovies: actions.actionCreatorGetByTypeMovies,
-        getAccount: actions.actionCreatorGetAccount
+        updateAuth: actionsAuthentication.actionCreatorUpdateAuth,
+        getByTypeMovies: actionsAccount.actionCreatorGetByTypeMovies,
+        getAccount: actionsAuthentication.actionCreatorGetAccount
         }
         ,dispatch)
 };

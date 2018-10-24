@@ -1,6 +1,6 @@
 import {createStore, applyMiddleware} from 'redux';
 import reducers from "../reducers/reducers";
-import * as actions from '../actions/actions'
+import * as actionsAccount from '../actions/actionsAccount'
 import { composeWithDevTools } from 'redux-devtools-extension';
 import * as constants from "../constants/contsants";
 
@@ -21,14 +21,14 @@ const async = ({getState, dispatch}) => next => action => {
 const getAccountList = ({ getState, dispatch }) => next => action => {
     if (action.type === constants.UPDATE_AUTH) {
         const {user, session_id} = action.payload;
-        dispatch(actions.actionCreatorGetByTypeMovies({
+        dispatch(actionsAccount.actionCreatorGetByTypeMovies({
             userId: user.id,
             params: {
                 session_id
             },
             type: 'favorite'
         }));
-        dispatch(actions.actionCreatorGetByTypeMovies({
+        dispatch(actionsAccount.actionCreatorGetByTypeMovies({
             userId: user.id,
             params: {
                 session_id

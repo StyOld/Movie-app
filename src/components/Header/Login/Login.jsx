@@ -1,7 +1,7 @@
 import React from 'react';
 import {Modal, ModalBody} from 'reactstrap';
 import LoginForm from './LoginForm';
-import * as actions from "../../../actions/actions";
+import * as actionsAuthentication from "../../../actions/actionsAuthentication";
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
@@ -35,7 +35,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators(
         {
-            toggleLoginForm: actions.actionCreatorToggleLoginForm,
+            toggleLoginForm: actionsAuthentication.actionCreatorToggleLoginForm,
         }
         ,dispatch)
 };

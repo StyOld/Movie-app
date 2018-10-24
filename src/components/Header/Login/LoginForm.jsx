@@ -1,7 +1,7 @@
 import React from "react";
 import CallApi from "../../../api/api";
 import classNames from 'classnames';
-import * as actions from "../../../actions/actions";
+import * as actionsAuthentication from "../../../actions/actionsAuthentication";
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
@@ -218,8 +218,8 @@ const mapStateToProps = () => {
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators(
         {
-            updateAuth: actions.actionCreatorUpdateAuth,
-            hideLoginForm: actions.actionCreatorHideLoginForm
+            updateAuth: actionsAuthentication.actionCreatorUpdateAuth,
+            hideLoginForm: actionsAuthentication.actionCreatorHideLoginForm
         }
         ,dispatch)
 };

@@ -1,6 +1,6 @@
 import React from "react";
 import _ from 'lodash';
-import * as actions from "../../actions/actions";
+import * as actionsMovies from "../../actions/actionsMovies";
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
@@ -14,8 +14,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
-        getMovies: actions.actionCreatorGetMovies,
-        onChangePage: actions.actionCreatorChangePage,
+        getMovies: actionsMovies.actionCreatorGetMovies,
+        onChangePage: actionsMovies.actionCreatorChangePage,
     }, dispatch)
 };
 

@@ -2,7 +2,6 @@ import React from 'react';
 import {Redirect} from 'react-router-dom';
 import MovieItem from '../../Movies/MovieItem';
 import {connect} from 'react-redux';
-// import * as actions from "../../../actions/actions";
 import {bindActionCreators} from 'redux';
 
 const mapStateToProps = (state) => {

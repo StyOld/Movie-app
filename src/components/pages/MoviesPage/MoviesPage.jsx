@@ -2,7 +2,7 @@ import React from "react";
 import Filters from "../../Filters/Filters";
 import MoviesList from "../../Movies/MoviesList";
 import Pagination from "../../Filters/Pagination";
-import * as actions from "../../../actions/actions";
+import * as actionsMovies from "../../../actions/actionsMovies";
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
@@ -48,7 +48,7 @@ const mapStateToProps = () => {
 
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
-        clearFilters : actions.actionCreatorClearFilters
+        clearFilters : actionsMovies.actionCreatorClearFilters
     },dispatch)
 };
 

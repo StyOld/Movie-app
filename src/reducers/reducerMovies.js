@@ -1,3 +1,5 @@
+import * as constants from '../constants/contsants';
+
 const initialState = {
     moviesData: {},
     moviesDetails: {},
@@ -13,44 +15,39 @@ const initialState = {
 
 const reducerMovies = (state = initialState, action) => {
     switch(action.type) {
-        case 'UPDATE_MOVIES':
+        case constants.UPDATE_MOVIES:
             return {
                 ...state,
-                moviesData: action.payload
+                moviesData: action.payload,
+                total_pages: action.payload.total_pages
         };
 
-        case 'GET_MOVIE_DETAILS':
+        case constants.GET_MOVIE_DETAILS:
             return {
                 ...state,
                 moviesDetails: action.payload.data
                 // moviesDetails: action.payload
             };
 
-        case 'UPDATE_MOVIE':
+        case constants.UPDATE_MOVIE_DETAILS:
             return {
                 ...state,
                 moviesDetails: {}
             };
 
-        case 'GET_GENRES_LIST':
+        case constants.GET_GENRES_LIST:
             return {
                 ...state,
                 genreList: action.payload.data
             };
 
-        case 'CHANGE_PAGE':
+        case constants.CHANGE_PAGE:
             return {
                 ...state,
                 page: action.payload
             };
 
-        case 'GET_TOTAL_PAGE':
-            return {
-                ...state,
-                total_pages: action.payload
-            };
-
-        case 'CLEAR_FILTERS':
+        case constants.CLEAR_FILTERS:
             return {
                 ...state,
                 filters: {
@@ -61,7 +58,7 @@ const reducerMovies = (state = initialState, action) => {
                 total_pages: ''
             };
 
-        case 'CHANGE_FILTERS':
+        case constants.CHANGE_FILTERS:
             return {
                 ...state,
                 filters: {
@@ -71,7 +68,7 @@ const reducerMovies = (state = initialState, action) => {
                 }
             };
 
-        case 'CHECKED_GENRE':
+        case constants.CHECKED_GENRE:
             return {
                 ...state,
                 filters: {
@@ -81,7 +78,7 @@ const reducerMovies = (state = initialState, action) => {
                 }
             };
 
-        case 'UNCHECKED_GENRE':
+        case constants.UNCHECKED_GENRE:
             return {
                 ...state,
                 filters: {

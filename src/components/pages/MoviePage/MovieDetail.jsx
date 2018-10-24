@@ -1,5 +1,5 @@
 import React from 'react';
-import * as actions from "../../../actions/actions";
+import * as actionsMovies from "../../../actions/actionsMovies";
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
@@ -26,13 +26,13 @@ class MovieDetail extends React.Component {
                                 <h6><strong>Сборы</strong></h6>
                                 <p>${this.props.moviesDetails.revenue}</p>
                                 <h6><strong>Жанры</strong></h6>
-                                {/*<ul className="container">*/}
-                                    {/*{this.props.moviesDetails.genres.map(item => (*/}
-                                        {/*<li key={item.id}>*/}
-                                            {/*{item.name}*/}
-                                        {/*</li>*/}
-                                    {/*))}*/}
-                                {/*</ul>*/}
+                                <ul className="container">
+                                    {this.props.moviesDetails.genres.map(item => (
+                                        <li key={item.id}>
+                                            {item.name}
+                                        </li>
+                                    ))}
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -42,8 +42,6 @@ class MovieDetail extends React.Component {
     }
 }
 
-{/*<div>{this.props.moviesDetails.homepage}</div>*/}
-
 const mapStateToProps = (state) => {
     return {
         moviesDetails: state.movies.moviesDetails
@@ -52,8 +50,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
-        getMovieDetails: actions.actionCreatorGetMovieDetails,
-        updateMovie: actions.actionCreatorUpdateMovie
+        getMovieDetails: actionsMovies.actionCreatorGetMovieDetails,
+        updateMovie: actionsMovies.actionCreatorUpdateMovie
     },dispatch)
 };
 

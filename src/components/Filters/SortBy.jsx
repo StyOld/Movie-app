@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import UISelect from "../UIComponents/UISelect";
-import * as actions from "../../actions/actions";
+import * as actionsMovies from "../../actions/actionsMovies";
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
@@ -68,7 +68,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
-        onChangeFilters: actions.actionCreatorChangeFilters
+        onChangeFilters: actionsMovies.actionCreatorChangeFilters
     },dispatch)
 };
 
