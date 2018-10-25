@@ -15,3 +15,10 @@ export const actionCreatorUpdateMovie = () => {
         type: constants.UPDATE_MOVIE_DETAILS
     }
 };
+
+export const actionCreatorGetMovieCredits = (payload) => {
+    return {
+        type: constants.GET_MOVIE_CREDITS,
+        payload
+    }
+};
