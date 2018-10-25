@@ -81,13 +81,13 @@ export const actionCreatorChangeFilters = (event) => {
     }
 };
 
-export const actionCreatorChangeGenres = payload => {
-    return dispatch => {
-        dispatch({
-            type: payload.target.checked ? constants.CHECKED_GENRE : constants.UNCHECKED_GENRE,
-            payload: payload.target.value
-        });
-    };
+// export const actionCreatorChangeGenres = payload => {
+//     return dispatch => {
+//         dispatch({
+//             type: payload.target.checked ? constants.CHECKED_GENRE : constants.UNCHECKED_GENRE,
+//             payload: payload.target.value
+//         });
+//     };
 // (payload.target.checked) ? (
 //     dispatch({
 //         type: 'CHECKED_GENRE',
@@ -99,4 +99,4 @@ export const actionCreatorChangeGenres = payload => {
 //         payload
 //     })
 //     )
-};
+// };

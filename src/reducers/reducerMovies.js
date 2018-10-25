@@ -54,31 +54,31 @@ const reducerMovies = (state = initialState, action) => {
                 }
             };
 
-        case constants.CHECKED_GENRE:
-            return {
-                ...state,
-                filters: {
-                    ...state.filters,
-                    genres: [...state.filters.genres, action.payload]
-                    // genres: [...state.filters.genres, action.payload.target.value]
-                }
-            };
-
-        case constants.UNCHECKED_GENRE:
-            return {
-                ...state,
-                filters: {
-                    ...state.filters,
-                    genres: state.filters.genres.filter(genreId => {
-                        return genreId !== action.payload
-                        // return genreId !== action.payload.target.value
-                    })
-                }
-            };
-
         default:
             return state;
     }
 };
 
 export default reducerMovies;
+
+// case constants.CHECKED_GENRE:
+//     return {
+//         ...state,
+//         filters: {
+//             ...state.filters,
+//             genres: [...state.filters.genres, action.payload]
+//             // genres: [...state.filters.genres, action.payload.target.value]
+//         }
+//     };
+//
+// case constants.UNCHECKED_GENRE:
+//     return {
+//         ...state,
+//         filters: {
+//             ...state.filters,
+//             genres: state.filters.genres.filter(genreId => {
+//                 return genreId !== action.payload
+//                 // return genreId !== action.payload.target.value
+//             })
+//         }
+//     };

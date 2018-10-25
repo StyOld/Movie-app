@@ -1,6 +1,7 @@
 import {createStore, applyMiddleware} from 'redux';
 import reducers from "../reducers/reducers";
-import * as actionsAccount from '../actions/actionsAccount'
+import * as actionsAccount from '../actions/actionsAccount';
+import * as actionsMovies from '../actions/actionsMovies'
 import { composeWithDevTools } from 'redux-devtools-extension';
 import * as constants from "../constants/contsants";
 
@@ -39,40 +40,44 @@ const getAccountList = ({ getState, dispatch }) => next => action => {
         return next(action);
 };
 
-// const getMoviesOnChangeFilters = ({ getState, dispatch }) => next => action => {
-//     if (action.type === constants.CHANGE_FILTERS) {
-//         dispatch(actions.actionCreatorChangePage(1));
-//         dispatch(actions.actionCreatorGetMovies({
-//             filters: action.payload.filters,
-//             page: 1
-//         }));
-//     }
-//     return next(action);
-// };
-//
-// const getMoviesOnChangePage = ({ getState, dispatch }) => next => action => {
-//     if (action.type === constants.CHANGE_PAGE) {
-//         // const {filters: {sort_by, primary_release_year, genres}, page} = action.payload;
-//         dispatch(actions.actionCreatorGetMovies({
-//             filters: action.payload.filters,
-//             page: action.payload.page
-//         }));
-//     }
-//     return next(action);
-// };
+const changingFiltersGetMovies = ({ getState, dispatch }) => next => action => {
+    if (action.type === constants.CHANGE_FILTERS) {
+        dispatch(actionsMovies.actionCreatorChangePage(1));
+        dispatch(actionsMovies.actionCreatorGetMovies({
+            filters: {
+                ...getState().movies.filters,
+                [action.payload.name]: action.payload.value
+            },
+            page: 1
+        }));
+    }
 
-// componentDidUpdate(prevProps) {
-//     if (!_.isEqual(this.props.filters, prevProps.filters)) {
-//         this.props.onChangePage(1);
-//         this.props.getMovies({filters: this.props.filters, page: 1});
-//     }
-//     if (this.props.page !== prevProps.page) {
-//         this.props.getMovies({filters: this.props.filters, page: this.props.page})
-//     }
-// }
+    if (action.type === constants.CHANGE_PAGE) {
+        dispatch(actionsMovies.actionCreatorGetMovies({
+            filters: {
+                ...getState().movies.filters,
+                [action.payload.name]: action.payload.value
+            },
+            page: action.payload
+        }));
+    }
 
-// const store = createStore(reducers, compose(applyMiddleware(async),window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() ));
+    return next(action);
+};
 
-const store = createStore(reducers, composeWithDevTools(applyMiddleware(async, getAccountList)));
+const onClearFilters = ({getState, dispatch}) => next => action => {
+    if (action.type === constants.CLEAR_FILTERS) {
+        dispatch(actionsMovies.actionCreatorGetMovies({
+            filters: {
+                sort_by: 'vote_average.asc',
+                primary_release_year: '2018',
+                genres: []},
+            page: 1
+        }));
+    }
+        return next(action);
+};
+
+const store = createStore(reducers, composeWithDevTools(applyMiddleware(async, getAccountList, changingFiltersGetMovies, onClearFilters)));
 
 export default store;
