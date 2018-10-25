@@ -10,7 +10,7 @@ export const actionCreatorGetMovies = ({filters, page}) => {
         primary_release_year: primary_release_year
         // with_genres: genres.join(',') словил баг на стороне сервака
     };
-
+    console.log("genres", genres)
     if (genres.length>0) queryStringParams.with_genres = genres.join(',');
 
     return dispatch => {

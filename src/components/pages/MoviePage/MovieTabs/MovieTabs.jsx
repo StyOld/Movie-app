@@ -51,6 +51,11 @@ export default class MovieTabs extends React.Component {
                         </NavLink>
                     </NavItem>
                 </Nav>
+                {/* 
+                <Route path="/movie/:id/images" component={MovieDetail}>
+                <Route path="/movie/:id/videos" component={MovieDetail}>
+                <Route path="/movie/:id/credites" component={MovieDetail} />
+                */}
                 <TabContent activeTab={this.state.activeTab}>
                     <TabPane tabId="1">
                         <MovieDetail />

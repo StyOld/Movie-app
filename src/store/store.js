@@ -1,6 +1,8 @@
 import {createStore, applyMiddleware} from 'redux';
 import reducers from "../reducers/reducers";
 import * as actionsAccount from '../actions/actionsAccount'
+import * as actionsMovies from "../actions/actionsMovies"
+
 import { composeWithDevTools } from 'redux-devtools-extension';
 import * as constants from "../constants/contsants";
 
@@ -39,16 +41,20 @@ const getAccountList = ({ getState, dispatch }) => next => action => {
         return next(action);
 };
 
-// const getMoviesOnChangeFilters = ({ getState, dispatch }) => next => action => {
-//     if (action.type === constants.CHANGE_FILTERS) {
-//         dispatch(actions.actionCreatorChangePage(1));
-//         dispatch(actions.actionCreatorGetMovies({
-//             filters: action.payload.filters,
-//             page: 1
-//         }));
-//     }
-//     return next(action);
-// };
+const changingFiltersGetMovies = ({ getState, dispatch }) => next => action => {
+    if (action.type === constants.CHANGE_FILTERS) {
+        dispatch(actionsMovies.actionCreatorChangePage(1));
+        dispatch(actionsMovies.actionCreatorGetMovies({
+            filters: {
+                ...getState().movies.filters,
+                [action.payload.name]: action.payload.value
+            },
+            page: 1
+        }));
+    }
+    
+    return next(action);
+};
 //
 // const getMoviesOnChangePage = ({ getState, dispatch }) => next => action => {
 //     if (action.type === constants.CHANGE_PAGE) {
@@ -73,6 +79,6 @@ const getAccountList = ({ getState, dispatch }) => next => action => {
 
 // const store = createStore(reducers, compose(applyMiddleware(async),window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() ));
 
-const store = createStore(reducers, composeWithDevTools(applyMiddleware(async, getAccountList)));
+const store = createStore(reducers, composeWithDevTools(applyMiddleware(async, getAccountList, changingFiltersGetMovies)));
 
 export default store;

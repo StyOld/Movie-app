@@ -25,10 +25,10 @@ export default (Component) => connect(mapStateToProps, mapDispatchToProps)(class
     }
 
     componentDidUpdate(prevProps) {
-        if (!_.isEqual(this.props.filters, prevProps.filters)) {
-            this.props.onChangePage(1);
-            this.props.getMovies({filters: this.props.filters, page: 1});
-        }
+        // if (!_.isEqual(this.props.filters, prevProps.filters)) {
+        //     this.props.onChangePage(1);
+        //     this.props.getMovies({filters: this.props.filters, page: 1});
+        // }
         if (this.props.page !== prevProps.page) {
             this.props.getMovies({filters: this.props.filters, page: this.props.page})
         }

@@ -13,7 +13,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
         getGenresList: actionsMovies.actionCreatorGetGenresList,
-        onChangeGenres: actionsMovies.actionCreatorChangeGenres
+        onChangeFilters: actionsMovies.actionCreatorChangeFilters
     }, dispatch)
 };
 
@@ -22,9 +22,22 @@ export default (Component) => connect(mapStateToProps, mapDispatchToProps)(class
         this.props.getGenresList()
     }
 
+    onChangeGenres = event => {        
+            this.props.onChangeFilters({
+                target: {
+                    name: "genres",
+                    value: event.target.checked ? 
+                        [...this.props.genres, event.target.value]:
+                        this.props.genres.filter(genreId => {
+                            return String(genreId) !== String(event.target.value);
+                        })  
+                }
+            })
+    }
+
     render() {
         const {genres, genreList, onChangeGenres} = this.props;
-        return <Component genreList={genreList} genres={genres} onChangeGenres={onChangeGenres}/>;
+        return <Component genreList={genreList} genres={genres} onChangeGenres={this.onChangeGenres}/>;
     }
 })
 
