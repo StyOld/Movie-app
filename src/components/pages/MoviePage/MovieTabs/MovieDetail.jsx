@@ -1,39 +1,38 @@
 import React from 'react';
-import * as actionsMovies from "../../../actions/actionsMovies";
+import * as actionsMovie from "../../../../actions/actionsMovie";
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
 class MovieDetail extends React.Component {
     render() {
-        console.log(this.props.moviesDetails.genres)
+        const {moviesDetails, movieGenres} = this.props;
         return (
             <div>
                 <div className='card'>
                     <div className='container'>
                         <div className='col'>
-                            <div className='col-8'>
                                 <h4><strong>Факты</strong></h4>
+                                <p></p>
                                 <h6><strong>Статус</strong></h6>
-                                <p>{this.props.moviesDetails.status}</p>
+                                <p>{moviesDetails.status}</p>
                                 <h6><strong>Информация о релизе</strong></h6>
-                                <p>{this.props.moviesDetails.release_date}</p>
-                                <h6><strong>Оригинальный</strong></h6>
-                                {/*<p>{this.props.moviesDetails.spoken_languages}</p>*/}
+                                <p>{moviesDetails.release_date}</p>
+                                <h6><strong>Оригинальный язык</strong></h6>
+                                <p>{moviesDetails.original_language}</p>
                                 <h6><strong>Продолжительность</strong></h6>
-                                <p>{this.props.moviesDetails.runtime} m</p>
+                                <p>{moviesDetails.runtime} m</p>
                                 <h6><strong>Бюджет</strong></h6>
-                                <p>${this.props.moviesDetails.budget}</p>
+                                <p>${moviesDetails.budget}</p>
                                 <h6><strong>Сборы</strong></h6>
-                                <p>${this.props.moviesDetails.revenue}</p>
+                                <p>${moviesDetails.revenue}</p>
                                 <h6><strong>Жанры</strong></h6>
                                 <ul className="container">
-                                    {this.props.moviesDetails.genres.map(item => (
+                                    {movieGenres.map(item => (
                                         <li key={item.id}>
                                             {item.name}
                                         </li>
                                     ))}
                                 </ul>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -44,14 +43,15 @@ class MovieDetail extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        moviesDetails: state.movies.moviesDetails
+        moviesDetails: state.movie.moviesDetails,
+        movieGenres: state.movie.movieGenres
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
-        getMovieDetails: actionsMovies.actionCreatorGetMovieDetails,
-        updateMovie: actionsMovies.actionCreatorUpdateMovie
+        getMovieDetails: actionsMovie.actionCreatorGetMovieDetails,
+        updateMovie: actionsMovie.actionCreatorUpdateMovie
     },dispatch)
 };
 

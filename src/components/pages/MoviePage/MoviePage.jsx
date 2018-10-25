@@ -2,10 +2,10 @@ import React from 'react';
 import CallApi from "../../../api/api";
 import FavoriteIcon from '../../Movies/Icons/FavoriteIcon';
 import WatchIcon from '../../Movies/Icons/WatchIcon';
-import * as actionsMovies from "../../../actions/actionsMovies";
+import * as actionsMovie from "../../../actions/actionsMovie";
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import MovieTabs from "./MovieTabs";
+import MovieTabs from "./MovieTabs/MovieTabs";
 
 class MoviePage extends React.Component {
     componentDidMount () {
@@ -37,7 +37,6 @@ class MoviePage extends React.Component {
                         </div>
                         <div className='col-8'>
                             <h4 className="card-title"><strong>{moviesDetails.title}</strong></h4>
-                            {/* <h5 className="card-title"><strong>Oписание фильма</strong></h5> */}
                             <p className="card-text">{moviesDetails.overview}</p>
                         <div className='d-flex align-items-center'>
                             <FavoriteIcon movieId={moviesDetails.id}/>
@@ -54,14 +53,14 @@ class MoviePage extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        moviesDetails: state.movies.moviesDetails
+        moviesDetails: state.movie.moviesDetails
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
-        getMovieDetails: actionsMovies.actionCreatorGetMovieDetails,
-        updateMovie: actionsMovies.actionCreatorUpdateMovie
+        getMovieDetails: actionsMovie.actionCreatorGetMovieDetails,
+        updateMovie: actionsMovie.actionCreatorUpdateMovie
     },dispatch)
 };
 

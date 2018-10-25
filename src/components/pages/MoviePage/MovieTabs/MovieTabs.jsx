@@ -24,7 +24,7 @@ export default class MovieTabs extends React.Component {
     }
     render() {
         return (
-            <div>
+            <div className='container'>
                 <Nav tabs>
                     <NavItem>
                         <NavLink

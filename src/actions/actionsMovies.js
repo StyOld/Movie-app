@@ -37,22 +37,6 @@ export const actionCreatorGetMovies = ({filters, page}) => {
     }
 };
 
-export const actionCreatorGetMovieDetails = (payload) => {
-    return {
-        type: constants.GET_MOVIE_DETAILS,
-        payload
-        // payload: {
-        //     data: payload.data
-        // }
-    }
-};
-
-export const actionCreatorUpdateMovie = () => {
-    return {
-        type: constants.UPDATE_MOVIE_DETAILS
-    }
-};
-
 export const actionCreatorGetGenresList = () => {
     return dispatch => {
         CallApi.get('/genre/movie/list')

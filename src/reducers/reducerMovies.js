@@ -2,7 +2,6 @@ import * as constants from '../constants/contsants';
 
 const initialState = {
     moviesData: {},
-    moviesDetails: {},
     genreList: [],
     filters: {
         sort_by: 'vote_average.asc',
@@ -21,19 +20,6 @@ const reducerMovies = (state = initialState, action) => {
                 moviesData: action.payload,
                 total_pages: action.payload.total_pages
         };
-
-        case constants.GET_MOVIE_DETAILS:
-            return {
-                ...state,
-                moviesDetails: action.payload.data
-                // moviesDetails: action.payload
-            };
-
-        case constants.UPDATE_MOVIE_DETAILS:
-            return {
-                ...state,
-                moviesDetails: {}
-            };
 
         case constants.GET_GENRES_LIST:
             return {
