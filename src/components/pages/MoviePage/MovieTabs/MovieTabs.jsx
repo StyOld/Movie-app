@@ -31,7 +31,7 @@ export default class MovieTabs extends React.Component {
             <div className='container mt-4'>
                 <Nav tabs>
                     <NavItem>
-                        <Link to ={`/movie/${this.props.itemId}}/detail`}>
+                        <Link to ={`/movie/${this.props.itemId}/detail`}>
                         <NavLink
                             className={classnames({ active: this.state.activeTab === '1' })}
                             onClick={() => { this.toggle('1'); }}

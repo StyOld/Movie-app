@@ -19,7 +19,7 @@ class MovieVideos extends React.Component {
         return (
             <div className="row mt-4">
                 {this.props.movieVideos.map(videoItem => (
-                    <div className="col-6 mb-2">
+                    <div className="col-6" key={videoItem.id}>
                         <YouTube
                             className="container"
                             videoId={videoItem.key}
