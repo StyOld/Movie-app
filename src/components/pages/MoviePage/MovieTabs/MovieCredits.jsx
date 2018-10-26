@@ -3,29 +3,38 @@ import CallApi from "../../../../api/api";
 import * as actionsMovie from "../../../../actions/actionsMovie";
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import CreditItem from "./CreditItem";
 
 class MovieCredits extends React.Component {
     componentDidMount () {
-        // CallApi.get(`/movie/${this.props.moviesDetails.id}/credits`)
-        //     .then(data => {
-        //         this.props.getMovieCredits({
-        //             data
-        //         })
-        //     })
+        CallApi.get(`/movie/${this.props.match.params.id}}/credits`)
+            .then(data => {
+                this.props.getMovieCredits({
+                    data
+                })
+            })
     }
 
     render() {
-        // console.log(this.props.moviesDetails);
         return (
-            <div>MovieCredits</div>
+            <div className='container'>
+                <div className="row mt-2">
+                    {this.props.movieCreditsCast.map(creditItem => (
+                        <div className="col-3 mb-2" key={creditItem.id}>
+                            <CreditItem
+                                item={creditItem}
+                            />
+                        </div>
+                    ))}
+                </div>
+            </div>
         )
     }
 }
 
 const mapStateToProps = (state) => {
     return {
-        movieCredits: state.movie.movieCredits,
-        moviesDetails: state.movie.moviesDetails
+        movieCreditsCast: state.movie.movieCredits.cast || []
     }
 };
 

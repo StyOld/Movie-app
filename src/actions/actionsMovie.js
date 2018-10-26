@@ -22,3 +22,10 @@ export const actionCreatorGetMovieCredits = (payload) => {
         payload
     }
 };
+
+export const actionCreatorGetMovieVideos = (payload) => {
+    return {
+        type: constants.GET_MOVIE_VIDEOS,
+        payload
+    }
+};

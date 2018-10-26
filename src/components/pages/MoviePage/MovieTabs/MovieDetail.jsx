@@ -44,7 +44,7 @@ class MovieDetail extends React.Component {
 const mapStateToProps = (state) => {
     return {
         moviesDetails: state.movie.moviesDetails,
-        movieGenres: state.movie.movieGenres
+        movieGenres: state.movie.moviesDetails.genres || []
     }
 };
 

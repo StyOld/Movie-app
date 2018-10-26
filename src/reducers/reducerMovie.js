@@ -2,8 +2,8 @@ import * as constants from "../constants/contsants";
 
 const initialState = {
     moviesDetails: {},
-    movieGenres: [],
-    movieCredits: {}
+    movieCredits: {},
+    movieVideos: []
 };
 
 const reducerMovie = (state = initialState, action) => {
@@ -11,8 +11,7 @@ const reducerMovie = (state = initialState, action) => {
         case constants.GET_MOVIE_DETAILS:
             return {
                 ...state,
-                moviesDetails: action.payload.data,
-                movieGenres: action.payload.data.genres
+                moviesDetails: action.payload.data
             };
 
         case constants.UPDATE_MOVIE_DETAILS:
@@ -25,6 +24,12 @@ const reducerMovie = (state = initialState, action) => {
             return {
                 ...state,
                 movieCredits: action.payload.data
+            };
+
+        case constants.GET_MOVIE_VIDEOS:
+            return {
+                ...state,
+                movieVideos: action.payload.data
             };
 
         default:

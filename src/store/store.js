@@ -65,7 +65,7 @@ const changingFiltersGetMovies = ({ getState, dispatch }) => next => action => {
     return next(action);
 };
 
-const onClearFilters = ({getState, dispatch}) => next => action => {
+const ClearFilters = ({getState, dispatch}) => next => action => {
     if (action.type === constants.CLEAR_FILTERS) {
         dispatch(actionsMovies.actionCreatorGetMovies({
             filters: {
@@ -78,6 +78,6 @@ const onClearFilters = ({getState, dispatch}) => next => action => {
         return next(action);
 };
 
-const store = createStore(reducers, composeWithDevTools(applyMiddleware(async, getAccountList, changingFiltersGetMovies, onClearFilters)));
+const store = createStore(reducers, composeWithDevTools(applyMiddleware(async, getAccountList, changingFiltersGetMovies, ClearFilters)));
 
 export default store;

@@ -25,7 +25,7 @@ class MoviePage extends React.Component {
     render() {
         const {moviesDetails} = this.props;
         return (
-            <div className='card'>
+            <div>
                 <div className='container'>
                     <div className='row'>
                         <div className='col-4'>
@@ -36,8 +36,8 @@ class MoviePage extends React.Component {
                             />
                         </div>
                         <div className='col-8'>
-                            <h4 className="card-title"><strong>{moviesDetails.title}</strong></h4>
-                            <p className="card-text">{moviesDetails.overview}</p>
+                            <h4><strong>{moviesDetails.title}</strong></h4>
+                            <p>{moviesDetails.overview}</p>
                         <div className='d-flex align-items-center'>
                             <FavoriteIcon movieId={moviesDetails.id}/>
                             <WatchIcon movieId={moviesDetails.id}/>
@@ -45,7 +45,7 @@ class MoviePage extends React.Component {
                         </div>
                     </div>
                 </div>
-                <MovieTabs />
+                <MovieTabs itemId={moviesDetails.id}/>
             </div>
         )
     }
