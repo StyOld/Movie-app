@@ -14,17 +14,18 @@ export default class MovieItem extends React.Component {
             item.poster_path}`}
           alt=""
         />
-        <div className="card-body">
-          {/*<h6 className="card-title">{item.title}</h6>*/}
-          <Link className="card-title" to={`/movie/${item.id}`}>
-              {item.title}
-              </Link>
-            <div className='d-flex justify-content-between align-items-center'>
-                <div className="card-text">Рейтинг: {item.vote_average}</div>
-                <FavoriteIcon movieId={item.id}/>
-                <WatchIcon movieId={item.id}/>
-            </div>
-        </div>
+          <div className="card-body">
+              <h5>
+                  <Link className="card-title" to={`/movie/${item.id}`}>
+                      {item.title}
+                  </Link>
+              </h5>
+              <div className='d-flex justify-content-between align-items-center'>
+                  <div className="card-text">Рейтинг: {item.vote_average}</div>
+                  <FavoriteIcon movieId={item.id}/>
+                  <WatchIcon movieId={item.id}/>
+              </div>
+          </div>
       </div>
     );
   }

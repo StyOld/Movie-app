@@ -10,7 +10,7 @@ export const actionCreatorGetMovieDetails = (payload) => {
     }
 };
 
-export const actionCreatorUpdateMovie = () => {
+export const actionCreatorUpdateMovieDetails = () => {
     return {
         type: constants.UPDATE_MOVIE_DETAILS
     }

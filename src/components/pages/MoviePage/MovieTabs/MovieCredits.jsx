@@ -18,7 +18,7 @@ class MovieCredits extends React.Component {
     render() {
         return (
             <div className='container'>
-                <div className="row mt-2">
+                <div className="row mt-4">
                     {this.props.movieCreditsCast.map(creditItem => (
                         <div className="col-3 mb-2" key={creditItem.id}>
                             <CreditItem

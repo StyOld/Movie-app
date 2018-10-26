@@ -17,7 +17,9 @@ const reducerMovie = (state = initialState, action) => {
         case constants.UPDATE_MOVIE_DETAILS:
             return {
                 ...state,
-                moviesDetails: {}
+                moviesDetails: {},
+                movieCredits: {},
+                movieVideos: []
             };
 
         case constants.GET_MOVIE_CREDITS:

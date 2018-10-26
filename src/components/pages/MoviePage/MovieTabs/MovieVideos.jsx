@@ -2,6 +2,7 @@ import React from 'react';
 import CallApi from "../../../../api/api";
 import * as actionsMovie from "../../../../actions/actionsMovie";
 import {connect} from 'react-redux';
+import YouTube from 'react-youtube';
 import {bindActionCreators} from 'redux';
 
 class MovieVideos extends React.Component {
@@ -15,10 +16,16 @@ class MovieVideos extends React.Component {
     }
 
     render() {
-        console.log(this.props.movieVideos)
         return (
-            <div>
-                VIDEOS
+            <div className="row mt-4">
+                {this.props.movieVideos.map(videoItem => (
+                    <div className="col-6 mb-2">
+                        <YouTube
+                            className="container"
+                            videoId={videoItem.key}
+                        />
+                    </div>
+                ))}
             </div>
         )
     }

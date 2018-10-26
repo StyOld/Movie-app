@@ -19,7 +19,7 @@ class MoviePage extends React.Component {
 
     // ЧТо бы очистить moviesDetails. При нескольких переходах на разные фильмы, при загрузке инфы с сервера показывается инфа предыдущего фильма.
     componentWillUnmount() {
-        this.props.updateMovie()
+        this.props.updateMovieDetails()
     }
 
     render() {
@@ -27,7 +27,7 @@ class MoviePage extends React.Component {
         return (
             <div>
                 <div className='container'>
-                    <div className='row'>
+                    <div className='row mt-4'>
                         <div className='col-4'>
                             <img
                                 className="card-img-top"
@@ -60,7 +60,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
         getMovieDetails: actionsMovie.actionCreatorGetMovieDetails,
-        updateMovie: actionsMovie.actionCreatorUpdateMovie
+        updateMovieDetails: actionsMovie.actionCreatorUpdateMovieDetails
     },dispatch)
 };
 
