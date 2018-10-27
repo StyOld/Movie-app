@@ -38,13 +38,7 @@ export default class CallApi {
     };
 
     return fetchApi(
-      `${API_URL}${url}?${queryString.stringify(queryStringParams)}`,
-      {
-        mode: "cors",
-        headers: {
-          "Content-type": "application/json"
-        }
-      }
+      `${API_URL}${url}?${queryString.stringify(queryStringParams)}`
     );
   }
 
