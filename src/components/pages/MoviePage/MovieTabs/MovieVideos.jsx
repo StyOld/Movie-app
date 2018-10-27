@@ -1,45 +1,44 @@
 import React from 'react';
-import CallApi from "../../../../api/api";
 import * as actionsMovie from "../../../../actions/actionsMovie";
 import {connect} from 'react-redux';
-import YouTube from 'react-youtube';
 import {bindActionCreators} from 'redux';
+import YouTube from 'react-youtube';
 
 class MovieVideos extends React.Component {
     componentDidMount () {
-        CallApi.get(`/movie/${this.props.match.params.id}/videos`)
-            .then(data => {
-                this.props.getMovieVideos({
-                    data: data.results
-                })
-            })
+        this.props.getByTypeMovieDetails({
+            movieId: this.props.match.params.id,
+            type: 'videos'
+        })
     }
 
     render() {
         return (
-            <div className="row mt-4">
-                {this.props.movieVideos.map(videoItem => (
-                    <div className="col-6" key={videoItem.id}>
-                        <YouTube
-                            className="container"
-                            videoId={videoItem.key}
+            this.props.videosOfMovie.length !==0 ?
+                <div className="row mt-4">
+                    {this.props.videosOfMovie.map(videoItem => (
+                        <div className="col-6" key={videoItem.id}>
+                            <YouTube
+                                className="container"
+                                videoId={videoItem.key}
                         />
-                    </div>
-                ))}
-            </div>
+                        </div>
+                    ))}
+                    </div> :
+                <div className="row mt-4"><h4><strong>Нет видео</strong></h4></div>
         )
     }
 }
 
 const mapStateToProps = (state) => {
     return {
-        movieVideos: state.movie.movieVideos
+        videosOfMovie: state.movie.videosOfMovie.results || []
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
-        getMovieVideos: actionsMovie.actionCreatorGetMovieVideos
+        getByTypeMovieDetails: actionsMovie.actionCreatorGetByTypeMovieDetails
     },dispatch)
 };
 

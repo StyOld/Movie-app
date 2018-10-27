@@ -23,7 +23,7 @@ class MoviePage extends React.Component {
     }
 
     render() {
-        const {moviesDetails} = this.props;
+        const {detailsOfMovie} = this.props;
         return (
             <div>
                 <div className='container'>
@@ -31,21 +31,21 @@ class MoviePage extends React.Component {
                         <div className='col-4'>
                             <img
                                 className="card-img-top"
-                                src={`https://image.tmdb.org/t/p/w500${moviesDetails.backdrop_path || moviesDetails.poster_path}`}
+                                src={`https://image.tmdb.org/t/p/w500${detailsOfMovie.backdrop_path || detailsOfMovie.poster_path}`}
                                 alt=""
                             />
                         </div>
                         <div className='col-8'>
-                            <h4><strong>{moviesDetails.title}</strong></h4>
-                            <p>{moviesDetails.overview}</p>
+                            <h4><strong>{detailsOfMovie.title}</strong></h4>
+                            <p>{detailsOfMovie.overview}</p>
                         <div className='d-flex align-items-center'>
-                            <FavoriteIcon movieId={moviesDetails.id}/>
-                            <WatchIcon movieId={moviesDetails.id}/>
+                            <FavoriteIcon movieId={detailsOfMovie.id}/>
+                            <WatchIcon movieId={detailsOfMovie.id}/>
                         </div>
                         </div>
                     </div>
                 </div>
-                <MovieTabs itemId={moviesDetails.id}/>
+                <MovieTabs itemId={detailsOfMovie.id}/>
             </div>
         )
     }
@@ -53,7 +53,7 @@ class MoviePage extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        moviesDetails: state.movie.moviesDetails
+        detailsOfMovie: state.movie.detailsOfMovie
     }
 };
 
