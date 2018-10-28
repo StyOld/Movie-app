@@ -5,7 +5,7 @@ import * as actionsAuthentication from "../../../actions/actionsAuthentication";
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
-class LoginForm extends React.Component {
+export class LoginForm extends React.Component {
     state = {
         username: "",
         password: "",
@@ -31,13 +31,14 @@ class LoginForm extends React.Component {
         }));
     };
 
-    handleBlur = () => {
+    handleBlur = (event) => {
+        const name = event.target.name
         const errors = this.validateFields();
         if (Object.keys(errors).length > 0) {
             this.setState(prevState => ({
                 errors: {
                     ...prevState.errors,
-                    ...errors
+                    [name]: errors[name]
                 }
             }));
         }

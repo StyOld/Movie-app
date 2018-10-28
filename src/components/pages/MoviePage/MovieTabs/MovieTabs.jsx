@@ -8,7 +8,6 @@ import MovieCredits from "./MovieCredits";
 
 export default class MovieTabs extends React.Component {
     render() {
-        // console.log(this.props.moviesDetails.id)
         return (
             <div className='container mt-4'>
                 <Nav tabs>

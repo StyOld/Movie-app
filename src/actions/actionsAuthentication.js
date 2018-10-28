@@ -17,14 +17,18 @@ const cookies = new Cookies();
 //     })
 // };
 
-export const actionCreatorUpdateAuth = (payload) => {
-    cookies.set('session_id', payload.session_id, {
+export const actionCreatorUpdateAuth = ({user, session_id, isAuth}) => {
+    cookies.set('session_id', session_id, {
         path: '/',
         maxAge: 2592000
     });
     return {
         type: constants.UPDATE_AUTH,
-        payload
+        payload: {
+            user,
+            session_id,
+            isAuth
+        }
     }
 };
 
