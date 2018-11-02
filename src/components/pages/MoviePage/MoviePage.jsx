@@ -26,6 +26,7 @@ class MoviePage extends React.Component {
         const {details} = this.props;
         return (
             <div>
+                {Object.keys(details).length !==0 ? (
                 <div className='container'>
                     <div className='row mt-4'>
                         <div className='col-4'>
@@ -44,7 +45,9 @@ class MoviePage extends React.Component {
                         </div>
                         </div>
                     </div>
-                </div>
+                </div>) : (
+                <div className="mt-4"><h5><strong>...Загрузка</strong></h5></div>
+                )}
                 <MovieTabs itemId={details.id}/>
             </div>
         )

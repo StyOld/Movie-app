@@ -14,25 +14,31 @@ class MovieVideos extends React.Component {
 
     render() {
         return (
-            this.props.videos.length !==0 ?
-                (<div className="row mt-4">
-                    {this.props.videos.map(videoItem => (
-                        <div className="col-6" key={videoItem.id}>
-                            <YouTube
-                                className="container"
-                                videoId={videoItem.key}
-                        />
-                        </div>
-                    ))}
-                    </div>) :
+            Object.keys(this.props.videos).length !==0  ? (
+                this.props.videoList.length !==0 ? (
+                    <div className="row mt-4">
+                        {this.props.videoList.map(videoItem => (
+                            <div className="col-6" key={videoItem.id}>
+                                <YouTube
+                                    className="container"
+                                    videoId={videoItem.key}
+                                />
+                            </div>
+                        ))}
+                    </div>
+                ) : (
+                    <div className="row mt-4"><h4><strong>Нет видео</strong></h4></div>
+                )) : (
                 <div className="row mt-4"><h4><strong>...Загрузка</strong></h4></div>
+            )
         )
     }
 }
 
 const mapStateToProps = (state) => {
     return {
-        videos: state.movie.videos.results || []
+        videos: state.movie.videos,
+        videoList: state.movie.videos.results || []
     }
 };
 
