@@ -38,10 +38,10 @@ class UserMenu extends React.Component {
                 </DropdownToggle>
                 <DropdownMenu right>
                     <DropdownItem>
-                        <Link to="/account/favorites">Избранные</Link>
+                        <Link to="/account/favorites" id='text-decor'>Избранные</Link>
                     </DropdownItem>
                     <DropdownItem>
-                        <Link to="/account/watchlist">Список просмотра</Link>
+                        <Link to="/account/watchlist" id='text-decor'>Список просмотра</Link>
                     </DropdownItem>
                     <DropdownItem onClick={(session_id) => deleteSession({session_id})}>Выйти</DropdownItem>
                 </DropdownMenu>

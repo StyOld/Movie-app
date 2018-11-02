@@ -16,7 +16,7 @@ export default class MovieItem extends React.Component {
         />
           <div className="card-body">
               <h5>
-                  <Link className="card-title" to={`/movie/${item.id}`}>
+                  <Link className="card-title" to={`/movie/${item.id}`} id='text-decor'>
                       {item.title}
                   </Link>
               </h5>

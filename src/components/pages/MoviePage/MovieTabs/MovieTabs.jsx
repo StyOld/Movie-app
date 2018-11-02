@@ -16,6 +16,7 @@ export default class MovieTabs extends React.Component {
                             to ={`/movie/${this.props.itemId}/detail`}
                             // activeClassName="active"
                             className='text-decor'
+                            id='text-decor'
                         >
                             Детально
                         </NavLink>
@@ -24,6 +25,7 @@ export default class MovieTabs extends React.Component {
                         <NavLink
                             to ={`/movie/${this.props.itemId}/videos`}
                             activeClassName="active"
+                            id='text-decor'
                         >
                             Видео
                         </NavLink>
@@ -32,6 +34,7 @@ export default class MovieTabs extends React.Component {
                         <NavLink
                             to ={`/movie/${this.props.itemId}/credits`}
                             activeClassName="active"
+                            id='text-decor'
                         >
                             Актёры
                         </NavLink>

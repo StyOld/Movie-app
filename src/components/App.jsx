@@ -30,7 +30,7 @@ class App extends React.Component {
                       <Route path='/account/watchlist' component={AccountListByTypePage('watchlist')}/>
                   </div>
           </BrowserRouter>
-          ) : (<p>...Loading</p>)
+          ) : (<h5><strong>...Загрузка</strong></h5>)
   }
 }
 

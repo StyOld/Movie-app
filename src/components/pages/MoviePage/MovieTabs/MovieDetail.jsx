@@ -5,7 +5,7 @@ import {bindActionCreators} from 'redux';
 
 class MovieDetail extends React.Component {
     render() {
-        const {moviesDetails, movieGenres} = this.props;
+        const {MovieDetails, movieGenres} = this.props;
         return (
             <div className='mt-4'>
                 <h4><strong>Факты:</strong></h4>
@@ -13,19 +13,19 @@ class MovieDetail extends React.Component {
                     <div className='row'>
                         <div className='col-4'>
                             <h6><strong>Статус</strong></h6>
-                            <p>{moviesDetails.status}</p>
+                            <p>{MovieDetails.status}</p>
                             <h6><strong>Информация о релизе</strong></h6>
-                            <p>{moviesDetails.release_date}</p>
+                            <p>{MovieDetails.release_date}</p>
                             <h6><strong>Оригинальный язык</strong></h6>
-                            <p>{moviesDetails.original_language}</p>
+                            <p>{MovieDetails.original_language}</p>
                             <h6><strong>Продолжительность</strong></h6>
-                            <p>{moviesDetails.runtime} m</p>
+                            <p>{MovieDetails.runtime} m</p>
                         </div>
                         <div>
                             <h6><strong>Бюджет</strong></h6>
-                            <p>${moviesDetails.budget}</p>
+                            <p>${MovieDetails.budget}</p>
                             <h6><strong>Сборы</strong></h6>
-                            <p>${moviesDetails.revenue}</p>
+                            <p>${MovieDetails.revenue}</p>
                             <h6><strong>Жанры</strong></h6>
                             <ul className="container">
                                 {movieGenres.map(item => (
@@ -44,8 +44,8 @@ class MovieDetail extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        moviesDetails: state.movie.detailsOfMovie,
-        movieGenres: state.movie.detailsOfMovie.genres || []
+        MovieDetails: state.movie.details,
+        movieGenres: state.movie.details.genres || []
     }
 };
 

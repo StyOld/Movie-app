@@ -14,9 +14,9 @@ class MovieVideos extends React.Component {
 
     render() {
         return (
-            this.props.videosOfMovie.length !==0 ?
-                <div className="row mt-4">
-                    {this.props.videosOfMovie.map(videoItem => (
+            this.props.videos.length !==0 ?
+                (<div className="row mt-4">
+                    {this.props.videos.map(videoItem => (
                         <div className="col-6" key={videoItem.id}>
                             <YouTube
                                 className="container"
@@ -24,15 +24,15 @@ class MovieVideos extends React.Component {
                         />
                         </div>
                     ))}
-                    </div> :
-                <div className="row mt-4"><h4><strong>Нет видео</strong></h4></div>
+                    </div>) :
+                <div className="row mt-4"><h4><strong>...Загрузка</strong></h4></div>
         )
     }
 }
 
 const mapStateToProps = (state) => {
     return {
-        videosOfMovie: state.movie.videosOfMovie.results || []
+        videos: state.movie.videos.results || []
     }
 };
 
