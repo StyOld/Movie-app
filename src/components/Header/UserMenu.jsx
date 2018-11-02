@@ -20,36 +20,30 @@ class UserMenu extends React.Component {
         const {user, showDropDown, deleteSession} = this.props;
         return (
             <Dropdown isOpen={showDropDown} toggle={this.toggle}>
-                <DropdownToggle nav caret>
-                    <div>
-                        <img
-                            width='60'
-                            className='rounded-circle'
-                            src={`https://gravatar.com/avatar/${
-                                user.avatar.gravatar.hash
-                                }.jpg?s=64"`}
-                            alt=''
-                        />
-                    </div>
+                <DropdownToggle
+                    tag="div"
+                    onClick={this.toggle}
+                    data-toggle="dropdown"
+                    aria-expanded={showDropDown}
+                >
+                    <img
+                        width="60"
+                        className="rounded-circle"
+                        src={`https://gravatar.com/avatar/${
+                            user.avatar.gravatar.hash
+                            }.jpg?s=64"`}
+                        alt=""
+                        onClick={this.toggle}
+                    />
                 </DropdownToggle>
                 <DropdownMenu right>
                     <DropdownItem>
-                        <Link to='/account/favorites'>
-                            Избранное
-                        </Link>
+                        <Link to="/account/favorites">Избранные</Link>
                     </DropdownItem>
                     <DropdownItem>
-                        <Link to='/account/watchlist'>
-                            Список просмотра
-                        </Link>
+                        <Link to="/account/watchlist">Список просмотра</Link>
                     </DropdownItem>
-                    <DropdownItem
-                        className='font-weight-bold'
-                        // onClick={() => deleteSession({session_id: this.props.session_id})}
-                        onClick={(session_id) => deleteSession({session_id})}
-                    >
-                        Выход
-                    </DropdownItem>
+                    <DropdownItem onClick={(session_id) => deleteSession({session_id})}>Выйти</DropdownItem>
                 </DropdownMenu>
             </Dropdown>
         );
@@ -71,6 +65,40 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserMenu);
+
+{/*<Dropdown isOpen={showDropDown} toggle={this.toggle}>*/}
+{/*<DropdownToggle nav caret>*/}
+{/*<div>*/}
+{/*<img*/}
+{/*width='60'*/}
+{/*className='rounded-circle'*/}
+{/*src={`https://gravatar.com/avatar/${*/}
+{/*user.avatar.gravatar.hash*/}
+{/*}.jpg?s=64"`}*/}
+{/*alt=''*/}
+{/*/>*/}
+{/*</div>*/}
+{/*</DropdownToggle>*/}
+{/*<DropdownMenu right>*/}
+{/*<DropdownItem>*/}
+{/*<Link to='/account/favorites'>*/}
+{/*Избранное*/}
+{/*</Link>*/}
+{/*</DropdownItem>*/}
+{/*<DropdownItem>*/}
+{/*<Link to='/account/watchlist'>*/}
+{/*Список просмотра*/}
+{/*</Link>*/}
+{/*</DropdownItem>*/}
+{/*<DropdownItem*/}
+{/*className='font-weight-bold'*/}
+{/*// onClick={() => deleteSession({session_id: this.props.session_id})}*/}
+{/*onClick={(session_id) => deleteSession({session_id})}*/}
+{/*>*/}
+{/*Выход*/}
+{/*</DropdownItem>*/}
+{/*</DropdownMenu>*/}
+{/*</Dropdown>*/}
 
 // import AppConsumerHOC from "../HOC/AppConsumerHOC";
 

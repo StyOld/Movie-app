@@ -12,7 +12,6 @@ input.invalid {
   border-color: $error;
 }
 
-
 .circle {
   width: 40px;
   height: 40px;
@@ -27,7 +26,11 @@ input.invalid {
   }
 }
 
-.card-img--height {
+.img--height {
   max-height: 161.84px;
   object-fit: cover;
+}
+
+.text-decor {
+  text-decoration: none
 }

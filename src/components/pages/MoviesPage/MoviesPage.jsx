@@ -15,18 +15,16 @@ class MoviesPage extends React.Component {
                     <div className="col-4">
                         <div className="card" style={{ width: "100%" }}>
                             <div className="card-body">
-                                <div className="d-flex justify-content-center">
-                                    <h3 className='mr-2'>Фильтры:</h3>
-                                    <button
-                                        type='button'
-                                        className='btn'
-                                        onClick={clearFilters}
-                                        // onClick={() => clearFilters()}
-                                    >
-                                        Очистить фильтры
-                                    </button>
-                                </div>
+                                <h4><strong>Фильтры:</strong></h4>
                                 <Filters/>
+                                <button
+                                    // type='button'
+                                    className='btn mt-2'
+                                    onClick={clearFilters}
+                                    // onClick={() => clearFilters()}
+                                >
+                                    Очистить фильтры
+                                </button>
                                 <Pagination/>
                             </div>
                         </div>

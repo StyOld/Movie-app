@@ -4,8 +4,8 @@ const initialState = {
     moviesData: {},
     genreList: [],
     filters: {
-        sort_by: 'vote_average.asc',
-        primary_release_year: '2018',
+        sort_by: 'vote_average.desc',
+        primary_release_year: '2017',
         genres: []
     },
     page: 1,

@@ -15,7 +15,7 @@ class Header extends React.Component {
                         <li className='nav-item active'>
                             {/*<a className='nav-link'>Home</a>*/}
                             <Link className='nav-link' to='/'>
-                                <h5 className='font-weight-bold'>Home</h5>
+                                <h5 className='font-weight-bold'>Киноафиша</h5>
                             </Link>
                         </li>
                     </ul>

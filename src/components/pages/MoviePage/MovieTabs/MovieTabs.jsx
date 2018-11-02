@@ -14,7 +14,8 @@ export default class MovieTabs extends React.Component {
                     <NavLinkItem>
                         <NavLink
                             to ={`/movie/${this.props.itemId}/detail`}
-                            activeClassName="active"
+                            // activeClassName="active"
+                            className='text-decor'
                         >
                             Детально
                         </NavLink>

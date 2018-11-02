@@ -9,7 +9,7 @@ export default class MovieItem extends React.Component {
     return (
       <div className="card" style={{ width: "100%" }}>
         <img
-          className="card-img-top card-img--height"
+          className="card-img-top img--height"
           src={`https://image.tmdb.org/t/p/w500${item.backdrop_path ||
             item.poster_path}`}
           alt=""

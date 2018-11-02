@@ -8,7 +8,7 @@ class Pagination extends React.Component {
         const {page, total_pages, onChangePage}=this.props;
 
         return(
-            <div className="d-flex justify-content-center">
+            <div className="d-flex align-items-center mt-2">
                 <button
                     type="button"
                     className="btn btn-light mr-2"
