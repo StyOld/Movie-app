@@ -11,7 +11,7 @@ class MovieDetail extends React.Component {
                 <h4><strong>Факты:</strong></h4>
                 <div className='container mt-4'>
                     <div className='row'>
-                        <div className='col-4'>
+                        <div className='col-md-4 col-12'>
                             <h6><strong>Статус</strong></h6>
                             <p>{MovieDetails.status}</p>
                             <h6><strong>Информация о релизе</strong></h6>
@@ -21,7 +21,7 @@ class MovieDetail extends React.Component {
                             <h6><strong>Продолжительность</strong></h6>
                             <p>{MovieDetails.runtime} m</p>
                         </div>
-                        <div>
+                        <div className='col-md-8 col-12'>
                             <h6><strong>Бюджет</strong></h6>
                             <p>${MovieDetails.budget}</p>
                             <h6><strong>Сборы</strong></h6>
