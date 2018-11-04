@@ -10,15 +10,3 @@ class UILabel extends React.PureComponent {
     }
 }
 export default UILabel;
-
-// Замена React.PureComponent
-// shouldComponentUpdate(nextProps, nextStage) {
-//     console.log('this.props', this.props)
-//     console.log('nextProps', nextProps)
-//
-//     if (nextProps.id !== this.props.id) {
-//         return true;
-//     } else {
-//         return false;
-//     }
-// }

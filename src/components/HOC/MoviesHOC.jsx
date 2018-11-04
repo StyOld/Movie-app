@@ -2,7 +2,6 @@ import React from "react";
 import * as actionsMovies from "../../actions/actionsMovies";
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-// import _ from 'lodash';
 
 const mapStateToProps = (state) => {
     return {
@@ -30,51 +29,3 @@ export default (Component) => connect(mapStateToProps, mapDispatchToProps)(class
     }
 }
 )
-
-// import _ from 'lodash';
-
-// constructor() {
-//     super();
-//     this.state = {
-//         movies: []
-//     };
-// }
-
-// CallApi.get('/discover/movie', {
-//     params: queryStringParams
-// })
-//     .then(data => {
-//      this.setState({
-//          movies: data.results
-//      });
-//     this.props.getTotalPages(data.total_pages);
-
-// getMovies = (filters, page) => {
-//     const {sort_by, primary_release_year, genres} = filters;
-//
-//     const queryStringParams = {
-//         sort_by: sort_by,
-//         page: page,
-//         primary_release_year: primary_release_year
-//         // with_genres: genres.join(',') словил баг на стороне сервака
-//     };
-//
-//     if (genres.length>0) queryStringParams.with_genres = genres.join(',');
-//     this.props.getMovies(queryStringParams);
-// };
-
-// this.getMovies(this.props.filters, this.props.page)
-
-// this.getMovies(this.props.filters, 1);
-
-// this.getMovies(this.props.filters, this.props.page)
-
-// componentDidUpdate(prevProps) {
-// if (!_.isEqual(this.props.filters, prevProps.filters)) {
-//     this.props.onChangePage(1);
-//     this.props.getMovies({filters: this.props.filters, page: 1});
-// }
-// if (this.props.page !== prevProps.page) {
-//     this.props.getMovies({filters: this.props.filters, page: this.props.page})
-// }
-// }

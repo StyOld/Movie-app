@@ -13,7 +13,6 @@ class Header extends React.Component {
                 <div className='container'>
                     <ul className='navbar-nav'>
                         <li className='nav-item active'>
-                            {/*<a className='nav-link'>Home</a>*/}
                             <Link className='nav-link' to='/'>
                                 <h5 className='font-weight-bold'>Киноафиша</h5>
                             </Link>

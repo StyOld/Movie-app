@@ -41,7 +41,3 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
-
-// import AppConsumerHOC from "../../HOC/AppConsumerHOC";
-
-// export default AppConsumerHOC(Login);

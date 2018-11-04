@@ -18,13 +18,6 @@ describe('reducerAuthentication', () => {
             }
         };
 
-        // expect(reducerAuthentication(undefined, action)).toEqual({
-        //     ...initialState,
-        //     user: action.payload.user,
-        //     session_id: action.payload.session_id,
-        //     isAuth: true
-        // })
-
         expect(reducerAuthentication(undefined, action)).toMatchSnapshot();
     });
 

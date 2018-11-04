@@ -44,7 +44,6 @@ class PrimaryReleaseYear extends React.Component {
                     value={primary_release_year}
                     onChange={onChangeFilters}
                     label={LabelText}
-                    // options={optionsYear}
                 >
                     {optionsYear.map(option => {
                         return <option key={option.value} value={option.value}>

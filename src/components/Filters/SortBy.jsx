@@ -45,8 +45,6 @@ class SortBy extends React.Component {
                     value={sort_by}
                     onChange={onChangeFilters}
                     label={LabelText}
-                    // label='Сортировать по:'
-                    // options={optionsType}
                 >
                     {optionsType.map(option => {
                         return <option key={option.value} value={option.value}>
@@ -73,18 +71,3 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SortBy);
-
-// import _ from "lodash";
-
-// Один из способов задать ссылку на массив, что бы каждый раз не было лишнего рендера, но эти данные не передаються с компонентом.
-// const options = [
-//     {
-//         label: 'Популярные по убыванию',
-//         value: 'popularity.desc'
-//     },
-//     ...
-// ];
-
-// shouldComponentUpdate(nextProps, nextStage) {
-//     return _.isEqual(nextProps, this.props) ? false : true
-// }

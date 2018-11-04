@@ -10,16 +10,12 @@ export default class UISelect extends React.PureComponent {
 
     render() {
         const {id, name, value, onChange, label, children} = this.props;
-        // console.log('UISelect render');
 
         return (
             <div className="form-group">
-                {/*<label htmlFor={id}>{labelText}</label>*/}
-
                 <UILabel id={id}>
                     {label}
                 </UILabel>
-
                 <select
                     className="form-control"
                     id={id}
@@ -28,35 +24,8 @@ export default class UISelect extends React.PureComponent {
                     onChange={onChange}
                 >
                     {children}
-
-                    {/*{options.map(option => {*/}
-                            {/*return <option key={option.value} value={option.value}>*/}
-                                {/*{option.label}*/}
-                                {/*{option.image && <img scr={option.image}>}*/}
-                            {/*</option>*/}
-                    {/*})}*/}
-
-                    {/*<option value="popularity.desc">Популярные по убыванию</option>*/}
-                    {/*<option value="popularity.asc">Популярные по возростанию</option>*/}
                 </select>
             </div>
         );
     }
 }
-
-// import _ from 'lodash'
-
-// shouldComponentUpdate(nextProps, nextStage) {
-//     return _.isEqual(nextProps, this.props) ? false : true
-// }
-
-// shouldComponentUpdate(nextProps, nextStage) {
-//     // console.log('this.props', this.props);
-//     // console.log('nextProps', nextProps);
-//
-//     if (nextProps.value !== this.props.value) {
-//         return true;
-//     } else {
-//         return false;
-//     }
-// }

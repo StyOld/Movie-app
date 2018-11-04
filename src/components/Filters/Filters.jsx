@@ -14,24 +14,3 @@ export default class Filters extends React.PureComponent {
     );
   }
 }
-
-// const {
-//     filters: {sort_by, primary_release_year, genres},
-//     onChangeFilters,
-//     onChangeGenres
-// } = this.props;
-
-//<SortBy
-//      sort_by={sort_by}
-//      onChangeFilters={onChangeFilters}
-///>
-
-//<PrimaryReleaseYear
-//      primary_release_year={primary_release_year}
-//      onChangeFilters={onChangeFilters}
-///>
-
-//<Genres
-//      genres={genres}
-//      onChangeGenres={onChangeGenres}
-///>

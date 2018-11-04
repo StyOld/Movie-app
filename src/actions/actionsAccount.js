@@ -22,5 +22,4 @@ export const actionCreatorGetByTypeMovies = ({userId, params, type}) => {
                 })
             })
     }
-    // CallApi.get(`/account/{account_id}/${type}/movies`,
 };

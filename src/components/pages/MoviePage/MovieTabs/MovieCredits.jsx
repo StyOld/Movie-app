@@ -18,7 +18,7 @@ class MovieCredits extends React.Component {
                 this.props.creditList.length !==0 ? (
                     <div className="row mt-4">
                         {this.props.creditList.map(creditItem => (
-                            <div className="col-3 mb-2" key={creditItem.id}>
+                            <div className="col-sm-4 col-12 mb-2" key={creditItem.id}>
                                 <CreditItem
                                     item={creditItem}
                                 />

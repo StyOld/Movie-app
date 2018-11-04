@@ -5,9 +5,6 @@ export const actionCreatorGetMovieDetails = (payload) => {
     return {
         type: constants.GET_MOVIE_DETAILS,
         payload
-        // payload: {
-        //     data: payload.data
-        // }
     }
 };
 

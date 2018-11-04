@@ -32,7 +32,7 @@ export class LoginForm extends React.Component {
     };
 
     handleBlur = (event) => {
-        const name = event.target.name
+        const name = event.target.name;
         const errors = this.validateFields();
         if (Object.keys(errors).length > 0) {
             this.setState(prevState => ({
@@ -73,10 +73,10 @@ export class LoginForm extends React.Component {
             .then(data => {
                 return CallApi.post('/authentication/token/validate_with_login', {
                     body: {
-                        // username: this.state.username,
-                        // password: this.state.password,
-                        username: 'StyOld',
-                        password: 'Agressor2805!',
+                        username: this.state.username,
+                        password: this.state.password,
+                        // username: 'StyOld',
+                        // password: '12345',
                         request_token: data.request_token
                     }
                 })
@@ -89,7 +89,6 @@ export class LoginForm extends React.Component {
                 })
             })
             .then(data => {
-                // this.props.updateSessionId(data.session_id);
                 session_id = data.session_id;
                 return CallApi.get('/account', {
                     params: {
@@ -152,7 +151,7 @@ export class LoginForm extends React.Component {
                             type="text"
                             className={this.getClassForInput('username')}
                             id="username"
-                            placeholder="Пользователь"
+                            placeholder="Пользователь: StyOld"
                             name="username"
                             value={username}
                             onChange={this.onChange}
@@ -168,7 +167,7 @@ export class LoginForm extends React.Component {
                             type="password"
                             className={this.getClassForInput('password')}
                             id="password"
-                            placeholder="Пароль"
+                            placeholder="Пароль: 12345"
                             name="password"
                             value={password}
                             onChange={this.onChange}
@@ -184,7 +183,7 @@ export class LoginForm extends React.Component {
                             type="password"
                             className={this.getClassForInput('repeatPassword')}
                             id="repeatPassword"
-                            placeholder="Повторите Пароль"
+                            placeholder="Повторите Пароль: 12345"
                             name="repeatPassword"
                             value={repeatPassword}
                             onChange={this.onChange}
@@ -226,267 +225,3 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
-
-// import AppConsumerHOC from "../../HOC/AppConsumerHOC";
-
-// export default AppConsumerHOC(LoginForm);
-
-// import {AppContext} from "../../App";
-
-// export default props => {
-//     // console.log(props);
-//     return (
-//         <AppContext.Consumer>
-//             {context =>
-//                 <LoginForm
-//                     updateUser={context.updateUser}
-//                     updateSessionId={context.updateSessionId}
-//                     {...props}
-//                 />
-//             }
-//         </AppContext.Consumer>
-//     );
-// };
-
-// onSubmit = () => {
-//     this.setState({
-//         submitting: true
-//     });
-//
-//     let session_id = null;
-//
-//     fetchApi(`${API_URL}/authentication/token/new?api_key=${API_KEY_3}`)
-//         .then(data => {
-//             fetchApi(
-//                 `${API_URL}/authentication/token/validate_with_login?api_key=${API_KEY_3}`,
-//                 {
-//                     method: "POST",
-//                     mode: "cors",
-//                     headers: {
-//                         "Content-type": "application/json"
-//                     },
-//                     body: JSON.stringify({
-//                         username: this.state.username,
-//                         password: this.state.password,
-//                         // username: 'StyOld',
-//                         // password: 'Agressor2805!',
-//                         request_token: data.request_token
-//                     })
-//                 }
-//             );
-//         })
-//         .then(data => {
-//             fetchApi(
-//                 `${API_URL}/authentication/session/new?api_key=${API_KEY_3}`,
-//                 {
-//                     method: "POST",
-//                     mode: "cors",
-//                     headers: {
-//                         "Content-type": "application/json"
-//                     },
-//                     body: JSON.stringify({
-//                         request_token: data.request_token
-//                     })
-//                 }
-//             );
-//         })
-//         .then(data => {
-//             session_id = data.session_id;
-//                 fetchApi(
-//                     `${API_URL}/account?api_key=${API_KEY_3}&session_id=${
-//                         data.session_id
-//                     }`)
-//         })
-//         .then(user => {
-//             this.setState({
-//                 submitting: false
-//             }, () => {
-//                 this.props.updateAuth({user, session_id});
-//             });
-//         })
-//         .catch(error => {
-//             console.log("error", error);
-//             this.setState({
-//                 submitting: false,
-//                 errors: {
-//                     base: error.status_message
-//                 }
-//             });
-//         });
-// };
-
-// 1
-// const getRequestToken = () => {
-//     return new Promise((resolve, reject) => {
-//         fetch(`${API_URL}/authentication/token/new?api_key=${API_KEY_3}`)
-//             .then(response => {
-//                 if (response.status < 400) {
-//                     return response.json()
-//                 } else {
-//                     throw response;
-//                 }
-//             }).then(data => {
-//                 resolve(data);
-//         }).catch(response => {
-//             response.json().then(error => {
-//                 reject(error);
-//             })
-//         })
-//     });
-// };
-// const validateWithLogin = (body) => {
-//     return new Promise((resolve, reject) => {
-//         fetch(`${API_URL}/authentication/token/validate_with_login?api_key=${API_KEY_3}`, {
-//             method: 'POST',
-//             mode: 'cors',
-//             "headers": {
-//                 "Content-type": "application/json"
-//             },
-//             body: JSON.stringify(body)
-//         })
-//             .then(response => {
-//                 if (response.status < 400) {
-//                     return response.json()
-//                 } else {
-//                     throw response;
-//                 }
-//             }).then(data => {
-//             resolve(data);
-//         }).catch(response => {
-//             response.json().then(error => {
-//                 reject(error);
-//             })
-//         })
-//     });
-// };
-
-// fetchApi(`${API_URL}/authentication/token/new?api_key=${API_KEY_3}`)
-//     .then(data => {
-//     return fetchApi(
-//         `${API_URL}/authentication/token/validate_with_login?api_key=${API_KEY_3}`,
-//         {
-//         method: 'POST',
-//         mode: 'cors',
-//         "headers": {
-//             "Content-type": "application/json"
-//         },
-//         body: JSON.stringify({
-//             username: 'StyOld',
-//             password: 'Agressor2805',
-//             request_token: data.request_token
-//         })
-//         },
-//         );
-// })
-//         .then(data => {
-//             return fetchApi(
-//                 `${API_URL}/authentication/session/new?api_key=${API_KEY_3}`,
-//             {
-//                 method: 'POST',
-//                 mode: 'cors',
-//                 "headers": {
-//                     "Content-type": "application/json"
-//                 },
-//                 body: JSON.stringify({
-//                     request_token: data.request_token
-//                 })
-//             })
-//         })
-//         .then(data => {
-//             console.log('session', data)
-//         })
-//         .catch(error => {
-//         console.log('error', error);
-//     })
-// };
-
-// 2
-//  fetch(
-//      `${API_URL}/authentication/token/validate_with_login?api_key=${API_KEY_3}`,
-//      {
-//          method: 'POST',
-//          mode: 'cors',
-//          "headers": {
-//              "Content-type": "application/json"
-//          },
-//          body: JSON.stringify({
-//              username: 'StyOld',
-//              password: 'Agressor2805',
-//              request_token: data.request_token
-//          })
-//      }
-// ).then(response => response.json()).then(data => {
-//         // 3
-//         fetch(`${API_URL}/authentication/session/new?api_key=${API_KEY_3}`, {
-//             method: 'POST',
-//             mode: 'cors',
-//             "headers": {
-//                 "Content-type": "application/json"
-//             },
-//             body: JSON.stringify({
-//                 request_token: data.request_token
-//             })
-//          }).then(response => response.json()).then(data => {
-//             console.log('session', data)
-//         })
-//     })
-// });
-
-// sendPromises = async () => {
-//     const fetchApi = (url, options = {}) => {
-//         return new Promise((resolve, reject) => {
-//             fetch(url, options)
-//                 .then(response => {
-//                     if (response.status < 400) {
-//                         return response.json()
-//                     } else {
-//                         throw response;
-//                     }
-//                 }).then(data => {
-//                 resolve(data);
-//             }).catch(response => {
-//                 response.json().then(error => {
-//                     reject(error);
-//                 })
-//             })
-//         });
-//     };
-//
-//     try {
-//         const data = await fetchApi(
-//             `${API_URL}/authentication/token/new?api_key=${API_KEY_3}`
-//         );
-//
-//         const result = await fetchApi(
-//             `${API_URL}/authentication/token/validate_with_login?api_key=${API_KEY_3}`,
-//             {
-//                 method: 'POST',
-//                 mode: 'cors',
-//                 "headers": {
-//                     "Content-type": "application/json"
-//                 },
-//                 body: JSON.stringify({
-//                     username: 'StyOld',
-//                     password: 'Agressor280',
-//                     request_token: data.request_token
-//                 })
-//             }
-//         );
-//
-//         const {session_id} = await fetchApi(
-//             `${API_URL}/authentication/session/new?api_key=${API_KEY_3}`,
-//             {
-//                 method: 'POST',
-//                 mode: 'cors',
-//                 "headers": {
-//                     "Content-type": "application/json"
-//                 },
-//                 body: JSON.stringify({
-//                     request_token: result.request_token
-//                 })
-//             });
-//         console.log(session_id)
-//     } catch (error) {
-//         console.log('error', error)
-//     }
-//     };

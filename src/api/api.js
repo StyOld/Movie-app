@@ -39,13 +39,6 @@ export default class CallApi {
 
     return fetchApi(
       `${API_URL}${url}?${queryString.stringify(queryStringParams)}`,
-      // Так не показывает превью запроса -
-      // {
-      //   mode: "cors",
-      //   headers: {
-      //     "Content-type": "application/json"
-      //   }
-      // }
     );
   }
 
@@ -89,12 +82,3 @@ export default class CallApi {
     );
   }
 }
-
-// const link = `${API_URL}/discover/movie?${queryString.stringify(queryStringParams)}`;
-// ulr = '/discover/movie'
-// params = {
-//   sort_by: sort_by,
-//   page: page,
-//   primary_release_year: primary_release_year,
-//   with_genres: genres.join(',')
-//}

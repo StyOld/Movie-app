@@ -13,7 +13,6 @@ class Pagination extends React.Component {
                     type="button"
                     className="btn btn-light mr-2"
                     disabled={page === 1}
-                    // onClick={() => onChangePage(page - 1)}
                     onClick={onChangePage.bind(null, page - 1)}
                 >
                     Назад

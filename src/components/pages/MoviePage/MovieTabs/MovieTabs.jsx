@@ -1,21 +1,20 @@
 import React from 'react';
 import { Nav, NavLink as NavLinkItem} from 'reactstrap';
-import {Switch, Route} from 'react-router';
+import {Switch, Route, withRouter} from 'react-router';
 import {NavLink} from 'react-router-dom';
 import MovieDetail from "./MovieDetail";
 import MovieVideos from "./MovieVideos";
 import MovieCredits from "./MovieCredits";
 
-export default class MovieTabs extends React.Component {
+class MovieTabs extends React.Component {
     render() {
         return (
             <div className='container mt-4'>
                 <Nav tabs>
                     <NavLinkItem>
                         <NavLink
-                            to ={`/movie/${this.props.itemId}/detail`}
-                            // activeClassName="active"
-                            className='text-decor'
+                            to ={`/movie/${this.props.match.params.id}/detail`}
+                            activeClassName="active"
                             id='text-decor'
                         >
                             Детально
@@ -23,7 +22,7 @@ export default class MovieTabs extends React.Component {
                     </NavLinkItem>
                     <NavLinkItem>
                         <NavLink
-                            to ={`/movie/${this.props.itemId}/videos`}
+                            to ={`/movie/${this.props.match.params.id}/videos`}
                             activeClassName="active"
                             id='text-decor'
                         >
@@ -32,7 +31,8 @@ export default class MovieTabs extends React.Component {
                     </NavLinkItem>
                     <NavLinkItem>
                         <NavLink
-                            to ={`/movie/${this.props.itemId}/credits`}
+                            to ={`/movie/${this.props.match.params.id}/credits`}
+                            // to ={`/movie/${this.props.itemId}/credits`}
                             activeClassName="active"
                             id='text-decor'
                         >
@@ -49,3 +49,5 @@ export default class MovieTabs extends React.Component {
         );
     }
 }
+
+export default withRouter(MovieTabs);

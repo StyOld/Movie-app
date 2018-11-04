@@ -40,18 +40,3 @@ export default (Component) => connect(mapStateToProps, mapDispatchToProps)(class
         return <Component genreList={genreList} genres={genres} onChangeGenres={this.onChangeGenres}/>;
     }
 })
-
-// import CallApi from "../../api/api";
-
-// getGenres = () => {
-//     CallApi.get('/genre/movie/list')
-//         .then(data => {
-//             this.props.getGenresList({
-//                 data: data.genres
-//             })
-//         })
-// };
-
-// componentDidMount() {
-//     this.getGenres()
-// }

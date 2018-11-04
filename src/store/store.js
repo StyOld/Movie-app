@@ -5,12 +5,6 @@ import * as actionsMovies from '../actions/actionsMovies'
 import { composeWithDevTools } from 'redux-devtools-extension';
 import * as constants from "../constants/contsants";
 
-// const logger = ({getState, dispatch}) => next => action => {
-//     // console.log('dispatch', dispatch);
-//     // console.log(action.type,action)
-//     return next(action);
-// }
-
 const async = ({getState, dispatch}) => next => action => {
     if (typeof action === 'function') {
         action(dispatch);

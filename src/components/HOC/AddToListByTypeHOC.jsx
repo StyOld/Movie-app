@@ -89,14 +89,6 @@ export default (Component, type) => connect(mapStateToProps, mapDispatchToProps)
         }
     };
 
-    // static getDerivedStateFromProps(props) {
-    //     return {
-    //         added: props[`${type}Movies`].findIndex(item => {
-    //                        return item.id === props.movieId
-    //                     }) !== -1
-    //     }
-    // }
-
     render () {
         const {added, disabled} = this.state;
         return (
@@ -104,7 +96,3 @@ export default (Component, type) => connect(mapStateToProps, mapDispatchToProps)
         )
     }
 })
-
-// import AppConsumerHOC from "./AppConsumerHOC";
-
-// export default (Component, type) => AppConsumerHOC(class AddToListByTypeHOC extends React.Component {

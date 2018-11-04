@@ -3,20 +3,6 @@ import CallApi from '../api/api';
 import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 
-// export const actionCreatorUpdateAuth = dispatch(payload => {
-//     return {
-//         type: 'UPDATE_AUTH',
-//         payload
-//     }
-// });
-
-// export const actionCreatorUpdateAuth = payload => dispatch => {
-//         return dispatch({
-//         type: 'UPDATE_AUTH',
-//         payload
-//     })
-// };
-
 export const actionCreatorUpdateAuth = ({user, session_id, isAuth}) => {
     cookies.set('session_id', session_id, {
         path: '/',

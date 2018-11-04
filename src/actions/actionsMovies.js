@@ -8,7 +8,6 @@ export const actionCreatorGetMovies = ({filters, page}) => {
         sort_by: sort_by,
         page: page,
         primary_release_year: primary_release_year
-        // with_genres: genres.join(',') словил баг на стороне сервака
     };
 
     if (genres.length>0) queryStringParams.with_genres = genres.join(',');
@@ -25,7 +24,6 @@ export const actionCreatorGetMovies = ({filters, page}) => {
                 dispatch({
                     type: constants.UPDATE_MOVIES,
                     payload: data
-                    // payload: data.results
                 });
             })
             .catch(error => {
@@ -76,27 +74,6 @@ export const actionCreatorChangeFilters = (event) => {
         payload: {
             name: event.target.name,
             value: event.target.value
-            // payload
         }
     }
 };
-
-// export const actionCreatorChangeGenres = payload => {
-//     return dispatch => {
-//         dispatch({
-//             type: payload.target.checked ? constants.CHECKED_GENRE : constants.UNCHECKED_GENRE,
-//             payload: payload.target.value
-//         });
-//     };
-// (payload.target.checked) ? (
-//     dispatch({
-//         type: 'CHECKED_GENRE',
-//         payload
-//     })
-//     ) : (
-//     dispatch({
-//         type: 'UNCHECKED_GENRE',
-//         payload
-//     })
-//     )
-// };

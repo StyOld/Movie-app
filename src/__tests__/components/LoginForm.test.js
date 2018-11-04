@@ -35,12 +35,5 @@ describe(`LoginForm`, () => {
             }
         });
         expect(wrapper.find(".invalid-feedback")).toHaveLength(1);
-
-        // console.log(wrapper.find(".invalid-feedback").html());
     });
-
-    // test('initial render', () => {
-    //     const wrapper = shallow(<LoginForm />);
-    //     expect(wrapper.html()).toMatchSnapshot();
-    // });
 });
