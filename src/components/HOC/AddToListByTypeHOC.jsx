@@ -78,16 +78,16 @@ export default (Component, type) => connect(mapStateToProps, mapDispatchToProps)
             })}
     };
 
-    componentDidUpdate(prevProps) {
-        if (!_.isEqual(this.props[`${type}Movies`], prevProps[`${type}Movies`]) || this.props.movieId !== prevProps.movieId) {
-            if (this.props[`${type}Movies`].findIndex(item => {
-               return item.id === this.props.movieId
-            }) !== -1) {
-                this.setState({
-                    added: true
-                })}
-        }
-    };
+    // componentDidUpdate(prevProps) {
+    //     if (!_.isEqual(this.props[`${type}Movies`], prevProps[`${type}Movies`]) || this.props.movieId !== prevProps.movieId) {
+    //         if (this.props[`${type}Movies`].findIndex(item => {
+    //            return item.id === this.props.movieId
+    //         }) !== -1) {
+    //             this.setState({
+    //                 added: false
+    //             })}
+    //     }
+    // };
 
     render () {
         const {added, disabled} = this.state;
