@@ -75,8 +75,6 @@ export class LoginForm extends React.Component {
                     body: {
                         username: this.state.username,
                         password: this.state.password,
-                        // username: 'StyOld',
-                        // password: '12345',
                         request_token: data.request_token
                     }
                 })

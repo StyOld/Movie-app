@@ -17,7 +17,6 @@ class SortBy extends React.Component {
             {
                 label: 'Популярные по убыванию',
                 value: 'popularity.desc'
-                // ,image: '/lol/jpg'
             },
             {
                 label: 'Популярные по возростанию',
@@ -26,7 +25,8 @@ class SortBy extends React.Component {
             {
                 label: 'Рейтинг по убыванию',
                 value: 'vote_average.desc'
-            },            {
+            },
+            {
                 label: 'Рейтинг по возростанию',
                 value: 'vote_average.asc'
             }
